@@ -2,7 +2,8 @@ package com.tilldawn;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.tilldawn.Controller.GameAudioController;
+import com.tilldawn.View.MainMenuView;
 
 public class Main extends Game {
     private static SpriteBatch batch;
@@ -10,15 +11,15 @@ public class Main extends Game {
 
     @Override
     public void create() {
+        GameAudioController.getInstance().playMusic("Pretty Dungeon LOOP.wav", false, 0.1f);
         batch = new SpriteBatch();
         game = this;
+        setScreen(new MainMenuView(game));
     }
 
     @Override
     public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.end();
+        super.render();
     }
 
     @Override
