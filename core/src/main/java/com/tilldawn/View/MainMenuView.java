@@ -46,7 +46,7 @@ public class MainMenuView implements Screen {
         stage.addActor(label_play);
 
         // background
-        background = new Texture(Gdx.files.internal("landscape.jpg"));
+        background = new Texture(Gdx.files.internal("background.png"));
     }
 
     @Override
