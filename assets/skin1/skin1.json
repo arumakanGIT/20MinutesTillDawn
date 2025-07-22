@@ -427,8 +427,13 @@
 },
 "WindowStyle": {
 	"default": {
-		"background": "button1_UP",
-		"titleFont": "realWHITE-24-font",
+		"background": "window1",
+		"titleFont": "realWHITE-12",
+		"titleFontColor": "PINK"
+	},
+	"square": {
+		"background": "button2_UP",
+		"titleFont": "realWHITE-12",
 		"titleFontColor": "PINK"
 	}
 }

@@ -104,6 +104,15 @@ button1_UP
   orig: 38, 37
   offset: 0, 0
   index: -1
+window1
+  rotate: false
+  xy: 1023, 1375
+  size: 38, 37
+  split: 12, 12, 13, 11
+  pad: 15, 15, 18, 11
+  orig: 38, 37
+  offset: 0, 0
+  index: -1
 button2_CHECKED
   rotate: false
   xy: 1120, 1527

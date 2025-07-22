@@ -20,13 +20,16 @@ public class LoginMenu implements Screen, AppView {
     private final TextField password;
     private final TextField passwordConfirm;
     private final TextButton loginButton;
-    private TextButton registerButton;
-    private Texture background;
+    private final TextButton registerButton;
+    private final Texture background;
+    private final Skin skin;
+    private final TextButton exitButton;
 
+    // init :
     public LoginMenu() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        Skin skin = AssetManager.getInstance().getSkin1();
+        skin = AssetManager.getInstance().getSkin1();
         Table table = new Table();
         table.setFillParent(true);
         table.center();
@@ -45,6 +48,7 @@ public class LoginMenu implements Screen, AppView {
         Label passwordLabel = new Label("Password:", skin, "default-16");
         Label passwordConfirmLabel = new Label("Confirm Password:", skin, "default-16");
         Label weolcomeLabel = new Label("Welcome", skin, "pink-45");
+        exitButton = new TextButton("Exit", skin, "without-16");
 
         table.add(weolcomeLabel).padBottom(100);
         table.row();
@@ -62,7 +66,9 @@ public class LoginMenu implements Screen, AppView {
         table.row();
         table.add(loginButton).width(300).padTop(50);
         table.row();
-        table.add(registerButton).padTop(15);
+        table.add(registerButton).padTop(30);
+        table.row();
+        table.add(exitButton).padTop(30);
 
         stage.addActor(table);
         new LoginMenuController(this);
@@ -89,6 +95,8 @@ public class LoginMenu implements Screen, AppView {
         stage.dispose();
     }
 
+    // getter :
+
     public TextField getUsername() {
         return username;
     }
@@ -108,6 +116,20 @@ public class LoginMenu implements Screen, AppView {
     public TextButton getRegisterButton() {
         return registerButton;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
+
+    public TextButton getExitButton() {
+        return exitButton;
+    }
+
+    //
 
     @Override
     public void pause() {
