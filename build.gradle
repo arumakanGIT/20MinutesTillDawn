@@ -17,6 +17,12 @@ allprojects {
   apply plugin: 'eclipse'
   apply plugin: 'idea'
 
+//  repositories {
+//    google()
+//    mavenCentral()
+//    maven { url "https://jitpack.io" }
+//  }
+
   // This allows you to "Build and run using IntelliJ IDEA", an option in IDEA's Settings.
   idea {
     module {

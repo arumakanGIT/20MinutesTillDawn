@@ -6,6 +6,18 @@
 		"markupEnabled": false,
 		"flip": false
 	},
+	"realWHITE-12": {
+		"file": "PressStart2P-Regular(5).fnt",
+		"scaledSize": -1,
+		"markupEnabled": false,
+		"flip": false
+	},
+	"realWHITE-16": {
+		"file": "PressStart2P-Regular(4).fnt",
+		"scaledSize": -1,
+		"markupEnabled": false,
+		"flip": false
+	},
 	"realWHITE-24-font": {
 		"file": "PressStart2P-Regular(3).fnt",
 		"scaledSize": -1,
@@ -186,6 +198,44 @@
 	"green-45": {
 		"font": "white-45-font",
 		"fontColor": "GREEN"
+	},
+	"default-16": {
+		"font": "realWHITE-16"
+	},
+	"pink-16": {
+		"font": "realWHITE-16",
+		"fontColor": "PINK"
+	},
+	"green-16": {
+		"font": "realWHITE-16",
+		"fontColor": "GREEN"
+	},
+	"white-16": {
+		"font": "realWHITE-16",
+		"fontColor": "WHITE"
+	},
+	"purple-16": {
+		"font": "realWHITE-16",
+		"fontColor": "purple"
+	},
+	"default-12": {
+		"font": "realWHITE-12"
+	},
+	"pink-12": {
+		"font": "realWHITE-12",
+		"fontColor": "PINK"
+	},
+	"green-12": {
+		"font": "realWHITE-12",
+		"fontColor": "GREEN"
+	},
+	"purple-12": {
+		"font": "realWHITE-12",
+		"fontColor": "purple"
+	},
+	"white-12": {
+		"font": "realWHITE-12",
+		"fontColor": "WHITE"
 	}
 },
 "ListStyle": {
@@ -292,18 +342,81 @@
 		"over": "button4_UP",
 		"checked": "button4_DOWNCHECKED",
 		"checkedOver": "button4_CHECKED"
+	},
+	"without-16": {
+		"font": "realWHITE-16",
+		"fontColor": "PINK",
+		"downFontColor": "GREEN",
+		"overFontColor": "WHITE",
+		"pressedOffsetX": -2,
+		"pressedOffsetY": -2
+	},
+	"without-12": {
+		"font": "realWHITE-16",
+		"fontColor": "PINK",
+		"downFontColor": "GREEN",
+		"overFontColor": "WHITE",
+		"pressedOffsetX": -2,
+		"pressedOffsetY": -2
+	},
+	"without-12": {
+		"font": "realWHITE-12",
+		"fontColor": "PINK",
+		"downFontColor": "GREEN",
+		"overFontColor": "WHITE",
+		"pressedOffsetX": -2,
+		"pressedOffsetY": -2
+	},
+	"default-16": {
+		"font": "realWHITE-16",
+		"fontColor": "PINK",
+		"downFontColor": "GREEN",
+		"overFontColor": "WHITE",
+		"disabledFontColor": "GREEN",
+		"up": "button1_UP",
+		"pressedOffsetX": -2,
+		"pressedOffsetY": -2
+	},
+	"default-12": {
+		"font": "realWHITE-12",
+		"fontColor": "PINK",
+		"downFontColor": "GREEN",
+		"overFontColor": "WHITE",
+		"disabledFontColor": "GREEN",
+		"up": "button1_UP",
+		"pressedOffsetX": -2,
+		"pressedOffsetY": -2
 	}
 },
 "TextFieldStyle": {
 	"default": {
-		"font": "realWHITE-24-font",
-		"fontColor": "Whited",
+		"font": "realWHITE-16",
+		"fontColor": "GREEN",
+		"focusedFontColor": "Whited",
 		"disabledFontColor": "GREEN",
 		"background": "button2_UP",
-		"cursor": "pink-pixel",
+		"cursor": "Cursos",
 		"selection": "pink-pixel",
 		"messageFont": "realWHITE-24-font",
 		"messageFontColor": "WHITE"
+	},
+	"font12": {
+		"font": "realWHITE-12",
+		"fontColor": "GREEN",
+		"focusedFontColor": "Whited",
+		"disabledFontColor": "GREEN",
+		"background": "button2_UP",
+		"cursor": "Cursos",
+		"selection": "pink-pixel",
+		"messageFont": "realWHITE-24-font",
+		"messageFontColor": "WHITE"
+	},
+	"back": {
+		"font": "realWHITE-16",
+		"fontColor": "GREEN",
+		"focusedFontColor": "Whited",
+		"cursor": "Cursos",
+		"selection": "pink-pixel"
 	}
 },
 "TextTooltipStyle": {
