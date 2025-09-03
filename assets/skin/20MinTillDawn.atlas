@@ -1,0 +1,27 @@
+
+20MinTillDawn.png
+size: 512, 512
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+ChevyRay - Express
+  rotate: false
+  xy: 1, 11
+  size: 504, 71
+  orig: 504, 71
+  offset: 0, 0
+  index: -1
+ChevyRay - Express(1)
+  rotate: false
+  xy: 1, 365
+  size: 505, 139
+  orig: 505, 139
+  offset: 0, 0
+  index: -1
+ChevyRay - Express(2)
+  rotate: false
+  xy: 1, 84
+  size: 505, 279
+  orig: 505, 279
+  offset: 0, 0
+  index: -1
