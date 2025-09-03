@@ -4,82 +4,112 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Controller.LoginMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Models.AnimationManager;
 import com.tilldawn.Models.AssetManager;
 
-public class LoginMenu implements Screen, AppView {
-    private final Main game = Main.getGame();
-
+public class LoginMenu implements AppView {
     // fields :
-    private final Stage stage;
-    private final TextField username;
-    private final TextField password;
-    private final TextField passwordConfirm;
-    private final TextButton loginButton;
-    private final TextButton registerButton;
     private final Texture background;
-    private final Skin skin;
+    private final Stage stage;
+    private final Animation<TextureRegion> blickRight1 = AnimationManager.getInstance().get("blinkRight");
+    private final Animation<TextureRegion> blickRight2 = AnimationManager.getInstance().get("blinkRight");
+    private final Animation<TextureRegion> blickLeft1 = AnimationManager.getInstance().get("blinkLeft");
+    private final Animation<TextureRegion> blickLeft2 = AnimationManager.getInstance().get("blinkLeft");
+
+    private final TextButton preGameButton;
+    private final TextButton settingButton;
+    private final TextButton profileButton;
+    private final TextButton scoreBoardButton;
+    private final TextButton talentButton;
     private final TextButton exitButton;
 
     // init :
     public LoginMenu() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        skin = AssetManager.getInstance().getSkin1();
         Table table = new Table();
         table.setFillParent(true);
         table.center();
-        background = new Texture(Gdx.files.internal("background_loginmenu.jpg"));
+        background = new Texture(Gdx.files.internal("IntroMenuBackGround.png"));
+        Skin skin = AssetManager.getInstance().getSkin();
 
-        username = new TextField("", skin);
-        password = new TextField("", skin);
-        password.setPasswordCharacter('*');
-        password.setPasswordMode(true);
-        passwordConfirm = new TextField("", skin);
-        passwordConfirm.setPasswordCharacter('*');
-        passwordConfirm.setPasswordMode(true);
-        loginButton = new TextButton("  Login  ", skin, "default-16");
-        registerButton = new TextButton("Register", skin, "without-16");
-        Label usernameLabel = new Label("Username:", skin, "default-16");
-        Label passwordLabel = new Label("Password:", skin, "default-16");
-        Label passwordConfirmLabel = new Label("Confirm Password:", skin, "default-16");
-        Label weolcomeLabel = new Label("Welcome", skin, "pink-45");
-        exitButton = new TextButton("Exit", skin, "without-16");
+        preGameButton = new TextButton("Pre Game", skin, "chvy_PINK_54");
+        settingButton = new TextButton("Setting", skin, "chvy_PINK_36");
+        profileButton = new TextButton("Profile", skin, "chvy_PINK_36");
+        scoreBoardButton = new TextButton("Score Board", skin, "chvy_PINK_36");
+        talentButton = new TextButton("Talent", skin, "chvy_PINK_36");
+        exitButton = new TextButton("Exit", skin, "chvy_PINK_36");
 
-        table.add(weolcomeLabel).padBottom(100);
-        table.row();
-        table.add(usernameLabel);
-        table.row();
-        table.add(username).width(300).padTop(10);
-        table.row();
-        table.add(passwordLabel).padTop(30);
-        table.row();
-        table.add(password).width(300).padTop(10);
-        table.row();
-        table.add(passwordConfirmLabel).padTop(30);
-        table.row();
-        table.add(passwordConfirm).width(300).padTop(10);
-        table.row();
-        table.add(loginButton).width(300).padTop(50);
-        table.row();
-        table.add(registerButton).padTop(30);
-        table.row();
-        table.add(exitButton).padTop(30);
+        int pad = 20;
+        table.add(preGameButton).pad(pad).padTop(200).row();
+        table.add(settingButton).pad(pad).row();
+        table.add(profileButton).pad(pad).row();
+        table.add(scoreBoardButton).pad(pad).row();
+        table.add(talentButton).pad(pad).row();
+        table.add(exitButton).pad(pad);
 
         stage.addActor(table);
         new LoginMenuController(this);
     }
 
+    private float blinkingStateTime = 0f;
+    private boolean blinking = false;
+    private float blinkTimer = 0f;
+
     @Override
     public void render(float v) {
+        TextureRegion currentFrame1;
+        TextureRegion currentFrame2;
+        TextureRegion currentFrame3;
+        TextureRegion currentFrame4;
+
+        if (blinking) {
+            blinkingStateTime += v;
+            currentFrame1 = blickRight1.getKeyFrame(blinkingStateTime, false);
+            currentFrame2 = blickRight2.getKeyFrame(blinkingStateTime, false);
+            currentFrame3 = blickLeft1.getKeyFrame(blinkingStateTime, false);
+            currentFrame4 = blickLeft2.getKeyFrame(blinkingStateTime, false);
+
+            if (blickRight1.isAnimationFinished(blinkingStateTime)) {
+                blinking = false;
+                blinkTimer = 0;
+                blinkingStateTime = 0;
+                currentFrame1 = blickRight1.getKeyFrame(0);
+                currentFrame2 = blickRight2.getKeyFrame(0);
+                currentFrame3 = blickLeft1.getKeyFrame(0);
+                currentFrame4 = blickLeft2.getKeyFrame(0);
+            }
+        } else {
+            blinkTimer += v;
+
+            currentFrame1 = blickRight1.getKeyFrame(0);
+            currentFrame2 = blickRight2.getKeyFrame(0);
+            currentFrame3 = blickLeft1.getKeyFrame(0);
+            currentFrame4 = blickLeft2.getKeyFrame(0);
+
+            if (blinkTimer >= 4f) {
+                blinking = true;
+                blinkingStateTime = 0;
+            }
+        }
+
+
         ScreenUtils.clear(Color.WHITE);
-        game.getBatch().begin();
-        game.getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.getBatch().end();
+        Main.getGame().getBatch().begin();
+        Main.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Main.getGame().getBatch().draw(currentFrame1, Gdx.graphics.getWidth() / 2f + 400, Gdx.graphics.getHeight() / 2f - 100 + 100);
+        Main.getGame().getBatch().draw(currentFrame2, Gdx.graphics.getWidth() / 2f + 350, Gdx.graphics.getHeight() / 2f - 100 - 100);
+        Main.getGame().getBatch().draw(currentFrame3, Gdx.graphics.getWidth() / 2f - 500, Gdx.graphics.getHeight() / 2f - 100 + 100);
+        Main.getGame().getBatch().draw(currentFrame4, Gdx.graphics.getWidth() / 2f - 450, Gdx.graphics.getHeight() / 2f - 100 - 100);
+        Main.getGame().getBatch().end();
+
         stage.act(v);
         stage.draw();
     }
@@ -97,36 +127,32 @@ public class LoginMenu implements Screen, AppView {
 
     // getter :
 
-    public TextField getUsername() {
-        return username;
-    }
-
-    public TextField getPassword() {
-        return password;
-    }
-
-    public TextField getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public TextButton getLoginButton() {
-        return loginButton;
-    }
-
-    public TextButton getRegisterButton() {
-        return registerButton;
-    }
-
     public Stage getStage() {
         return stage;
     }
 
-    public Skin getSkin() {
-        return skin;
-    }
-
     public TextButton getExitButton() {
         return exitButton;
+    }
+
+    public TextButton getSettingButton() {
+        return settingButton;
+    }
+
+    public TextButton getPreGameButton() {
+        return preGameButton;
+    }
+
+    public TextButton getProfileButton() {
+        return profileButton;
+    }
+
+    public TextButton getScoreBoardButton() {
+        return scoreBoardButton;
+    }
+
+    public TextButton getTalentButton() {
+        return talentButton;
     }
 
     //

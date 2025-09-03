@@ -1,4 +1,6 @@
 package com.tilldawn.View;
 
-public interface AppView {
+import com.badlogic.gdx.Screen;
+
+public interface AppView extends Screen {
 }

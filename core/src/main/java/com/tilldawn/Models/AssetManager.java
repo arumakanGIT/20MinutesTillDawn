@@ -13,7 +13,7 @@ public class AssetManager {
         return instance;
     }
 
-    public Skin getSkin1() {
-        return new Skin(Gdx.files.internal("skin1/skin1.json"));
+    public Skin getSkin() {
+        return new Skin(Gdx.files.internal("skin/20MinTillDawn.json"));
     }
 }

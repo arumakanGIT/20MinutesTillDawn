@@ -1,20 +1,19 @@
 package com.tilldawn.View;
 
-import com.badlogic.gdx.Screen;
+public class SettingMenu implements AppView {
 
-public class RegisterMenu implements AppView {
     @Override
     public void show() {
 
     }
 
     @Override
-    public void render(float v) {
+    public void render(float delta) {
 
     }
 
     @Override
-    public void resize(int i, int i1) {
+    public void resize(int width, int height) {
 
     }
 

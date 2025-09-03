@@ -10,9 +10,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Models.AssetManager;
 import com.tilldawn.Main;
 
-public class MainMenu implements Screen, AppView {
+public class MainMenu implements AppView {
     private final Stage stage;
-    private final Main game = Main.getGame();
 
     private final Texture background;
 
@@ -20,10 +19,10 @@ public class MainMenu implements Screen, AppView {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin1 = AssetManager.getInstance().getSkin1();
-        TextButton play = new TextButton("Play", skin1, "withoutBackGround");
-        play.setPosition((float) Gdx.graphics.getWidth() - play.getWidth() - play.getWidth() / 2, (float) Gdx.graphics.getHeight() - play.getHeight() * 3);
-        stage.addActor(play);
+//        Skin skin1 = AssetManager.getInstance().getSkin1();
+//        TextButton play = new TextButton("Play", skin1, "withoutBackGround");
+//        play.setPosition((float) Gdx.graphics.getWidth() - play.getWidth() - play.getWidth() / 2, (float) Gdx.graphics.getHeight() - play.getHeight() * 3);
+//        stage.addActor(play);
 
         background = new Texture(Gdx.files.internal("background.png"));
     }
@@ -31,9 +30,9 @@ public class MainMenu implements Screen, AppView {
     @Override
     public void render(float v) {
         ScreenUtils.clear(0, 0, 0, 1);
-        game.getBatch().begin();
-        game.getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.getBatch().end();
+        Main.getGame().getBatch().begin();
+        Main.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Main.getGame().getBatch().end();
         stage.act(v);
         stage.draw();
     }

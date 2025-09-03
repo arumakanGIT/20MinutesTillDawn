@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.tilldawn.Models.Result;
+import com.tilldawn.Models.SFX;
 import com.tilldawn.View.LoginMenu;
 
 public class LoginMenuController {
@@ -18,6 +19,51 @@ public class LoginMenuController {
 
     private void initialize() {
 
+        // Pre game
+
+        menu.getPreGameButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+            }
+        });
+
+        // setting
+
+        menu.getSettingButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+            }
+        });
+
+        // profile
+
+        menu.getProfileButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+            }
+        });
+
+        // score board
+
+        menu.getScoreBoardButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+            }
+        });
+
+        // talent
+
+        menu.getTalentButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+            }
+        });
+
         // Exit
 
         menu.getExitButton().addListener(new ClickListener() {
@@ -26,64 +72,6 @@ public class LoginMenuController {
                 Gdx.app.exit();
             }
         });
-
-        // Login
-
-        menu.getLoginButton().addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                String username = menu.getUsername().getText();
-                String password = menu.getPassword().getText();
-                String confirmPassword = menu.getPasswordConfirm().getText();
-
-                if (!checkUsername(username).isSuccessful())
-                    ;
-//                if ()
-            }
-        });
-
-        // Username ExtField
-
-        menu.getUsername().addListener(new FocusListener() {
-            public void keyboardFocusChanged(FocusEvent event, Actor actor, boolean focused) {
-                if (!focused) {
-                    String text = menu.getUsername().getText();
-                    if (text.length() > 20 || text.length() < 3) {
-
-                    }
-                }
-            }
-        });
-
-        // Password TextField
-
-        menu.getPassword().addListener(new FocusListener() {
-            public void keyboardFocusChanged(FocusEvent event, Actor actor, boolean focused) {
-                if (!focused) {
-                    String text = menu.getPassword().getText();
-
-                }
-            }
-        });
-
-        // Password Confirm TextField
-
-        menu.getPasswordConfirm().addListener(new FocusListener() {
-            public void keyboardFocusChanged(FocusEvent event, Actor actor, boolean focused) {
-                if (!focused) {
-                    String text = menu.getPasswordConfirm().getText();
-
-                }
-            }
-        });
-
-        // Register
-
-        menu.getRegisterButton().addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-
-            }
-        });
-
     }
 
     private Result checkUsername(String username) {
