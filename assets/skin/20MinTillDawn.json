@@ -1,5 +1,11 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	ChvyExprs_WHITE_16: {
+		file: ChevyRay - Express(3).fnt
+		scaledSize: -1
+		markupEnabled: false
+		flip: false
+	}
 	ChvyExprs_WHITE_24: {
 		file: ChevyRay - Express.fnt
 		scaledSize: -1
@@ -18,6 +24,12 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 		markupEnabled: false
 		flip: false
 	}
+	ChvyExprs_WHITE_85: {
+		file: ChevyRay - Express(4).fnt
+		scaledSize: -1
+		markupEnabled: false
+		flip: false
+	}
 }
 com.badlogic.gdx.graphics.Color: {
 	GREEN1: {
@@ -32,11 +44,61 @@ com.badlogic.gdx.graphics.Color: {
 		b: 0.57254905
 		a: 1
 	}
+	RED: {
+		r: 1
+		g: 0
+		b: 0
+		a: 1
+	}
 	WHITE: {
 		r: 1
 		g: 1
 		b: 1
 		a: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	default: {
+		up: button
+	}
+	exit1: {
+		up: exitButton
+		down: exitButton_DOWN
+		over: exitButton_OVER
+	}
+	exit2: {
+		up: exitButton2
+		down: exitButton2_DOWN
+		over: exitButton2_OVER
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: {
+		font: ChvyExprs_WHITE_24
+	}
+	chvyExprs_PINK_24: {
+		font: ChvyExprs_WHITE_24
+		fontColor: PINK
+	}
+	chvyExprs_GREEN1_24: {
+		font: ChvyExprs_WHITE_24
+		fontColor: GREEN1
+	}
+	chvyExprs_RED_36: {
+		font: ChvyExprs_WHITE_36
+		fontColor: RED
+	}
+	chvyExprs_RED_54: {
+		font: ChvyExprs_WHITE_54
+		fontColor: RED
+	}
+	chvyExprs_PINK_85: {
+		font: ChvyExprs_WHITE_85
+		fontColor: PINK
+	}
+	chvyExprs_RED_85: {
+		font: ChvyExprs_WHITE_85
+		fontColor: RED
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
@@ -54,6 +116,40 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		font: ChvyExprs_WHITE_54
 		fontColor: PINK
 		overFontColor: GREEN1
+	}
+	chvy_PINK_16: {
+		font: ChvyExprs_WHITE_16
+		fontColor: PINK
+		overFontColor: GREEN1
+	}
+	chvy_PINK_24_ui: {
+		font: ChvyExprs_WHITE_24
+		fontColor: PINK
+		up: T_UIPanel
+		over: T_UIPanelSelected
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: {
+		font: ChvyExprs_WHITE_24
+		fontColor: GREEN1
+		focusedFontColor: WHITE
+		background: textFieldBack1
+		cursor: cursor2
+		selection: selection
+	}
+	default2: {
+		font: ChvyExprs_WHITE_24
+		fontColor: PINK
+		focusedFontColor: WHITE
+		background: textFieldBack2
+		cursor: cursor1
+		selection: selection
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
+	default: {
+		label: default
 	}
 }
 }

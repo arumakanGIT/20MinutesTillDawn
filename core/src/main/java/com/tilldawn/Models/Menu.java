@@ -6,7 +6,12 @@ import com.tilldawn.View.*;
 public enum Menu {
     MainMenu(new MainMenu()),
     LoginMenu(new LoginMenu()),
-    RegisterMenu(new RegisterMenu());
+    RegisterMenu(new RegisterMenu()),
+    SettingMenu(new SettingMenu()),
+    ProfileMenu(new ProfileMenu()),
+    TalentMenu(new TalentMenu()),
+    ScoreBoardMenu(new ScoreBoardMenu()),
+    PreGameMenu(new PreGameMenu());
 
     private final Screen screen;
 
