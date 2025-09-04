@@ -1,46 +1,116 @@
 package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.tilldawn.Models.AssetManager;
+import com.tilldawn.Controller.MainMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Models.AnimationManager;
+import com.tilldawn.Models.AssetManager;
 
 public class MainMenu implements AppView {
-    private final Stage stage;
-
+    // fields :
     private final Texture background;
+    private final Stage stage;
+    private final Animation<TextureRegion> blickRight1 = AnimationManager.getInstance().get("blinkRight");
+    private final Animation<TextureRegion> blickRight2 = AnimationManager.getInstance().get("blinkRight");
+    private final Animation<TextureRegion> blickLeft1 = AnimationManager.getInstance().get("blinkLeft");
+    private final Animation<TextureRegion> blickLeft2 = AnimationManager.getInstance().get("blinkLeft");
 
+    private final TextButton preGameButton;
+    private final TextButton settingButton;
+    private final TextButton profileButton;
+    private final TextButton scoreBoardButton;
+    private final TextButton talentButton;
+    private final TextButton exitButton;
+
+    // init :
     public MainMenu() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+        Table table = new Table();
+        table.setFillParent(true);
+        table.center();
+        background = new Texture(Gdx.files.internal("IntroMenuBackGround.png"));
+        Skin skin = AssetManager.getInstance().getSkin();
 
-//        Skin skin1 = AssetManager.getInstance().getSkin1();
-//        TextButton play = new TextButton("Play", skin1, "withoutBackGround");
-//        play.setPosition((float) Gdx.graphics.getWidth() - play.getWidth() - play.getWidth() / 2, (float) Gdx.graphics.getHeight() - play.getHeight() * 3);
-//        stage.addActor(play);
+        preGameButton = new TextButton("Pre Game", skin, "chvy_PINK_54");
+        settingButton = new TextButton("Setting", skin, "chvy_PINK_36");
+        profileButton = new TextButton("Profile", skin, "chvy_PINK_36");
+        scoreBoardButton = new TextButton("Score Board", skin, "chvy_PINK_36");
+        talentButton = new TextButton("Talent", skin, "chvy_PINK_36");
+        exitButton = new TextButton("Exit", skin, "chvy_PINK_36");
 
-        background = new Texture(Gdx.files.internal("background.png"));
+        int pad = 20;
+        table.add(preGameButton).pad(pad).padTop(200).row();
+        table.add(settingButton).pad(pad).row();
+        table.add(profileButton).pad(pad).row();
+        table.add(scoreBoardButton).pad(pad).row();
+        table.add(talentButton).pad(pad).row();
+        table.add(exitButton).pad(pad);
+
+        stage.addActor(table);
+        new MainMenuController(this);
     }
+
+    private float blinkingStateTime = 0f;
+    private boolean blinking = false;
+    private float blinkTimer = 0f;
 
     @Override
     public void render(float v) {
-        ScreenUtils.clear(0, 0, 0, 1);
+        TextureRegion currentFrame1;
+        TextureRegion currentFrame2;
+        TextureRegion currentFrame3;
+        TextureRegion currentFrame4;
+
+        if (blinking) {
+            blinkingStateTime += v;
+            currentFrame1 = blickRight1.getKeyFrame(blinkingStateTime, false);
+            currentFrame2 = blickRight2.getKeyFrame(blinkingStateTime, false);
+            currentFrame3 = blickLeft1.getKeyFrame(blinkingStateTime, false);
+            currentFrame4 = blickLeft2.getKeyFrame(blinkingStateTime, false);
+
+            if (blickRight1.isAnimationFinished(blinkingStateTime)) {
+                blinking = false;
+                blinkTimer = 0;
+                blinkingStateTime = 0;
+                currentFrame1 = blickRight1.getKeyFrame(0);
+                currentFrame2 = blickRight2.getKeyFrame(0);
+                currentFrame3 = blickLeft1.getKeyFrame(0);
+                currentFrame4 = blickLeft2.getKeyFrame(0);
+            }
+        } else {
+            blinkTimer += v;
+
+            currentFrame1 = blickRight1.getKeyFrame(0);
+            currentFrame2 = blickRight2.getKeyFrame(0);
+            currentFrame3 = blickLeft1.getKeyFrame(0);
+            currentFrame4 = blickLeft2.getKeyFrame(0);
+
+            if (blinkTimer >= 4f) {
+                blinking = true;
+                blinkingStateTime = 0;
+            }
+        }
+
+
+        ScreenUtils.clear(Color.WHITE);
         Main.getGame().getBatch().begin();
         Main.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Main.getGame().getBatch().draw(currentFrame1, Gdx.graphics.getWidth() / 2f + 400, Gdx.graphics.getHeight() / 2f - 100 + 100);
+        Main.getGame().getBatch().draw(currentFrame2, Gdx.graphics.getWidth() / 2f + 350, Gdx.graphics.getHeight() / 2f - 100 - 100);
+        Main.getGame().getBatch().draw(currentFrame3, Gdx.graphics.getWidth() / 2f - 500, Gdx.graphics.getHeight() / 2f - 100 + 100);
+        Main.getGame().getBatch().draw(currentFrame4, Gdx.graphics.getWidth() / 2f - 450, Gdx.graphics.getHeight() / 2f - 100 - 100);
         Main.getGame().getBatch().end();
+
         stage.act(v);
         stage.draw();
-    }
-
-    @Override
-    public void dispose() {
-        background.dispose();
-        stage.dispose();
     }
 
     @Override
@@ -49,9 +119,42 @@ public class MainMenu implements AppView {
     }
 
     @Override
-    public void show() {
-
+    public void dispose() {
+        background.dispose();
+        stage.dispose();
     }
+
+    // getter :
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public TextButton getExitButton() {
+        return exitButton;
+    }
+
+    public TextButton getSettingButton() {
+        return settingButton;
+    }
+
+    public TextButton getPreGameButton() {
+        return preGameButton;
+    }
+
+    public TextButton getProfileButton() {
+        return profileButton;
+    }
+
+    public TextButton getScoreBoardButton() {
+        return scoreBoardButton;
+    }
+
+    public TextButton getTalentButton() {
+        return talentButton;
+    }
+
+    //
 
     @Override
     public void pause() {
@@ -65,6 +168,11 @@ public class MainMenu implements AppView {
 
     @Override
     public void hide() {
+
+    }
+
+    @Override
+    public void show() {
 
     }
 }

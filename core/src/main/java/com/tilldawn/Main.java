@@ -2,7 +2,7 @@ package com.tilldawn;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tilldawn.Controller.GameAudioManager;
+import com.tilldawn.Models.GameAudioManager;
 import com.tilldawn.Models.App;
 
 public class Main extends Game {

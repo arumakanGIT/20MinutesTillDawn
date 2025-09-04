@@ -1,4 +1,4 @@
-package com.tilldawn.Controller;
+package com.tilldawn.Models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -15,6 +15,7 @@ public class GameAudioManager {
     public static float footStepVolume = 1f;
     // for music :
     public static float musicVolume = 1f;
+    public static boolean playMusic = false;
     // for ambient :
     public static float ambientVolume = 1f;
 
