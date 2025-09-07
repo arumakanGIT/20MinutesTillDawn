@@ -65,7 +65,7 @@ public class LoginMenuController {
         username = username.trim();
         password = password.trim();
 
-        if (UserDAO.login(username, password))
+        if (UserDAO.login(username, password).isSuccessful())
             return new Result(true, "User logged in");
         else
             return new Result(false, "Incorrect username or password");

@@ -1,14 +1,20 @@
 package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Controller.RegisterMenuController;
+import com.tilldawn.Models.AnimationManager;
 import com.tilldawn.Models.AssetManager;
+import com.tilldawn.Models.UserDAO;
 import com.tilldawn.TillDawn;
 
 import java.util.concurrent.Callable;
@@ -27,7 +33,7 @@ public class RegisterMenu implements AppView {
     private final Button usernameCheckButton;
     private final Button passwordCheckButton;
     private final Button confirmPasswordCheckButton;
-
+    private final SecurityQuestionDialog securityQuestionDialog;
     private final Label warningLabel;
 
     public RegisterMenu() {
@@ -73,6 +79,8 @@ public class RegisterMenu implements AppView {
         warningLabel.setAlignment(Align.center);
         warningLabel.setVisible(false);
 
+        securityQuestionDialog = new SecurityQuestionDialog(skin);
+
         menuTable.add(usernameLabel).pad(10).padLeft(-40).row();
         Table usernameTable = new Table();
         usernameTable.add(usernameField).width(600).padBottom(25).height(50);
@@ -105,15 +113,46 @@ public class RegisterMenu implements AppView {
 
     }
 
+    private float blinkingStateTime = 0f;
+    private boolean blinking = false;
+    private final Animation<TextureRegion> shadow = AnimationManager.getInstance().get("swordShadow");
+    private float blinkTimer = 0f;
+
     @Override
-    public void render(float v) {
+    public void render(float delta) {
+
+        TextureRegion currentFrame;
+
+        if (blinking) {
+            blinkingStateTime += delta;
+            currentFrame = shadow.getKeyFrame(blinkingStateTime, false);
+
+            if (shadow.isAnimationFinished(blinkingStateTime)) {
+                blinking = false;
+                blinkTimer = 0;
+                blinkingStateTime = 0;
+                currentFrame = shadow.getKeyFrame(0);
+            }
+        } else {
+            blinkTimer += delta;
+
+            currentFrame = shadow.getKeyFrame(0);
+
+            if (blinkTimer >= 1.4f) {
+                blinking = true;
+                blinkingStateTime = 0;
+            }
+        }
+
+        ScreenUtils.clear(Color.WHITE);
         TillDawn.getGame().getBatch().begin();
         TillDawn.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TillDawn.getGame().getBatch().draw(currentFrame, Gdx.graphics.getWidth() - 300, 448);
         TillDawn.getGame().getBatch().end();
-
-        stage.act(v);
+        stage.act(delta);
         stage.draw();
     }
+
 
     @Override
 
@@ -121,7 +160,16 @@ public class RegisterMenu implements AppView {
         stage.dispose();
         background.dispose();
     }
+
     //
+
+    public SecurityQuestionDialog getSecurityQuestionDialog() {
+        return securityQuestionDialog;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
 
     public Button getConfirmPasswordCheckButton() {
         return confirmPasswordCheckButton;

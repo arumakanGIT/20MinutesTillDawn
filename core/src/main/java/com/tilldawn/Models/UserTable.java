@@ -12,7 +12,9 @@ public class UserTable {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "username TEXT UNIQUE NOT NULL," +
                 "password TEXT NOT NULL," +
-                "salt TEXT NOT NULL)";
+                "salt TEXT NOT NULL," +
+                "securityQuestionID INTEGER NOT NULL," +
+                "answer TEXT NOT NULL)";
 
             stmt.execute(sql);
         } catch (Exception e) {
