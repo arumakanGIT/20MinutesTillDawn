@@ -38,6 +38,7 @@ public class LoginMenu implements AppView {
     private final TextField passwordField;
     private final Label warningLabel;
     private final Dialog setPasswordDialog;
+    private final CheckBox stayLoggedInCheckBox;
 
     public LoginMenu() {
         stage = new Stage();
@@ -119,13 +120,15 @@ public class LoginMenu implements AppView {
         });
         setPasswordDialog.getContentTable().add(cancelButton).padTop(50);
         setPasswordDialog.getContentTable().add(okButton).padTop(50);
+        stayLoggedInCheckBox = new CheckBox("  Stay Logged In", skin);
 
         menuTable.add(usernameLabel).pad(25).padTop(285).row();
-        menuTable.add(usernameField).width(600).height(50).pad(10).padBottom(60).row();
+        menuTable.add(usernameField).width(600).height(50).pad(10).padBottom(30).row();
         menuTable.add(passwordLabel).pad(25).row();
         menuTable.add(passwordField).width(600).height(50).pad(10).row();
         menuTable.add(forgetButton).pad(10).row();
-        menuTable.add(loginButton).pad(10).padTop(80).width(300).row();
+        menuTable.add(stayLoggedInCheckBox).pad(10).padTop(45).row();
+        menuTable.add(loginButton).pad(10).padTop(30).width(300).row();
         menuTable.add(registerButton).pad(10).row();
 
         table.add(menuTable).padLeft(220);

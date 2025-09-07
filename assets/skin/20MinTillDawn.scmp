@@ -662,6 +662,46 @@ atlasData: {
 			type: NINE_PATCH
 			hidden: false
 		}
+		{
+			file: C:/Users/Notebook/Documents/vs/20MinTillDawn/assets/skin/skinAssets/checkBox_ON1.png
+			bgColor: {
+				r: 1
+				g: 1
+				b: 1
+				a: 1
+			}
+			tint: null
+			tintName: null
+			name: checkBox_ON1
+			tiled: false
+			minWidth: -1
+			minHeight: -1
+			customized: false
+			tenPatchData: null
+			tvgData: null
+			type: TEXTURE
+			hidden: false
+		}
+		{
+			file: C:/Users/Notebook/Documents/vs/20MinTillDawn/assets/skin/skinAssets/checkBox_OFF.png
+			bgColor: {
+				r: 1
+				g: 1
+				b: 1
+				a: 1
+			}
+			tint: null
+			tintName: null
+			name: checkBox_OFF
+			tiled: false
+			minWidth: -1
+			minHeight: -1
+			customized: false
+			tenPatchData: null
+			tvgData: null
+			type: TEXTURE
+			hidden: false
+		}
 	]
 	fontDrawables: [
 		{
@@ -784,6 +824,26 @@ atlasData: {
 			type: FONT
 			hidden: false
 		}
+		{
+			file: C:/Users/Notebook/Documents/vs/20MinTillDawn/assets/fonts/ChevyRay - Express(7).png
+			bgColor: {
+				r: 1
+				g: 1
+				b: 1
+				a: 1
+			}
+			tint: null
+			tintName: null
+			name: ChevyRay - Express(7)
+			tiled: false
+			minWidth: -1
+			minHeight: -1
+			customized: false
+			tenPatchData: null
+			tvgData: null
+			type: FONT
+			hidden: false
+		}
 	]
 }
 jsonData: {
@@ -855,6 +915,14 @@ jsonData: {
 			markupEnabled: false
 			scaling: -1
 			file: C:/Users/Notebook/Documents/vs/20MinTillDawn/assets/fonts/ChevyRay - Express.fnt
+		}
+		{
+			class: com.ray3k.skincomposer.data.FontData
+			name: ChvyExprs_WHITE_24_boarder
+			flip: false
+			markupEnabled: false
+			scaling: -1
+			file: C:/Users/Notebook/Documents/vs/20MinTillDawn/assets/fonts/ChevyRay - Express(7).fnt
 		}
 		{
 			class: com.ray3k.skincomposer.data.FontData
@@ -2853,13 +2921,13 @@ jsonData: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
 						name: checkboxOn
 						optional: false
-						value: null
+						value: checkBox_ON1
 					}
 					checkboxOff: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
 						name: checkboxOff
 						optional: false
-						value: null
+						value: checkBox_OFF
 					}
 					checkboxOnOver: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
@@ -2889,13 +2957,13 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.g2d.BitmapFont
 						name: font
 						optional: false
-						value: null
+						value: ChvyExprs_WHITE_24
 					}
 					fontColor: {
 						type: com.badlogic.gdx.graphics.Color
 						name: fontColor
 						optional: true
-						value: null
+						value: PINK
 					}
 					downFontColor: {
 						type: com.badlogic.gdx.graphics.Color
@@ -3996,9 +4064,9 @@ preferences: {
 	}
 	preview-bg-color: {
 		class: com.badlogic.gdx.graphics.Color
-		r: 0.627451
-		g: 0.627451
-		b: 0.627451
+		r: 0
+		g: 0
+		b: 0
 		a: 1
 	}
 	last-import-export-path: {

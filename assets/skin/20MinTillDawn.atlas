@@ -6,49 +6,56 @@ filter: Linear, Linear
 repeat: none
 ChevyRay - Express
   rotate: false
-  xy: 1022, 1850
+  xy: 1022, 1880
   size: 504, 71
   orig: 504, 71
   offset: 0, 0
   index: -1
 ChevyRay - Express(1)
   rotate: false
-  xy: 515, 1782
+  xy: 515, 1812
   size: 505, 139
   orig: 505, 139
   offset: 0, 0
   index: -1
 ChevyRay - Express(2)
   rotate: false
-  xy: 1, 614
+  xy: 1, 644
   size: 505, 279
   orig: 505, 279
   offset: 0, 0
   index: -1
 ChevyRay - Express(3)
   rotate: false
-  xy: 515, 1738
+  xy: 515, 1768
   size: 505, 42
   orig: 505, 42
   offset: 0, 0
   index: -1
 ChevyRay - Express(4)_0
   rotate: false
-  xy: 1, 1409
+  xy: 1, 1439
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 ChevyRay - Express(4)_1
   rotate: false
-  xy: 1, 895
+  xy: 1, 925
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
+ChevyRay - Express(7)
+  rotate: false
+  xy: 1, 491
+  size: 499, 151
+  orig: 499, 151
+  offset: 0, 0
+  index: -1
 T_UIPanel
   rotate: false
-  xy: 1528, 1857
+  xy: 1528, 1887
   size: 64, 64
   split: 12, 13, 12, 12
   pad: 12, 12, 12, 12
@@ -57,7 +64,7 @@ T_UIPanel
   index: -1
 T_UIPanelSelected
   rotate: false
-  xy: 401, 548
+  xy: 915, 1702
   size: 64, 64
   split: 12, 13, 12, 12
   pad: 12, 12, 12, 12
@@ -66,105 +73,119 @@ T_UIPanelSelected
   index: -1
 button
   rotate: false
-  xy: 63, 174
+  xy: 577, 1328
   size: 48, 42
   orig: 48, 42
   offset: 0, 0
   index: -1
 cancelButton
   rotate: false
-  xy: 577, 1426
+  xy: 63, 179
   size: 53, 46
   orig: 53, 46
   offset: 0, 0
   index: -1
 cancelButton_OVER
   rotate: false
-  xy: 1, 106
+  xy: 515, 1260
   size: 53, 46
   orig: 53, 46
   offset: 0, 0
   index: -1
+checkBox_OFF
+  rotate: false
+  xy: 466, 469
+  size: 21, 20
+  orig: 21, 20
+  offset: 0, 0
+  index: -1
+checkBox_ON1
+  rotate: false
+  xy: 1090, 1858
+  size: 21, 20
+  orig: 21, 20
+  offset: 0, 0
+  index: -1
 checkButtonDisable
   rotate: false
-  xy: 1022, 1763
+  xy: 1022, 1793
   size: 60, 62
   orig: 60, 62
   offset: 0, 0
   index: -1
 checkButtonFail
   rotate: false
-  xy: 1, 154
+  xy: 515, 1308
   size: 60, 62
   orig: 60, 62
   offset: 0, 0
   index: -1
 checkButtonPass
   rotate: false
-  xy: 515, 1410
+  xy: 1, 163
   size: 60, 62
   orig: 60, 62
   offset: 0, 0
   index: -1
 cursor1
   rotate: false
-  xy: 1, 1
+  xy: 502, 578
   size: 3, 64
   orig: 3, 64
   offset: 0, 0
   index: -1
 cursor2
   rotate: false
-  xy: 508, 829
+  xy: 508, 859
   size: 3, 64
   orig: 3, 64
   offset: 0, 0
   index: -1
 exitButton
   rotate: false
-  xy: 1655, 1884
+  xy: 1655, 1914
   size: 47, 37
   orig: 47, 37
   offset: 0, 0
   index: -1
 exitButton2
   rotate: false
-  xy: 515, 1314
+  xy: 1, 67
   size: 47, 37
   orig: 47, 37
   offset: 0, 0
   index: -1
 exitButton2_DOWN
   rotate: false
-  xy: 632, 1435
+  xy: 118, 188
   size: 47, 37
   orig: 47, 37
   offset: 0, 0
   index: -1
 exitButton2_OVER
   rotate: false
-  xy: 1, 67
+  xy: 515, 1221
   size: 47, 37
   orig: 47, 37
   offset: 0, 0
   index: -1
 exitButton_DOWN
   rotate: false
-  xy: 401, 457
+  xy: 915, 1611
   size: 47, 37
   orig: 47, 37
   offset: 0, 0
   index: -1
 exitButton_OVER
   rotate: false
-  xy: 915, 1616
+  xy: 401, 369
   size: 47, 37
   orig: 47, 37
   offset: 0, 0
   index: -1
 hScroll
   rotate: false
-  xy: 1022, 1827
+  xy: 1022, 1857
   size: 66, 21
   split: 29, 28, 0, 0
   pad: 25, 25, 0, 0
@@ -173,28 +194,28 @@ hScroll
   index: -1
 hScrollKnob
   rotate: false
-  xy: 915, 1712
+  xy: 401, 465
   size: 63, 24
   orig: 63, 24
   offset: 0, 0
   index: -1
 okButton
   rotate: false
-  xy: 915, 1655
+  xy: 401, 408
   size: 53, 55
   orig: 53, 55
   offset: 0, 0
   index: -1
 okButton_OVER
   rotate: false
-  xy: 515, 1353
+  xy: 1, 106
   size: 53, 55
   orig: 53, 55
   offset: 0, 0
   index: -1
 selectBox
   rotate: false
-  xy: 1594, 1871
+  xy: 1594, 1901
   size: 59, 50
   split: 7, 33, 40, 6
   pad: 6, 30, 6, 6
@@ -203,7 +224,7 @@ selectBox
   index: -1
 selectBox_DISABLE
   rotate: false
-  xy: 401, 496
+  xy: 915, 1650
   size: 59, 50
   split: 7, 33, 40, 6
   pad: 6, 30, 6, 6
@@ -212,21 +233,21 @@ selectBox_DISABLE
   index: -1
 selection
   rotate: false
-  xy: 515, 1248
+  xy: 1, 1
   size: 6, 64
   orig: 6, 64
   offset: 0, 0
   index: -1
 stageBackground
   rotate: false
-  xy: 1, 218
+  xy: 515, 1372
   size: 398, 130
   orig: 398, 130
   offset: 0, 0
   index: -1
 textFieldBack1
   rotate: false
-  xy: 113, 185
+  xy: 627, 1339
   size: 31, 31
   split: 5, 5, 5, 5
   pad: 8, 8, 5, 5
@@ -235,7 +256,7 @@ textFieldBack1
   index: -1
 textFieldBack2
   rotate: false
-  xy: 467, 581
+  xy: 981, 1735
   size: 31, 31
   split: 5, 5, 5, 5
   pad: 8, 8, 5, 5
@@ -244,7 +265,7 @@ textFieldBack2
   index: -1
 vScroll
   rotate: false
-  xy: 915, 1548
+  xy: 401, 301
   size: 21, 66
   split: 0, 0, 28, 29
   pad: 0, 0, 25, 25
@@ -253,14 +274,14 @@ vScroll
   index: -1
 vScrollKnob
   rotate: false
-  xy: 401, 392
+  xy: 915, 1546
   size: 24, 63
   orig: 24, 63
   offset: 0, 0
   index: -1
 warningLabel
   rotate: false
-  xy: 1704, 1896
+  xy: 1704, 1926
   size: 24, 25
   split: 11, 11, 11, 11
   pad: 11, 11, 12, 12
@@ -269,7 +290,7 @@ warningLabel
   index: -1
 window1
   rotate: false
-  xy: 1, 482
+  xy: 515, 1636
   size: 398, 130
   split: 100, 114, 76, 23
   pad: 40, 28, 74, 20
@@ -278,7 +299,7 @@ window1
   index: -1
 window2
   rotate: false
-  xy: 515, 1606
+  xy: 1, 359
   size: 398, 130
   split: 290, 86, 79, 25
   pad: 40, 30, 75, 25
@@ -287,7 +308,7 @@ window2
   index: -1
 window3
   rotate: false
-  xy: 1, 350
+  xy: 515, 1504
   size: 398, 130
   split: 292, 84, 76, 22
   pad: 40, 31, 75, 23
@@ -296,7 +317,7 @@ window3
   index: -1
 window4
   rotate: false
-  xy: 515, 1474
+  xy: 1, 227
   size: 398, 130
   split: 103, 119, 76, 22
   pad: 39, 30, 74, 20

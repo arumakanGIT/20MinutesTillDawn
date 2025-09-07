@@ -86,31 +86,30 @@ public class RegisterMenu implements AppView {
         usernameTable.add(usernameField).width(600).padBottom(25).height(50);
         usernameTable.add(usernameCheckButton).width(usernameCheckButton.getWidth() / 2)
             .height(usernameCheckButton.getHeight() / 2).padBottom(30).padLeft(40).row();
-        menuTable.add(usernameTable).row();
+        menuTable.add(usernameTable).padBottom(30).row();
         menuTable.add(passwordLabel).pad(10).padLeft(-40).row();
         Table passwordTable = new Table();
         passwordTable.add(passwordField).width(600).padBottom(10).height(50);
         passwordTable.add(passwordCheckButton).width(passwordCheckButton.getWidth() / 2)
             .height(passwordCheckButton.getHeight() / 2).padBottom(15).padLeft(40).row();
         menuTable.add(passwordTable).row();
-        menuTable.add(randomPasswordButton).padBottom(25).padLeft(-40).row();
+        menuTable.add(randomPasswordButton).padBottom(55).padLeft(-40).row();
         menuTable.add(confirmPasswordLabel).pad(10).padLeft(-40).row();
         Table confirmPasswordTable = new Table();
         confirmPasswordTable.add(confirmPasswordField).width(600).padBottom(25).height(50);
         confirmPasswordTable.add(confirmPasswordCheckButton).width(confirmPasswordCheckButton.getWidth() / 2)
             .height(confirmPasswordCheckButton.getHeight() / 2).padBottom(30).padLeft(40).row();
-        menuTable.add(confirmPasswordTable).row();
+        menuTable.add(confirmPasswordTable).padBottom(30).row();
         menuTable.add(registerButton).width(300).pad(15).padTop(25).padLeft(-40).row();
         menuTable.add(loginButton).padLeft(-50).row();
 
-        table.add(menuTable).padLeft(220).padTop(285);
+        table.add(menuTable).padLeft(220).padTop(240);
         exitButton.setPosition(Gdx.graphics.getWidth() - 65, Gdx.graphics.getHeight() - 65);
         warningLabel.setPosition(Gdx.graphics.getWidth() / 2f, 40);
         stage.addActor(exitButton);
         stage.addActor(table);
         stage.addActor(warningLabel);
         new RegisterMenuController(this);
-
     }
 
     private float blinkingStateTime = 0f;
