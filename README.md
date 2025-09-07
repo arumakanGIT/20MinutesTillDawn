@@ -2,7 +2,7 @@
 
 A small university graphics project
 
-<img width="1919" height="1060" alt="image" src="https://github.com/user-attachments/assets/14933136-31e5-4661-8ec0-32bf780486a3" />
+<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/9d9fd595-f016-48bb-bad1-b43ddd34cb4e" />
 
 ### 🟢 Features
 
