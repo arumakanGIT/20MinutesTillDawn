@@ -14,11 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Controller.LoginMenuController;
-import com.tilldawn.Models.SHA_256;
-import com.tilldawn.Models.UserDAO;
+import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
-import com.tilldawn.Models.AnimationManager;
-import com.tilldawn.Models.AssetManager;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -104,10 +101,12 @@ public class LoginMenu implements AppView {
                     return;
                 }
 
-                UserDAO.changePassword(usernameField.getText(), newPasswordField.getText());
-                newPasswordField.setText("");
-                confirmPasswordField.setText("");
-                setPasswordDialog.hide();
+                Result result = UserDAO.changePassword(usernameField.getText(), newPasswordField.getText());
+                if (result.isSuccessful()) {
+                    newPasswordField.setText("");
+                    confirmPasswordField.setText("");
+                    setPasswordDialog.hide();
+                } else showWarning(result.message());
             }
         });
         cancelButton.addListener(new ClickListener() {
@@ -191,6 +190,11 @@ public class LoginMenu implements AppView {
     }
 
     //
+
+    public CheckBox getStayLoggedInCheckBox() {
+        return stayLoggedInCheckBox;
+    }
+
     public Dialog getSetPasswordDialog() {
         return setPasswordDialog;
     }

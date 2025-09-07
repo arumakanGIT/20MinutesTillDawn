@@ -145,8 +145,35 @@ public class UserDAO {
             else return new Result(false, "User not found");
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error checking user existence: " + e.getMessage());
             return new Result(false, "Database error: " + e.getMessage());
         }
+    }
+
+    public static void saveRememberToken(String username, String token) {
+        String sql = "UPDATE users SET rememberToken = ? WHERE username = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, token);
+            pstmt.setString(2, username);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getUserByToken(String token) {
+        String sql = "SELECT username FROM users WHERE rememberToken = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, token);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("username");
+            }
+        } catch (Exception e) {
+            System.out.println("Error checking user existence: " + e.getMessage());
+        }
+        return null;
     }
 }

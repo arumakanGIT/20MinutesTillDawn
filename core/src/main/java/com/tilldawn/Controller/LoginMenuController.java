@@ -1,17 +1,17 @@
 package com.tilldawn.Controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.RegisterMenu;
-import com.tilldawn.View.SecurityQuestionDialog;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class LoginMenuController {
 
@@ -37,9 +37,16 @@ public class LoginMenuController {
             public void clicked(InputEvent event, float x, float y) {
                 GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
                 Result result = check(menu.getUsernameField().getText(), menu.getPasswordField().getText());
-                if (result.isSuccessful())
+                if (result.isSuccessful()) {
+                    if (menu.getStayLoggedInCheckBox().isChecked()) {
+                        String token = generateToken();
+                        Preferences prefs = Gdx.app.getPreferences("MyGamePrefs");
+                        prefs.putString("rememberToken", token);
+                        prefs.flush();
+                        UserDAO.saveRememberToken(menu.getUsernameField().getText(), token);
+                    }
                     TillDawn.getGame().setScreen(new MainMenu());
-                else menu.showWarning(result.message());
+                } else menu.showWarning(result.message());
             }
         });
 
@@ -82,5 +89,9 @@ public class LoginMenuController {
             return new Result(true, "User logged in");
         else
             return new Result(false, "Incorrect username or password");
+    }
+
+    private String generateToken() {
+        return UUID.randomUUID().toString();
     }
 }
