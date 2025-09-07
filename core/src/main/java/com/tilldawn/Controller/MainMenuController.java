@@ -1,11 +1,12 @@
 package com.tilldawn.Controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.tilldawn.Models.GameAudioManager;
-import com.tilldawn.Models.Result;
-import com.tilldawn.Models.SFX;
+import com.tilldawn.Models.*;
+import com.tilldawn.TillDawn;
+import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
 
 public class MainMenuController {
@@ -54,6 +55,18 @@ public class MainMenuController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+            }
+        });
+
+        // logout
+        menu.getLogoutButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                UserDAO.saveRememberToken(App.getCurrentUser().getUsername(), null);
+                Preferences prefs = Gdx.app.getPreferences("StayLoggedIn");
+                prefs.remove("rememberToken");
+                prefs.flush();
+                TillDawn.getGame().setScreen(new LoginMenu());
             }
         });
 

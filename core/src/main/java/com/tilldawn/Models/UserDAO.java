@@ -176,4 +176,28 @@ public class UserDAO {
         }
         return null;
     }
+
+    public static User getUserByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new User(
+                    rs.getInt("id"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("salt"),
+                    rs.getInt("securityQuestionID"),
+                    rs.getString("answer")
+                );
+            }
+        } catch (Exception e) {
+            System.out.println("Error fetching user: " + e.getMessage());
+        }
+        return null;
+    }
 }

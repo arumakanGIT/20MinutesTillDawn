@@ -40,11 +40,12 @@ public class LoginMenuController {
                 if (result.isSuccessful()) {
                     if (menu.getStayLoggedInCheckBox().isChecked()) {
                         String token = generateToken();
-                        Preferences prefs = Gdx.app.getPreferences("MyGamePrefs");
+                        Preferences prefs = Gdx.app.getPreferences("StayLoggedIn");
                         prefs.putString("rememberToken", token);
                         prefs.flush();
                         UserDAO.saveRememberToken(menu.getUsernameField().getText(), token);
                     }
+                    App.setCurrentUser(UserDAO.getUserByUsername(menu.getUsernameField().getText()));
                     TillDawn.getGame().setScreen(new MainMenu());
                 } else menu.showWarning(result.message());
             }

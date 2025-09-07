@@ -27,6 +27,7 @@ public class MainMenu implements AppView {
     private final TextButton profileButton;
     private final TextButton scoreBoardButton;
     private final TextButton talentButton;
+    private final TextButton logoutButton;
     private final TextButton exitButton;
 
     // init :
@@ -44,7 +45,9 @@ public class MainMenu implements AppView {
         profileButton = new TextButton("Profile", skin, "chvy_PINK_36");
         scoreBoardButton = new TextButton("Score Board", skin, "chvy_PINK_36");
         talentButton = new TextButton("Talent", skin, "chvy_PINK_36");
-        exitButton = new TextButton("Exit", skin, "chvy_PINK_36");
+        logoutButton = new TextButton("Logout", skin, "chvy_PINK_36");
+        exitButton = new TextButton("Exit", skin);
+
 
         int pad = 20;
         table.add(preGameButton).pad(pad).padTop(200).row();
@@ -52,6 +55,7 @@ public class MainMenu implements AppView {
         table.add(profileButton).pad(pad).row();
         table.add(scoreBoardButton).pad(pad).row();
         table.add(talentButton).pad(pad).row();
+        table.add(logoutButton).pad(pad).row();
         table.add(exitButton).pad(pad);
 
         stage.addActor(table);
@@ -125,8 +129,8 @@ public class MainMenu implements AppView {
 
     // getter :
 
-    public Stage getStage() {
-        return stage;
+    public TextButton getLogoutButton() {
+        return logoutButton;
     }
 
     public TextButton getExitButton() {
