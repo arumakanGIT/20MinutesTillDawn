@@ -3,22 +3,23 @@ package com.tilldawn;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tilldawn.Models.GameAudioManager;
-import com.tilldawn.Models.App;
-import com.tilldawn.Models.Menu;
+import com.tilldawn.Models.UserTable;
+import com.tilldawn.View.LoginMenu;
 
-public class Main extends Game {
+public class TillDawn extends Game {
     private static SpriteBatch batch;
-    private static Main game;
+    private static TillDawn game;
 
     @Override
     public void create() {
+        UserTable.createTable();
         GameAudioManager.getInstance().playMusic("Pretty Dungeon LOOP.wav", false, GameAudioManager.musicVolume);
         batch = new SpriteBatch();
         game = this;
-        App.setScreen(Menu.LoginMenu);
+        setScreen(new LoginMenu());
     }
 
-    public static Main getGame() {
+    public static TillDawn getGame() {
         return game;
     }
 

@@ -1,15 +1,202 @@
 package com.tilldawn.View;
 
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
+import com.tilldawn.Controller.RegisterMenuController;
+import com.tilldawn.Models.AssetManager;
+import com.tilldawn.TillDawn;
+
+import java.util.concurrent.Callable;
 
 public class RegisterMenu implements AppView {
-    @Override
-    public void show() {
+
+    private final Stage stage;
+    private final Texture background;
+    private final TextField usernameField;
+    private final TextField passwordField;
+    private final TextField confirmPasswordField;
+    private final TextButton registerButton;
+    private final Button exitButton;
+    private final TextButton loginButton;
+    private final TextButton randomPasswordButton;
+    private final Button usernameCheckButton;
+    private final Button passwordCheckButton;
+    private final Button confirmPasswordCheckButton;
+
+    private final Label warningLabel;
+
+    public RegisterMenu() {
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        Table table = new Table();
+        table.setFillParent(true);
+        table.top().left();
+        background = new Texture(Gdx.files.internal("LoginMenuAssets/LoginMenuBackground.png"));
+        Skin skin = AssetManager.getInstance().getSkin();
+
+        Table menuTable = new Table();
+        loginButton = new TextButton("Login", skin);
+        exitButton = new Button(skin, "exit2");
+        usernameField = new TextField("", skin, "default2");
+        usernameField.setAlignment(Align.center);
+        usernameField.setMessageText("Username");
+        passwordField = new TextField("", skin, "default2");
+        passwordField.setAlignment(Align.center);
+        passwordField.setMessageText("Password");
+        passwordField.setPasswordCharacter('*');
+        passwordField.setPasswordMode(true);
+        confirmPasswordField = new TextField("", skin, "default2");
+        confirmPasswordField.setAlignment(Align.center);
+        confirmPasswordField.setMessageText("Confirm Password");
+        confirmPasswordField.setPasswordCharacter('*');
+        confirmPasswordField.setPasswordMode(true);
+        registerButton = new TextButton("Register", skin, "chvy_PINK_24_ui");
+        randomPasswordButton = new TextButton("Random Password", skin, "chvy_PINK_16");
+        Label usernameLabel = new Label("Enter your Username:", skin);
+        Label passwordLabel = new Label("Enter your Password:", skin);
+        Label confirmPasswordLabel = new Label("Confirm Password:", skin);
+        usernameCheckButton = new Button(skin, "check");
+        passwordCheckButton = new Button(skin, "check");
+        confirmPasswordCheckButton = new Button(skin, "check");
+        usernameCheckButton.setDisabled(true);
+        passwordCheckButton.setDisabled(true);
+        randomPasswordButton.setDisabled(true);
+        usernameCheckButton.setVisible(false);
+        passwordCheckButton.setVisible(false);
+        confirmPasswordCheckButton.setVisible(false);
+        warningLabel = new Label("", skin, "war_chvy_WHITE_24");
+        warningLabel.setAlignment(Align.center);
+        warningLabel.setVisible(false);
+
+        menuTable.add(usernameLabel).pad(10).padLeft(-40).row();
+        Table usernameTable = new Table();
+        usernameTable.add(usernameField).width(600).padBottom(25).height(50);
+        usernameTable.add(usernameCheckButton).width(usernameCheckButton.getWidth() / 2)
+            .height(usernameCheckButton.getHeight() / 2).padBottom(30).padLeft(40).row();
+        menuTable.add(usernameTable).row();
+        menuTable.add(passwordLabel).pad(10).padLeft(-40).row();
+        Table passwordTable = new Table();
+        passwordTable.add(passwordField).width(600).padBottom(10).height(50);
+        passwordTable.add(passwordCheckButton).width(passwordCheckButton.getWidth() / 2)
+            .height(passwordCheckButton.getHeight() / 2).padBottom(15).padLeft(40).row();
+        menuTable.add(passwordTable).row();
+        menuTable.add(randomPasswordButton).padBottom(25).padLeft(-40).row();
+        menuTable.add(confirmPasswordLabel).pad(10).padLeft(-40).row();
+        Table confirmPasswordTable = new Table();
+        confirmPasswordTable.add(confirmPasswordField).width(600).padBottom(25).height(50);
+        confirmPasswordTable.add(confirmPasswordCheckButton).width(confirmPasswordCheckButton.getWidth() / 2)
+            .height(confirmPasswordCheckButton.getHeight() / 2).padBottom(30).padLeft(40).row();
+        menuTable.add(confirmPasswordTable).row();
+        menuTable.add(registerButton).width(300).pad(15).padTop(25).padLeft(-40).row();
+        menuTable.add(loginButton).padLeft(-50).row();
+
+        table.add(menuTable).padLeft(220).padTop(285);
+        exitButton.setPosition(Gdx.graphics.getWidth() - 65, Gdx.graphics.getHeight() - 65);
+        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f, 40);
+        stage.addActor(exitButton);
+        stage.addActor(table);
+        stage.addActor(warningLabel);
+        new RegisterMenuController(this);
 
     }
 
     @Override
     public void render(float v) {
+        TillDawn.getGame().getBatch().begin();
+        TillDawn.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TillDawn.getGame().getBatch().end();
+
+        stage.act(v);
+        stage.draw();
+    }
+
+    @Override
+
+    public void dispose() {
+        stage.dispose();
+        background.dispose();
+    }
+    //
+
+    public Button getConfirmPasswordCheckButton() {
+        return confirmPasswordCheckButton;
+    }
+
+    public Button getUsernameCheckButton() {
+        return usernameCheckButton;
+    }
+
+    public Button getPasswordCheckButton() {
+        return passwordCheckButton;
+    }
+
+    public TextButton getLoginButton() {
+        return loginButton;
+    }
+
+    public Button getExitButton() {
+        return exitButton;
+    }
+
+    public TextField getUsernameField() {
+        return usernameField;
+    }
+
+    public TextField getPasswordField() {
+        return passwordField;
+    }
+
+    public TextField getConfirmPasswordField() {
+        return confirmPasswordField;
+    }
+
+    public TextButton getRegisterButton() {
+        return registerButton;
+    }
+
+    public TextButton getRandomPasswordButton() {
+        return randomPasswordButton;
+    }
+
+    public void showWarning(String message) {
+        warningLabel.clearActions();
+        warningLabel.setText(message);
+
+        warningLabel.setWidth(warningLabel.getPrefWidth());
+        if (warningLabel.getWidth() < 600)
+            warningLabel.setWidth(600);
+        warningLabel.setHeight(warningLabel.getPrefHeight());
+
+        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f - warningLabel.getWidth() / 2, 40);
+
+        warningLabel.getColor().a = 0f;
+        warningLabel.setVisible(true);
+
+        warningLabel.addAction(
+            Actions.sequence(
+                Actions.fadeIn(0.5f),
+                Actions.delay(3),
+                Actions.fadeOut(0.5f),
+                new Action() {
+                    @Override
+                    public boolean act(float delta) {
+                        warningLabel.setVisible(false);
+                        return true;
+                    }
+                }
+            )
+        );
+    }
+
+    //
+
+    @Override
+    public void show() {
 
     }
 
@@ -30,11 +217,6 @@ public class RegisterMenu implements AppView {
 
     @Override
     public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
 
     }
 }

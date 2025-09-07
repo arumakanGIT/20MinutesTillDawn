@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Controller.LoginMenuController;
-import com.tilldawn.Main;
+import com.tilldawn.TillDawn;
 import com.tilldawn.Models.AnimationManager;
 import com.tilldawn.Models.AssetManager;
 
@@ -101,10 +101,10 @@ public class LoginMenu implements AppView {
         }
 
         ScreenUtils.clear(Color.WHITE);
-        Main.getGame().getBatch().begin();
-        Main.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Main.getGame().getBatch().draw(currentFrame, Gdx.graphics.getWidth() - 300, 448);
-        Main.getGame().getBatch().end();
+        TillDawn.getGame().getBatch().begin();
+        TillDawn.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TillDawn.getGame().getBatch().draw(currentFrame, Gdx.graphics.getWidth() - 300, 448);
+        TillDawn.getGame().getBatch().end();
         stage.act(delta);
         stage.draw();
     }
@@ -116,7 +116,8 @@ public class LoginMenu implements AppView {
 
     @Override
     public void dispose() {
-
+        background.dispose();
+        stage.dispose();
     }
 
     //

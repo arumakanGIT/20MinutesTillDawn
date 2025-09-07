@@ -71,6 +71,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 		down: exitButton2_DOWN
 		over: exitButton2_OVER
 	}
+	check: {
+		up: checkButtonPass
+		checked: checkButtonFail
+	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
@@ -99,6 +103,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	chvyExprs_RED_85: {
 		font: ChvyExprs_WHITE_85
 		fontColor: RED
+	}
+	war_chvy_WHITE_24: {
+		font: ChvyExprs_WHITE_24
+		fontColor: WHITE
+		background: warningLabel
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {

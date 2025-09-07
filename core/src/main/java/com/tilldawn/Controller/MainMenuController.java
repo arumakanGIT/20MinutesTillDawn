@@ -17,9 +17,7 @@ public class MainMenuController {
     }
 
     private void initialize() {
-
         // Pre game
-
         menu.getPreGameButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -28,7 +26,6 @@ public class MainMenuController {
         });
 
         // setting
-
         menu.getSettingButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -37,7 +34,6 @@ public class MainMenuController {
         });
 
         // profile
-
         menu.getProfileButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -46,7 +42,6 @@ public class MainMenuController {
         });
 
         // score board
-
         menu.getScoreBoardButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -55,7 +50,6 @@ public class MainMenuController {
         });
 
         // talent
-
         menu.getTalentButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -64,29 +58,11 @@ public class MainMenuController {
         });
 
         // Exit
-
         menu.getExitButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
         });
-    }
-
-    private Result checkUsername(String username) {
-        username = username.trim();
-
-        if (username.length() < 3 || username.length() > 20)
-            return new Result(false, "username should be between 3 and 20 characters");
-
-        return new Result(true, "");
-    }
-
-    private Result checkPassword(String password) {
-        password = password.trim();
-        if (password.length() < 8)
-            return new Result(false, "password should be at least 8 characters");
-
-        return new Result(true, "");
     }
 }

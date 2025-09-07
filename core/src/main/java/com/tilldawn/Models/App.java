@@ -1,21 +1,17 @@
 package com.tilldawn.Models;
 
-import com.badlogic.gdx.Screen;
-import com.tilldawn.Main;
+import java.util.ArrayList;
 
 public class App {
     public static Menu currentMenu;
 
-    public static Screen getCurrentMenu() {
-        return currentMenu.getScreen();
+    private final ArrayList<User> users = new ArrayList<>();
+
+    public static Menu getCurrentMenu() {
+        return currentMenu;
     }
 
     public static void setCurrentMenu(Menu currentMenu) {
         App.currentMenu = currentMenu;
-    }
-
-    public static void setScreen(Menu currentMenu) {
-        setCurrentMenu(currentMenu);
-        Main.getGame().setScreen(currentMenu.getScreen());
     }
 }
