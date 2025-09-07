@@ -212,33 +212,7 @@ public class RegisterMenu implements AppView {
     }
 
     public void showWarning(String message) {
-        warningLabel.clearActions();
-        warningLabel.setText(message);
-
-        warningLabel.setWidth(warningLabel.getPrefWidth());
-        if (warningLabel.getWidth() < 600)
-            warningLabel.setWidth(600);
-        warningLabel.setHeight(warningLabel.getPrefHeight());
-
-        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f - warningLabel.getWidth() / 2, 40);
-
-        warningLabel.getColor().a = 0f;
-        warningLabel.setVisible(true);
-
-        warningLabel.addAction(
-            Actions.sequence(
-                Actions.fadeIn(0.5f),
-                Actions.delay(3),
-                Actions.fadeOut(0.5f),
-                new Action() {
-                    @Override
-                    public boolean act(float delta) {
-                        warningLabel.setVisible(false);
-                        return true;
-                    }
-                }
-            )
-        );
+        LoginMenu.showWarningLabel(message, warningLabel);
     }
 
     //

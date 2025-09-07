@@ -2,15 +2,16 @@ package com.tilldawn.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.tilldawn.Models.GameAudioManager;
-import com.tilldawn.Models.Result;
-import com.tilldawn.Models.SFX;
-import com.tilldawn.Models.UserDAO;
+import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.RegisterMenu;
+import com.tilldawn.View.SecurityQuestionDialog;
+
+import java.util.Objects;
 
 public class LoginMenuController {
 
@@ -38,7 +39,7 @@ public class LoginMenuController {
                 Result result = check(menu.getUsernameField().getText(), menu.getPasswordField().getText());
                 if (result.isSuccessful())
                     TillDawn.getGame().setScreen(new MainMenu());
-                else ;
+                else menu.showWarning(result.message());
             }
         });
 
@@ -47,7 +48,18 @@ public class LoginMenuController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
-
+                if (!menu.getUsernameField().getText().isEmpty() && UserDAO.userExists(menu.getUsernameField().getText()).isSuccessful()) {
+                    menu.getSecurityQuestionDialog().setForgetPasswordMode(UserDAO.getSecurityQuestionID(menu.getUsernameField().getText()));
+                    menu.getSecurityQuestionDialog().setListener((selectedIndex, answer) -> {
+                        if (Objects.requireNonNull(UserDAO.getAnswer(menu.getUsernameField().getText()))
+                            .equals(SHA_256.hashPassword(answer, UserDAO.getSalt(menu.getUsernameField().getText())))) {
+                            menu.getSecurityQuestionDialog().hide();
+                            menu.getSetPasswordDialog().show(menu.getStage());
+                        } else menu.showWarning("Wrong Answer!");
+                    });
+                    menu.getSecurityQuestionDialog().show(menu.getStage());
+                } else
+                    menu.showWarning("Please Enter Username!");
             }
         });
 
@@ -64,6 +76,7 @@ public class LoginMenuController {
     private Result check(String username, String password) {
         username = username.trim();
         password = password.trim();
+
 
         if (UserDAO.login(username, password).isSuccessful())
             return new Result(true, "User logged in");

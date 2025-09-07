@@ -81,6 +81,14 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 		up: checkButtonPass
 		checked: checkButtonFail
 	}
+	ok: {
+		up: okButton
+		over: okButton_OVER
+	}
+	cancel: {
+		up: cancelButton
+		over: cancelButton_OVER
+	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
@@ -144,6 +152,7 @@ com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 		background: selectBox
 		scrollStyle: default
 		listStyle: default
+		backgroundDisabled: selectBox_DISABLE
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {

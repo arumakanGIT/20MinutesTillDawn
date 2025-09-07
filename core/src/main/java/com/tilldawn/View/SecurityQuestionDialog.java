@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SecurityQuestionDialog extends Window {
+    private final SelectBox<String> questionList;
     private SecurityQuestionListener listener;
 
     public SecurityQuestionDialog(Skin skin) {
@@ -33,7 +34,7 @@ public class SecurityQuestionDialog extends Window {
         Label title = new Label("Security Question", skin, "chvyExprs_PINK_54");
 
         Label chooseLabel = new Label("Choose your security question from the list below", skin);
-        SelectBox<String> questionList = new SelectBox<>(skin);
+        questionList = new SelectBox<>(skin);
         questionList.setItems(questions.toArray(new String[0]));
 
         Label answerLabel = new Label("Answer your security question", skin);
@@ -91,5 +92,10 @@ public class SecurityQuestionDialog extends Window {
 
     public void setListener(SecurityQuestionListener listener) {
         this.listener = listener;
+    }
+
+    public void setForgetPasswordMode(int securityQuestionID) {
+        questionList.setDisabled(true);
+        questionList.setSelectedIndex(securityQuestionID);
     }
 }
