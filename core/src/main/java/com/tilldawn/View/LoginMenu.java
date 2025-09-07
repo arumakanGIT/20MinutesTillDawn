@@ -52,7 +52,6 @@ public class LoginMenu implements AppView {
         loginButton = new TextButton("Login", skin, "chvy_PINK_24_ui");
         forgetButton = new TextButton("Forget Password?", skin, "chvy_PINK_16");
         registerButton = new TextButton("Register", skin);
-        Label welcomeLabel = new Label("WELCOME!", skin, "chvyExprs_RED_85");
         usernameField = new TextField("", skin, "default2");
         usernameField.setMessageText("Username");
         usernameField.setAlignment(Align.center);
@@ -99,19 +98,22 @@ public class LoginMenu implements AppView {
                     showWarning("Invalid Password!");
                     return;
                 }
-                if (UserDAO.getPassword(usernameField.getText()).equals(SHA_256.hashPassword(newPasswordField.getText(), UserDAO.getSalt(usernameField.getText())))) {
+                if (Objects.equals(UserDAO.getPassword(usernameField.getText()), SHA_256.hashPassword(newPasswordField.getText(), UserDAO.getSalt(usernameField.getText())))) {
                     showWarning("Please Enter a new Password");
                     return;
                 }
 
                 UserDAO.changePassword(usernameField.getText(), newPasswordField.getText());
-
+                newPasswordField.setText("");
+                confirmPasswordField.setText("");
                 setPasswordDialog.hide();
             }
         });
         cancelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                newPasswordField.setText("");
+                confirmPasswordField.setText("");
                 setPasswordDialog.hide();
             }
         });

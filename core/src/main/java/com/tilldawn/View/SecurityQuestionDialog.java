@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 public class SecurityQuestionDialog extends Window {
     private final SelectBox<String> questionList;
+    private final TextField answerField;
     private SecurityQuestionListener listener;
 
     public SecurityQuestionDialog(Skin skin) {
@@ -38,7 +39,7 @@ public class SecurityQuestionDialog extends Window {
         questionList.setItems(questions.toArray(new String[0]));
 
         Label answerLabel = new Label("Answer your security question", skin);
-        TextField answerField = new TextField("", skin);
+        answerField = new TextField("", skin);
 
         TextButton exit = new TextButton("Cancel", skin);
         TextButton done = new TextButton("Done", skin, "chvy_PINK_24_ui");
@@ -83,6 +84,7 @@ public class SecurityQuestionDialog extends Window {
     }
 
     public void hide() {
+        answerField.setText("");
         this.remove();
     }
 
