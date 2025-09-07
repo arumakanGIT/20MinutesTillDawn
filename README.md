@@ -2,12 +2,21 @@
 
 A small university graphics project
 
-### Features
+<img width="1919" height="1060" alt="image" src="https://github.com/user-attachments/assets/14933136-31e5-4661-8ec0-32bf780486a3" />
 
-### Project Status
+### 🟢 Features
 
-This is a university practice project and not a full version of the original game.
 
-### Installation & Run
+### 🔴 Project Status
 
-### Tech Stack
+> This is a university practice project and not a full version of the original game.
+
+### 🟢 Installation & Run
+
+
+
+### 🟢 Tech Stack
+
+- SQLite
+- LibGDX
+- JAVA
