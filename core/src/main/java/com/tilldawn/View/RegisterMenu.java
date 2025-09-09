@@ -5,19 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Controller.RegisterMenuController;
 import com.tilldawn.Models.AnimationManager;
 import com.tilldawn.Models.AssetManager;
-import com.tilldawn.Models.UserDAO;
 import com.tilldawn.TillDawn;
-
-import java.util.concurrent.Callable;
 
 public class RegisterMenu implements AppView {
 

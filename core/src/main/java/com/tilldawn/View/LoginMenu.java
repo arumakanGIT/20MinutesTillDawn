@@ -265,7 +265,6 @@ public class LoginMenu implements AppView {
         );
     }
 
-
     //
 
     @Override
