@@ -136,6 +136,10 @@ public class LoginMenu implements AppView {
         warningLabel.setPosition(Gdx.graphics.getWidth() / 2f, 40);
         stage.addActor(exitButton);
         stage.addActor(warningLabel);
+
+        // for test
+        Label positionLabel = new Label(Gdx.graphics.getWidth() + " : " + Gdx.graphics.getHeight(), skin);
+        stage.addActor(positionLabel);
         new LoginMenuController(this);
     }
 
