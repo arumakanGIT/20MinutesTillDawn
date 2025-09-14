@@ -54,7 +54,7 @@ public class LoginMenu implements AppView {
         exitButton = new Button(skin, "exit2");
         loginButton = new TextButton("Login", skin, "chvy_PINK_16_ui");
         forgetButton = new TextButton("Forget Password?", skin, "chvy_PINK_16");
-        registerButton = new TextButton("Register", skin,"chvy_PINK_16");
+        registerButton = new TextButton("Register", skin, "chvy_PINK_16");
         usernameField = new TextField("", skin, "default3");
         usernameField.setMessageText("Username");
         usernameField.setAlignment(Align.center);
@@ -177,11 +177,15 @@ public class LoginMenu implements AppView {
             }
         }
 
+        float small = 0.7f;
+
         ScreenUtils.clear(new Color(39f / 255f, 33f / 255f, 42f / 255f, 1f));
         TillDawn.getGame().getBatch().setProjectionMatrix(stage.getCamera().combined);
         TillDawn.getGame().getBatch().begin();
         TillDawn.getGame().getBatch().draw(background, 0, 0, stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight());
-        TillDawn.getGame().getBatch().draw(currentFrame, stage.getViewport().getWorldWidth() - 300, 200);
+        TillDawn.getGame().getBatch().draw(currentFrame, stage.getViewport().getWorldWidth() - 203, 297,
+            currentFrame.getRegionWidth() * small,
+            currentFrame.getRegionHeight() * small);
         TillDawn.getGame().getBatch().end();
         stage.act(delta);
         stage.draw();
