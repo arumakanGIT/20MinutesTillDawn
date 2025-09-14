@@ -52,22 +52,22 @@ public class LoginMenu implements AppView {
         Skin skin = AssetManager.getInstance().getSkin();
 
         exitButton = new Button(skin, "exit2");
-        loginButton = new TextButton("Login", skin, "chvy_PINK_24_ui");
+        loginButton = new TextButton("Login", skin, "chvy_PINK_16_ui");
         forgetButton = new TextButton("Forget Password?", skin, "chvy_PINK_16");
-        registerButton = new TextButton("Register", skin);
-        usernameField = new TextField("", skin, "default2");
+        registerButton = new TextButton("Register", skin,"chvy_PINK_16");
+        usernameField = new TextField("", skin, "default3");
         usernameField.setMessageText("Username");
         usernameField.setAlignment(Align.center);
-        passwordField = new TextField("", skin, "default2");
+        passwordField = new TextField("", skin, "default3");
         passwordField.setMessageText("Password");
         passwordField.setAlignment(Align.center);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
-        Label usernameLabel = new Label("Enter your Username:", skin);
-        Label passwordLabel = new Label("Enter your password:", skin);
+        Label usernameLabel = new Label("Enter your Username :", skin, "chvyExprs_WHITE_16");
+        Label passwordLabel = new Label("Enter your password :", skin, "chvyExprs_WHITE_16");
         securityQuestionDialog = new SecurityQuestionDialog(skin);
         Table menuTable = new Table();
-        warningLabel = new Label("", skin, "war_chvy_WHITE_24");
+        warningLabel = new Label("", skin, "war_OpSa_WHITE_16");
         warningLabel.setAlignment(Align.center);
         warningLabel.setVisible(false);
         setPasswordDialog = new Dialog("", skin);
@@ -124,20 +124,21 @@ public class LoginMenu implements AppView {
         });
         setPasswordDialog.getContentTable().add(cancelButton).padTop(50);
         setPasswordDialog.getContentTable().add(okButton).padTop(50);
-        stayLoggedInCheckBox = new CheckBox("  Stay Logged In", skin);
+        stayLoggedInCheckBox = new CheckBox("  Stay Logged In", skin, "chvy_PINK_16");
 
         menuTable.add(usernameLabel).pad(15).row();
         menuTable.add(usernameField).width(400).height(50).padBottom(10).row();
         menuTable.add(passwordLabel).pad(15).padTop(10).row();
         menuTable.add(passwordField).width(400).height(50).padBottom(10).row();
         menuTable.add(forgetButton).pad(10).row();
-        menuTable.add(stayLoggedInCheckBox).padTop(10).row();
-        menuTable.add(loginButton).pad(10).padTop(30).width(300).row();
+        menuTable.add(stayLoggedInCheckBox).padTop(25).row();
+        menuTable.add(loginButton).pad(10).padTop(40).width(150).height(40).row();
         menuTable.add(registerButton).pad(10).row();
 
-        table.add(menuTable).padLeft(160).padTop(150);
+        table.add(menuTable).padLeft(160).padTop(160);
         stage.addActor(table);
-        exitButton.setPosition(stage.getViewport().getWorldWidth() - 65, stage.getViewport().getWorldHeight() - 65);
+        exitButton.setSize(exitButton.getWidth() / 2, exitButton.getHeight() / 2);
+        exitButton.setPosition(stage.getViewport().getWorldWidth() - 40, stage.getViewport().getWorldHeight() - 20);
         warningLabel.setPosition(stage.getViewport().getWorldWidth() / 2f, 40);
         stage.addActor(exitButton);
         stage.addActor(warningLabel);
@@ -176,20 +177,20 @@ public class LoginMenu implements AppView {
             }
         }
 
-//        ScreenUtils.clear(new Color(39f / 255f, 33f / 255f, 42f / 255f, 1f));
+        ScreenUtils.clear(new Color(39f / 255f, 33f / 255f, 42f / 255f, 1f));
         TillDawn.getGame().getBatch().setProjectionMatrix(stage.getCamera().combined);
         TillDawn.getGame().getBatch().begin();
         TillDawn.getGame().getBatch().draw(background, 0, 0, stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight());
-        TillDawn.getGame().getBatch().draw(currentFrame, stage.getViewport().getWorldWidth() - 300, 448);
+        TillDawn.getGame().getBatch().draw(currentFrame, stage.getViewport().getWorldWidth() - 300, 200);
         TillDawn.getGame().getBatch().end();
         stage.act(delta);
         stage.draw();
     }
 
-        @Override
-        public void resize(int width, int height) {
-            stage.getViewport().update(width, height, true);
-        }
+    @Override
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+    }
 
     @Override
     public void dispose() {
@@ -252,7 +253,7 @@ public class LoginMenu implements AppView {
             warningLabel.setWidth(600);
         warningLabel.setHeight(warningLabel.getPrefHeight());
 
-        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f - stage.getViewport().getWorldHeight() / 2, 40);
+        warningLabel.setPosition(stage.getViewport().getWorldWidth() / 2f - warningLabel.getWidth() / 2, 40);
 
         warningLabel.getColor().a = 0f;
         warningLabel.setVisible(true);
