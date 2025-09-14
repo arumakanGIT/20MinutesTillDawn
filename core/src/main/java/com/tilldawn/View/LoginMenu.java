@@ -63,8 +63,8 @@ public class LoginMenu implements AppView {
         passwordField.setAlignment(Align.center);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
-        Label usernameLabel = new Label("Enter your Username :", skin);
-        Label passwordLabel = new Label("Enter your password :", skin);
+        Label usernameLabel = new Label("Enter your Username:", skin);
+        Label passwordLabel = new Label("Enter your password:", skin);
         securityQuestionDialog = new SecurityQuestionDialog(skin);
         Table menuTable = new Table();
         warningLabel = new Label("", skin, "war_chvy_WHITE_24");
@@ -126,18 +126,16 @@ public class LoginMenu implements AppView {
         setPasswordDialog.getContentTable().add(okButton).padTop(50);
         stayLoggedInCheckBox = new CheckBox("  Stay Logged In", skin);
 
-        menuTable.debug();
-        table.debug();
-        menuTable.add(usernameLabel).pad(25).padTop(40).row();
-        menuTable.add(usernameField).width(600).height(50).pad(10).padBottom(30).row();
-        menuTable.add(passwordLabel).pad(25).row();
-        menuTable.add(passwordField).width(600).height(50).pad(10).row();
+        menuTable.add(usernameLabel).pad(15).row();
+        menuTable.add(usernameField).width(400).height(50).padBottom(10).row();
+        menuTable.add(passwordLabel).pad(15).padTop(10).row();
+        menuTable.add(passwordField).width(400).height(50).padBottom(10).row();
         menuTable.add(forgetButton).pad(10).row();
-        menuTable.add(stayLoggedInCheckBox).pad(10).padTop(45).row();
+        menuTable.add(stayLoggedInCheckBox).padTop(10).row();
         menuTable.add(loginButton).pad(10).padTop(30).width(300).row();
         menuTable.add(registerButton).pad(10).row();
 
-        table.add(menuTable).padLeft(40);
+        table.add(menuTable).padLeft(160).padTop(150);
         stage.addActor(table);
         exitButton.setPosition(stage.getViewport().getWorldWidth() - 65, stage.getViewport().getWorldHeight() - 65);
         warningLabel.setPosition(stage.getViewport().getWorldWidth() / 2f, 40);
