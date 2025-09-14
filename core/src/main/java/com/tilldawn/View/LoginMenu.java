@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Controller.LoginMenuController;
 import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
@@ -23,7 +25,7 @@ import java.util.regex.Pattern;
 public class LoginMenu implements AppView {
 
     // fields
-    private final Stage stage;
+    private static Stage stage = null;
     private final Texture background;
     private final Animation<TextureRegion> shadow = AnimationManager.getInstance().get("swordShadow");
     private final SecurityQuestionDialog securityQuestionDialog;
@@ -38,7 +40,8 @@ public class LoginMenu implements AppView {
     private final CheckBox stayLoggedInCheckBox;
 
     public LoginMenu() {
-        stage = new Stage();
+        Viewport viewport = new FitViewport(1680, 1030);
+        stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
         Table table = new Table();
         table.setFillParent(true);
@@ -132,8 +135,8 @@ public class LoginMenu implements AppView {
 
         table.add(menuTable).padLeft(220);
         stage.addActor(table);
-        exitButton.setPosition(Gdx.graphics.getWidth() - 65, Gdx.graphics.getHeight() - 65);
-        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f, 40);
+        exitButton.setPosition(stage.getViewport().getWorldWidth() - 65, stage.getViewport().getWorldHeight() - 65);
+        warningLabel.setPosition(stage.getViewport().getWorldWidth() / 2f, 40);
         stage.addActor(exitButton);
         stage.addActor(warningLabel);
 
@@ -175,8 +178,8 @@ public class LoginMenu implements AppView {
 
         ScreenUtils.clear(Color.WHITE);
         TillDawn.getGame().getBatch().begin();
-        TillDawn.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TillDawn.getGame().getBatch().draw(currentFrame, Gdx.graphics.getWidth() - 300, 448);
+        TillDawn.getGame().getBatch().draw(background, 0, 0, stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight());
+        TillDawn.getGame().getBatch().draw(currentFrame, stage.getViewport().getWorldWidth() - 300, 448);
         TillDawn.getGame().getBatch().end();
         stage.act(delta);
         stage.draw();
@@ -239,7 +242,7 @@ public class LoginMenu implements AppView {
         showWarningLabel(message, warningLabel);
     }
 
-    static void showWarningLabel(String message, Label warningLabel) {
+    public static void showWarningLabel(String message, Label warningLabel) {
         warningLabel.clearActions();
         warningLabel.setText(message);
 
@@ -248,7 +251,7 @@ public class LoginMenu implements AppView {
             warningLabel.setWidth(600);
         warningLabel.setHeight(warningLabel.getPrefHeight());
 
-        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f - warningLabel.getWidth() / 2, 40);
+        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f - stage.getViewport().getWorldHeight() / 2, 40);
 
         warningLabel.getColor().a = 0f;
         warningLabel.setVisible(true);
