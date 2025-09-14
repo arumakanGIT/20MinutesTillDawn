@@ -168,6 +168,14 @@
 		"font": "OpSa_WHITE_16",
 		"fontColor": "WHITE",
 		"background": "warningLabel"
+	},
+	"chvyExprs_PINK_36": {
+		"font": "ChvyExprs_WHITE_36",
+		"fontColor": "PINK"
+	},
+	"OpSa_WHITE_16": {
+		"font": "OpSa_WHITE_16",
+		"fontColor": "WHITE"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
@@ -190,6 +198,14 @@
 "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
 	"default": {
 		"font": "ChvyExprs_WHITE_24",
+		"fontColor": "WHITE",
+		"background": "selectBox",
+		"scrollStyle": "default",
+		"listStyle": "default",
+		"backgroundDisabled": "selectBox_DISABLE"
+	},
+	"default2": {
+		"font": "ChvyExprs_WHITE_16",
 		"fontColor": "WHITE",
 		"background": "selectBox",
 		"scrollStyle": "default",
@@ -254,6 +270,14 @@
 		"focusedFontColor": "WHITE",
 		"background": "textFieldBack2",
 		"cursor": "cursor1",
+		"selection": "selection"
+	},
+	"default4": {
+		"font": "ChvyExprs_WHITE_16",
+		"fontColor": "BLACK",
+		"focusedFontColor": "BLACK",
+		"background": "textFieldBack1",
+		"cursor": "cursor2",
 		"selection": "selection"
 	}
 },

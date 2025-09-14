@@ -74,20 +74,20 @@ public class LoginMenu implements AppView {
         setPasswordDialog.setModal(true);
         setPasswordDialog.setMovable(false);
         setPasswordDialog.setResizable(false);
-        setPasswordDialog.getContentTable().add(new Label("Enter new Password :", skin)).padTop(50).padLeft(40);
-        TextField newPasswordField = new TextField("", skin);
+        setPasswordDialog.getContentTable().add(new Label("Enter new Password :", skin, "chvyExprs_WHITE_16")).padTop(50).padLeft(40);
+        TextField newPasswordField = new TextField("", skin, "default4");
         newPasswordField.setMessageText("Password");
         newPasswordField.setAlignment(Align.center);
         newPasswordField.setPasswordCharacter('*');
         newPasswordField.setPasswordMode(true);
-        setPasswordDialog.getContentTable().add(newPasswordField).height(60).width(600).padTop(50).padRight(40).row();
-        setPasswordDialog.getContentTable().add(new Label("Confirm Password :", skin)).padTop(25).padLeft(40);
-        TextField confirmPasswordField = new TextField("", skin);
+        setPasswordDialog.getContentTable().add(newPasswordField).width(400).padTop(50).padRight(40).row();
+        setPasswordDialog.getContentTable().add(new Label("Confirm Password :", skin, "chvyExprs_WHITE_16")).padTop(25).padLeft(40);
+        TextField confirmPasswordField = new TextField("", skin, "default4");
         confirmPasswordField.setMessageText("Confirm Password");
         confirmPasswordField.setAlignment(Align.center);
         confirmPasswordField.setPasswordCharacter('*');
         confirmPasswordField.setPasswordMode(true);
-        setPasswordDialog.getContentTable().add(confirmPasswordField).height(60).width(600).padTop(25).padRight(40).row();
+        setPasswordDialog.getContentTable().add(confirmPasswordField).width(400).padTop(25).padRight(40).row();
         Button okButton = new Button(skin, "ok");
         Button cancelButton = new Button(skin, "cancel");
         okButton.addListener(new ClickListener() {
@@ -122,8 +122,9 @@ public class LoginMenu implements AppView {
                 setPasswordDialog.hide();
             }
         });
-        setPasswordDialog.getContentTable().add(cancelButton).padTop(50);
-        setPasswordDialog.getContentTable().add(okButton).padTop(50);
+        setPasswordDialog.getContentTable().add(cancelButton).padTop(20).width(cancelButton.getWidth() / 1.5f).height(cancelButton.getHeight() / 1.5f);
+        setPasswordDialog.getContentTable().add(okButton).padRight(-100).padTop(20).width(okButton.getWidth() / 1.5f).height(okButton.getHeight() / 1.5f);
+//        setPasswordDialog.getContentTable().debug();
         stayLoggedInCheckBox = new CheckBox("  Stay Logged In", skin, "chvy_PINK_16");
 
         menuTable.add(usernameLabel).pad(15).row();

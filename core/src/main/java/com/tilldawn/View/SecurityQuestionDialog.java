@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.tilldawn.Models.GameAudioManager;
 import com.tilldawn.Models.SFX;
 
@@ -32,27 +33,27 @@ public class SecurityQuestionDialog extends Window {
             "What is the name of the hospital where you were born?",
             "What is your father's middle name?"));
 
-        Label title = new Label("Security Question", skin, "chvyExprs_PINK_54");
+        Label title = new Label("Security Question", skin, "chvyExprs_PINK_36");
 
-        Label chooseLabel = new Label("Choose your security question from the list below", skin);
-        questionList = new SelectBox<>(skin);
+        Label chooseLabel = new Label("Choose your security question from the list below", skin, "OpSa_WHITE_16");
+        questionList = new SelectBox<>(skin, "default2");
         questionList.setItems(questions.toArray(new String[0]));
+        questionList.setAlignment(Align.center);
 
-        Label answerLabel = new Label("Answer your security question", skin);
-        answerField = new TextField("", skin);
+        Label answerLabel = new Label("Answer your security question", skin, "OpSa_WHITE_16");
+        answerField = new TextField("", skin, "default4");
 
-        TextButton exit = new TextButton("Cancel", skin);
-        TextButton done = new TextButton("Done", skin, "chvy_PINK_24_ui");
+        TextButton exit = new TextButton("Cancel", skin, "chvy_PINK_16");
+        TextButton done = new TextButton("Done", skin, "chvy_PINK_16_ui");
 
-        add(title).padTop(50).row();
-        add(chooseLabel).padTop(100).row();
-        add(questionList).padTop(25).padLeft(40).padRight(40).row();
-        add(answerLabel).padTop(50).row();
-        add(answerField).padTop(25).width(questionList.getPrefWidth()).height(60).row();
-        add(done).padTop(50).width(300).row();
-        add(exit).padTop(25).padBottom(50);
+        add(title).padTop(20).row();
+        add(chooseLabel).padTop(40).row();
+        add(questionList).padTop(10).padLeft(40).padRight(40).row();
+        add(answerLabel).padTop(30).row();
+        add(answerField).padTop(10).width(questionList.getPrefWidth()).height(questionList.getPrefHeight()).row();
+        add(done).padTop(40).width(150).height(40).row();
+        add(exit).padTop(10).padBottom(20);
 
-        setSize(900, 650);
         setModal(true);
         pack();
 
@@ -78,7 +79,8 @@ public class SecurityQuestionDialog extends Window {
 
     public void show(Stage stage) {
         if (!hasParent()) {
-            setPosition(Gdx.graphics.getWidth() / 2f - this.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - this.getHeight() / 2f);
+            setPosition(stage.getViewport().getWorldWidth() / 2f - this.getWidth() / 2f,
+                stage.getViewport().getWorldHeight() / 2f - this.getHeight() / 2f);
             stage.addActor(this);
         }
     }
