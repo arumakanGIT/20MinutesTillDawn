@@ -138,7 +138,7 @@ public class LoginMenu implements AppView {
         table.add(menuTable).padLeft(160).padTop(160);
         stage.addActor(table);
         exitButton.setSize(exitButton.getWidth() / 2, exitButton.getHeight() / 2);
-        exitButton.setPosition(stage.getViewport().getWorldWidth() - 40, stage.getViewport().getWorldHeight() - 20);
+        exitButton.setPosition(stage.getViewport().getWorldWidth() - 40, stage.getViewport().getWorldHeight() - 40);
         warningLabel.setPosition(stage.getViewport().getWorldWidth() / 2f, 40);
         stage.addActor(exitButton);
         stage.addActor(warningLabel);
