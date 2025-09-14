@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Controller.LoginMenuController;
@@ -40,7 +42,7 @@ public class LoginMenu implements AppView {
     private final CheckBox stayLoggedInCheckBox;
 
     public LoginMenu() {
-        Viewport viewport = new FitViewport(1680, 1030);
+        Viewport viewport = new FitViewport(1280, 720);
         stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
         Table table = new Table();
@@ -124,7 +126,9 @@ public class LoginMenu implements AppView {
         setPasswordDialog.getContentTable().add(okButton).padTop(50);
         stayLoggedInCheckBox = new CheckBox("  Stay Logged In", skin);
 
-        menuTable.add(usernameLabel).pad(25).padTop(285).row();
+        menuTable.debug();
+        table.debug();
+        menuTable.add(usernameLabel).pad(25).padTop(40).row();
         menuTable.add(usernameField).width(600).height(50).pad(10).padBottom(30).row();
         menuTable.add(passwordLabel).pad(25).row();
         menuTable.add(passwordField).width(600).height(50).pad(10).row();
@@ -133,17 +137,15 @@ public class LoginMenu implements AppView {
         menuTable.add(loginButton).pad(10).padTop(30).width(300).row();
         menuTable.add(registerButton).pad(10).row();
 
-        table.add(menuTable).padLeft(220);
+        table.add(menuTable).padLeft(40);
         stage.addActor(table);
         exitButton.setPosition(stage.getViewport().getWorldWidth() - 65, stage.getViewport().getWorldHeight() - 65);
         warningLabel.setPosition(stage.getViewport().getWorldWidth() / 2f, 40);
         stage.addActor(exitButton);
         stage.addActor(warningLabel);
+        new LoginMenuController(this);
 
         // for test
-        Label positionLabel = new Label(Gdx.graphics.getWidth() + " : " + Gdx.graphics.getHeight(), skin);
-        stage.addActor(positionLabel);
-        new LoginMenuController(this);
     }
 
     private float blinkingStateTime = 0f;
@@ -176,7 +178,8 @@ public class LoginMenu implements AppView {
             }
         }
 
-        ScreenUtils.clear(Color.WHITE);
+//        ScreenUtils.clear(new Color(39f / 255f, 33f / 255f, 42f / 255f, 1f));
+        TillDawn.getGame().getBatch().setProjectionMatrix(stage.getCamera().combined);
         TillDawn.getGame().getBatch().begin();
         TillDawn.getGame().getBatch().draw(background, 0, 0, stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight());
         TillDawn.getGame().getBatch().draw(currentFrame, stage.getViewport().getWorldWidth() - 300, 448);
@@ -185,10 +188,10 @@ public class LoginMenu implements AppView {
         stage.draw();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
+        @Override
+        public void resize(int width, int height) {
+            stage.getViewport().update(width, height, true);
+        }
 
     @Override
     public void dispose() {
