@@ -6,10 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
-import com.tilldawn.Models.GameAudioManager;
-import com.tilldawn.Models.Result;
-import com.tilldawn.Models.SFX;
-import com.tilldawn.Models.UserDAO;
+import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
@@ -34,6 +31,7 @@ public class RegisterMenuController {
             public void clicked(InputEvent event, float x, float y) {
                 GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
                 TillDawn.getGame().setScreen(new LoginMenu());
+                menu.dispose();
             }
         });
 
@@ -108,8 +106,11 @@ public class RegisterMenuController {
                 if (result.isSuccessful()) {
                     menu.getSecurityQuestionDialog().setListener((selectedIndex, answer) -> {
                         Result result1 = UserDAO.register(menu.getUsernameField().getText(), menu.getPasswordField().getText(), selectedIndex, answer);
-                        if (result1.isSuccessful())
+                        if (result1.isSuccessful()) {
+                            App.setCurrentUser(UserDAO.getUserByUsername(menu.getUsernameField().getText()));
                             TillDawn.getGame().setScreen(new MainMenu());
+                            menu.dispose();
+                        }
                         else
                             menu.showWarning(result1.message());
                     });

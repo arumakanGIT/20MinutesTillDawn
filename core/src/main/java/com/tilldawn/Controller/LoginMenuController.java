@@ -48,6 +48,7 @@ public class LoginMenuController {
                     }
                     App.setCurrentUser(UserDAO.getUserByUsername(menu.getUsernameField().getText()));
                     TillDawn.getGame().setScreen(new MainMenu());
+                    menu.dispose();
                 } else menu.showWarning(result.message());
             }
         });
@@ -78,6 +79,7 @@ public class LoginMenuController {
             public void clicked(InputEvent event, float x, float y) {
                 GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
                 TillDawn.getGame().setScreen(new RegisterMenu());
+                menu.dispose();
             }
         });
     }

@@ -143,8 +143,6 @@ public class LoginMenu implements AppView {
         stage.addActor(exitButton);
         stage.addActor(warningLabel);
         new LoginMenuController(this);
-
-        // for test
     }
 
     private float blinkingStateTime = 0f;
@@ -282,7 +280,6 @@ public class LoginMenu implements AppView {
 
     @Override
     public void show() {
-
     }
 
     @Override

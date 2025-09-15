@@ -105,6 +105,7 @@ public class MainMenu implements AppView {
 
 
         ScreenUtils.clear(Color.WHITE);
+        TillDawn.getGame().getBatch().setProjectionMatrix(stage.getCamera().combined);
         TillDawn.getGame().getBatch().begin();
         TillDawn.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         TillDawn.getGame().getBatch().draw(currentFrame1, Gdx.graphics.getWidth() / 2f + 400, Gdx.graphics.getHeight() / 2f - 100 + 100);
@@ -174,6 +175,6 @@ public class MainMenu implements AppView {
 
     @Override
     public void show() {
-
+//        TillDawn.getGame().getBatch().setProjectionMatrix(TillDawn.getMatrix());
     }
 }

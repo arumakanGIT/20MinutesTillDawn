@@ -8,9 +8,6 @@ import com.tilldawn.Models.*;
 import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
 
-import java.sql.Connection;
-import java.sql.Statement;
-
 public class TillDawn extends Game {
     private static SpriteBatch batch;
     private static TillDawn game;
