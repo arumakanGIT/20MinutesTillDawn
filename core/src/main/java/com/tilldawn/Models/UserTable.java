@@ -14,7 +14,8 @@ public class UserTable {
                 "password TEXT NOT NULL," +
                 "salt TEXT NOT NULL," +
                 "securityQuestionID INTEGER NOT NULL," +
-                "answer TEXT NOT NULL)";
+                "answer TEXT NOT NULL," +
+                "rememberToken TEXT)";
 
             stmt.execute(sql);
         } catch (Exception e) {

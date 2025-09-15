@@ -124,7 +124,6 @@ public class LoginMenu implements AppView {
         });
         setPasswordDialog.getContentTable().add(cancelButton).padTop(20).width(cancelButton.getWidth() / 1.5f).height(cancelButton.getHeight() / 1.5f);
         setPasswordDialog.getContentTable().add(okButton).padRight(-100).padTop(20).width(okButton.getWidth() / 1.5f).height(okButton.getHeight() / 1.5f);
-//        setPasswordDialog.getContentTable().debug();
         stayLoggedInCheckBox = new CheckBox("  Stay Logged In", skin, "chvy_PINK_16");
 
         menuTable.add(usernameLabel).pad(15).row();

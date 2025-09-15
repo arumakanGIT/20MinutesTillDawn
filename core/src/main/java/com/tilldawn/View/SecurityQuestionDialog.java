@@ -37,6 +37,7 @@ public class SecurityQuestionDialog extends Window {
 
         Label chooseLabel = new Label("Choose your security question from the list below", skin, "OpSa_WHITE_16");
         questionList = new SelectBox<>(skin, "default2");
+        questionList.getScrollPane().setVariableSizeKnobs(false);
         questionList.setItems(questions.toArray(new String[0]));
         questionList.setAlignment(Align.center);
 

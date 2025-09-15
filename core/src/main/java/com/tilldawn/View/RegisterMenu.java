@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Controller.RegisterMenuController;
 import com.tilldawn.Models.AnimationManager;
 import com.tilldawn.Models.AssetManager;
@@ -32,7 +34,8 @@ public class RegisterMenu implements AppView {
     private final Label warningLabel;
 
     public RegisterMenu() {
-        stage = new Stage();
+        Viewport viewport = new FitViewport(1280, 720);
+        stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
         Table table = new Table();
         table.setFillParent(true);
@@ -41,26 +44,26 @@ public class RegisterMenu implements AppView {
         Skin skin = AssetManager.getInstance().getSkin();
 
         Table menuTable = new Table();
-        loginButton = new TextButton("Login", skin);
+        loginButton = new TextButton("Login", skin, "chvy_PINK_16");
         exitButton = new Button(skin, "exit2");
-        usernameField = new TextField("", skin, "default2");
+        usernameField = new TextField("", skin, "default3");
         usernameField.setAlignment(Align.center);
         usernameField.setMessageText("Username");
-        passwordField = new TextField("", skin, "default2");
+        passwordField = new TextField("", skin, "default3");
         passwordField.setAlignment(Align.center);
         passwordField.setMessageText("Password");
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
-        confirmPasswordField = new TextField("", skin, "default2");
+        confirmPasswordField = new TextField("", skin, "default3");
         confirmPasswordField.setAlignment(Align.center);
         confirmPasswordField.setMessageText("Confirm Password");
         confirmPasswordField.setPasswordCharacter('*');
         confirmPasswordField.setPasswordMode(true);
-        registerButton = new TextButton("Register", skin, "chvy_PINK_24_ui");
+        registerButton = new TextButton("Register", skin, "chvy_PINK_16_ui");
         randomPasswordButton = new TextButton("Random Password", skin, "chvy_PINK_16");
-        Label usernameLabel = new Label("Enter your Username:", skin);
-        Label passwordLabel = new Label("Enter your Password:", skin);
-        Label confirmPasswordLabel = new Label("Confirm Password:", skin);
+        Label usernameLabel = new Label("Enter your Username:", skin, "chvyExprs_WHITE_16");
+        Label passwordLabel = new Label("Enter your Password:", skin, "chvyExprs_WHITE_16");
+        Label confirmPasswordLabel = new Label("Confirm Password:", skin, "chvyExprs_WHITE_16");
         usernameCheckButton = new Button(skin, "check");
         passwordCheckButton = new Button(skin, "check");
         confirmPasswordCheckButton = new Button(skin, "check");
@@ -70,37 +73,39 @@ public class RegisterMenu implements AppView {
         usernameCheckButton.setVisible(false);
         passwordCheckButton.setVisible(false);
         confirmPasswordCheckButton.setVisible(false);
-        warningLabel = new Label("", skin, "war_chvy_WHITE_24");
+        warningLabel = new Label("", skin, "war_OpSa_WHITE_16");
         warningLabel.setAlignment(Align.center);
         warningLabel.setVisible(false);
 
         securityQuestionDialog = new SecurityQuestionDialog(skin);
 
-        menuTable.add(usernameLabel).pad(10).padLeft(-40).row();
+        menuTable.add(usernameLabel).padLeft(-40).padBottom(10).row();
         Table usernameTable = new Table();
-        usernameTable.add(usernameField).width(600).padBottom(25).height(50);
+        usernameTable.add(usernameField).width(400).height(50);
         usernameTable.add(usernameCheckButton).width(usernameCheckButton.getWidth() / 2)
-            .height(usernameCheckButton.getHeight() / 2).padBottom(30).padLeft(40).row();
-        menuTable.add(usernameTable).padBottom(30).row();
+            .height(usernameCheckButton.getHeight() / 2).padBottom(5).padLeft(40).row();
+        menuTable.add(usernameTable).padBottom(5).row();
         menuTable.add(passwordLabel).pad(10).padLeft(-40).row();
         Table passwordTable = new Table();
-        passwordTable.add(passwordField).width(600).padBottom(10).height(50);
+        passwordTable.add(passwordField).width(400).padBottom(10).height(50);
         passwordTable.add(passwordCheckButton).width(passwordCheckButton.getWidth() / 2)
             .height(passwordCheckButton.getHeight() / 2).padBottom(15).padLeft(40).row();
         menuTable.add(passwordTable).row();
-        menuTable.add(randomPasswordButton).padBottom(55).padLeft(-40).row();
+        menuTable.add(randomPasswordButton).padBottom(10).padLeft(-55
+        ).row();
         menuTable.add(confirmPasswordLabel).pad(10).padLeft(-40).row();
         Table confirmPasswordTable = new Table();
-        confirmPasswordTable.add(confirmPasswordField).width(600).padBottom(25).height(50);
+        confirmPasswordTable.add(confirmPasswordField).width(400).height(50);
         confirmPasswordTable.add(confirmPasswordCheckButton).width(confirmPasswordCheckButton.getWidth() / 2)
-            .height(confirmPasswordCheckButton.getHeight() / 2).padBottom(30).padLeft(40).row();
-        menuTable.add(confirmPasswordTable).padBottom(30).row();
-        menuTable.add(registerButton).width(300).pad(15).padTop(25).padLeft(-40).row();
-        menuTable.add(loginButton).padLeft(-50).row();
+            .height(confirmPasswordCheckButton.getHeight() / 2).padBottom(5).padLeft(40).row();
+        menuTable.add(confirmPasswordTable).padBottom(20).row();
+        menuTable.add(registerButton).width(150).height(40).padLeft(-50).row();
+        menuTable.add(loginButton).padLeft(-50).padTop(10).row();
 
-        table.add(menuTable).padLeft(220).padTop(240);
-        exitButton.setPosition(Gdx.graphics.getWidth() - 65, Gdx.graphics.getHeight() - 65);
-        warningLabel.setPosition(Gdx.graphics.getWidth() / 2f, 40);
+        table.add(menuTable).padLeft(160).padTop(180);
+        exitButton.setSize(exitButton.getWidth() / 2, exitButton.getHeight() / 2);
+        exitButton.setPosition(stage.getViewport().getWorldWidth() - 40, stage.getViewport().getWorldHeight() - 40);
+        warningLabel.setPosition(stage.getViewport().getWorldWidth() / 2f, 40);
         stage.addActor(exitButton);
         stage.addActor(table);
         stage.addActor(warningLabel);
@@ -138,15 +143,22 @@ public class RegisterMenu implements AppView {
             }
         }
 
-        ScreenUtils.clear(Color.WHITE);
+        float small = 0.7f;
+
+        ScreenUtils.clear(new Color(39f / 255f, 33f / 255f, 42f / 255f, 1f));
+        TillDawn.getGame().getBatch().setProjectionMatrix(stage.getCamera().combined);
         TillDawn.getGame().getBatch().begin();
-        TillDawn.getGame().getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TillDawn.getGame().getBatch().draw(currentFrame, Gdx.graphics.getWidth() - 300, 448);
+        TillDawn.getGame().getBatch().draw(background,
+            0, 0,
+            stage.getViewport().getWorldWidth(),
+            stage.getViewport().getWorldHeight());
+        TillDawn.getGame().getBatch().draw(currentFrame, stage.getViewport().getWorldWidth() - 203, 297,
+            currentFrame.getRegionWidth() * small,
+            currentFrame.getRegionHeight() * small);
         TillDawn.getGame().getBatch().end();
         stage.act(delta);
         stage.draw();
     }
-
 
     @Override
 

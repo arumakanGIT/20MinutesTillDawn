@@ -39,6 +39,7 @@ public class LoginMenuController {
                 Result result = check(menu.getUsernameField().getText(), menu.getPasswordField().getText());
                 if (result.isSuccessful()) {
                     if (menu.getStayLoggedInCheckBox().isChecked()) {
+                        System.out.println("stayLoggedInCheckBox is checked");
                         String token = generateToken();
                         Preferences prefs = Gdx.app.getPreferences("StayLoggedIn");
                         prefs.putString("rememberToken", token);

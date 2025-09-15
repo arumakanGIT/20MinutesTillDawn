@@ -185,6 +185,13 @@
 		"fontColorUnselected": "GREEN1",
 		"selection": "T_UIPanel",
 		"background": "textFieldBack1"
+	},
+	"default2": {
+		"font": "ChvyExprs_WHITE_16",
+		"fontColorSelected": "PINK",
+		"fontColorUnselected": "GREEN1",
+		"selection": "T_UIPanel",
+		"background": "textFieldBack1"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
@@ -209,7 +216,7 @@
 		"fontColor": "WHITE",
 		"background": "selectBox",
 		"scrollStyle": "default",
-		"listStyle": "default",
+		"listStyle": "default2",
 		"backgroundDisabled": "selectBox_DISABLE"
 	}
 },
