@@ -33,11 +33,11 @@ public class PreGameMenu implements AppView {
     private final Button weaponLeft;
     private Image avatar;
     private Image avatarText;
-    private Texture weapon;
-    private Texture num1;
-    private Texture num2;
-    private Texture num3;
-    private Texture num4;
+    private Image weapon;
+    private Image num1;
+    private Image num2;
+    private Image num3;
+    private Image num4;
     private final Button num1Up;
     private final Button num2Up;
     private final Button num3Up;
@@ -78,13 +78,12 @@ public class PreGameMenu implements AppView {
         index = avatars.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "avatar") + ".png");
         avatar = new Image(AssetManager.getInstance().getTexture(avatars.get(index)));
         avatarText = new Image(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"));
-        weapon = AssetManager.getInstance().getTexture(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon") + ".png");
-        num1 = AssetManager.getInstance().getTexture("2.png");
-        num2 = AssetManager.getInstance().getTexture("0.png");
-        num3 = AssetManager.getInstance().getTexture("0.png");
-        num4 = AssetManager.getInstance().getTexture("0.png");
+        weapon = new Image(AssetManager.getInstance().getTexture(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon") + ".png"));
+        num1 = new Image(AssetManager.getInstance().getTexture("2.png"));
+        num2 = new Image(AssetManager.getInstance().getTexture("0.png"));
+        num3 = new Image(AssetManager.getInstance().getTexture("0.png"));
+        num4 = new Image(AssetManager.getInstance().getTexture("0.png"));
 
-//        avatar.setSize(192, 261);
         avatar.setScaling(Scaling.fit);
         avatarText.setScaling(Scaling.fit);
 
@@ -96,7 +95,48 @@ public class PreGameMenu implements AppView {
         table.addActor(avatarText);
         row1.add(avatarRight);
 
-        table.add(row1).padTop(110);
+        Table row2 = new Table();
+        row2.add(weaponLeft).padRight(700);
+        row2.add(weaponRight);
+
+        Table row3 = new Table();
+        Stack num1Stack = new Stack();
+        Table num1Table = new Table();
+        num1Table.add(num1Up).row();
+        num1Table.add(num1Down);
+        num1Stack.add(num1);
+        num1Stack.add(num1Table);
+        row3.add(num1Stack).width(num1Stack.getWidth() / 3).height(num1Stack.getHeight() / 2).padRight(20);
+        Stack num2Stack = new Stack();
+        Table num2Table = new Table();
+        num2Table.add(num2Up).row();
+        num2Table.add(num2Down);
+        num2Stack.add(num2);
+        num2Stack.add(num2Table);
+        row3.add(num2Stack).width(num2Stack.getWidth() / 3).height(num2Stack.getHeight() / 2).padRight(40);
+        Stack num3Stack = new Stack();
+        Table num3Table = new Table();
+        num3Table.add(num3Up).row();
+        num3Table.add(num3Down);
+        num3Stack.add(num3);
+        num3Stack.add(num3Table);
+        row3.add(num3Stack).width(num3Stack.getWidth() / 3).height(num3Stack.getHeight() / 2).padRight(20);
+        Stack num4Stack = new Stack();
+        Table num4Table = new Table();
+        num4Table.add(num4Up).row();
+        num4Table.add(num4Down);
+        num4Stack.add(num4);
+        num4Stack.add(num4Table);
+        row3.add(num4Stack).width(num4Stack.getWidth() / 3).height(num4Stack.getHeight() / 2);
+
+        Table row4 = new Table();
+        row4.add(startButton).row();
+        row4.add(backButton).padTop(20).row();
+
+        table.add(row1).padTop(110).row();
+        table.add(row2).padTop(175).row();
+        table.add(row3).padTop(60).row();
+        table.add(row4).padTop(85).row();
 
         stage.addActor(table);
         new PreGameMenuController(this);
@@ -124,11 +164,6 @@ public class PreGameMenu implements AppView {
     public void dispose() {
         stage.dispose();
         background.dispose();
-        num1.dispose();
-        num2.dispose();
-        num3.dispose();
-        num4.dispose();
-        weapon.dispose();
     }
 
     //
