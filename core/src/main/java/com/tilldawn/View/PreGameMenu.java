@@ -5,7 +5,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -20,9 +22,13 @@ import com.tilldawn.Models.UserDAO;
 import com.tilldawn.TillDawn;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class PreGameMenu implements AppView {
 
+    public static final int weaponX = 830;
+    public static final int weaponY = 400;
     private final Texture background;
     private final Stage stage;
     private final TextButton backButton;
@@ -34,6 +40,7 @@ public class PreGameMenu implements AppView {
     private Image avatar;
     private Image avatarText;
     private Image weapon;
+    private Image weaponText;
     private Image num1;
     private Image num2;
     private Image num3;
@@ -48,6 +55,8 @@ public class PreGameMenu implements AppView {
     private final Button num4Down;
     private final ArrayList<String> avatars = new ArrayList<>();
     private int index;
+    private int weaponIndex;
+    private final ArrayList<String> weapons = new ArrayList<>(Arrays.asList("SMG", "Revolver", "ShotGun"));
 
     public PreGameMenu() {
         Viewport viewport = new FitViewport(1280, 720);
@@ -78,7 +87,9 @@ public class PreGameMenu implements AppView {
         index = avatars.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "avatar") + ".png");
         avatar = new Image(AssetManager.getInstance().getTexture(avatars.get(index)));
         avatarText = new Image(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"));
-        weapon = new Image(AssetManager.getInstance().getTexture(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon") + ".png"));
+        weaponIndex = weapons.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon"));
+        weapon = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + ".png"));
+        weaponText = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + "Text.png"));
         num1 = new Image(AssetManager.getInstance().getTexture("2.png"));
         num2 = new Image(AssetManager.getInstance().getTexture("0.png"));
         num3 = new Image(AssetManager.getInstance().getTexture("0.png"));
@@ -89,14 +100,21 @@ public class PreGameMenu implements AppView {
 
         Table row1 = new Table();
         row1.add(avatarLeft).padRight(700);
-        avatar.setPosition(400, 460);
+        avatar.setPosition(400, 450);
         avatarText.setPosition(700, 550);
         table.addActor(avatar);
         table.addActor(avatarText);
         row1.add(avatarRight);
 
+        weapon.setScaling(Scaling.fit);
+        weaponText.setScaling(Scaling.fit);
+
         Table row2 = new Table();
         row2.add(weaponLeft).padRight(700);
+        weapon.setPosition(730, 350);
+        weaponText.setPosition(400, 360);
+        table.addActor(weapon);
+        table.addActor(weaponText);
         row2.add(weaponRight);
 
         Table row3 = new Table();
@@ -138,8 +156,42 @@ public class PreGameMenu implements AppView {
         table.add(row3).padTop(60).row();
         table.add(row4).padTop(85).row();
 
+        addFloatAnimation(avatar);
+        addFloatAnimation(weapon);
+
         stage.addActor(table);
         new PreGameMenuController(this);
+    }
+
+    private final Random random = new Random();
+
+    public void addFloatAnimation(final Image image) {
+        final float baseX = image.getX();
+        final float baseY = image.getY();
+
+        image.addAction(Actions.forever(
+            Actions.sequence(
+                Actions.moveTo(
+                    baseX + (random.nextFloat() * 6 - 3),
+                    baseY + (random.nextFloat() * 20 - 10),
+                    0.5f + random.nextFloat() * 0.5f,
+                    Interpolation.sine
+                ),
+                Actions.moveTo(
+                    baseX + (random.nextFloat() * 20 - 10),
+                    baseY + (random.nextFloat() * 10 - 5),
+                    0.5f + random.nextFloat() * 0.5f,
+                    Interpolation.sine
+                ),
+                Actions.moveTo(
+                    baseX + (random.nextFloat() * 20 - 10),
+                    baseY + (random.nextFloat() * 18 - 9),
+                    0.5f + random.nextFloat() * 0.5f,
+                    Interpolation.sine
+                ),
+                Actions.moveTo(baseX, baseY, 0.5f)
+            )
+        ));
     }
 
     @Override
@@ -171,6 +223,8 @@ public class PreGameMenu implements AppView {
     public void update() {
         avatar.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(avatars.get(index)))));
         avatarText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"))));
+        weapon.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + ".png"))));
+        weaponText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + "Text.png"))));
     }
 
     public ArrayList<String> getAvatars() {
@@ -254,6 +308,26 @@ public class PreGameMenu implements AppView {
         } else {
             System.out.println("Path not found");
         }
+    }
+
+    public int getWeaponIndex() {
+        return weaponIndex;
+    }
+
+    public void setWeaponIndex(int weaponIndex) {
+        this.weaponIndex = weaponIndex;
+    }
+
+    public ArrayList<String> getWeapons() {
+        return weapons;
+    }
+
+    public Image getWeapon() {
+        return weapon;
+    }
+
+    public Image getWeaponText() {
+        return weaponText;
     }
 
     //
