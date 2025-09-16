@@ -1,4 +1,4 @@
-package com.tilldawn.Models;
+package com.tilldawn.Models.Enums;
 
 public enum SFX {
     click("assets\\SFX\\random\\click.ogg");
