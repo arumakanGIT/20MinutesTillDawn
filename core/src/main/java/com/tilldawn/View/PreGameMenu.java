@@ -1,19 +1,25 @@
 package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Controller.PreGameMenuController;
+import com.tilldawn.Models.App;
 import com.tilldawn.Models.AssetManager;
+import com.tilldawn.Models.UserDAO;
 import com.tilldawn.TillDawn;
+
+import java.util.ArrayList;
 
 public class PreGameMenu implements AppView {
 
@@ -25,7 +31,8 @@ public class PreGameMenu implements AppView {
     private final Button avatarLeft;
     private final Button weaponRight;
     private final Button weaponLeft;
-    private Texture avatar;
+    private Image avatar;
+    private Image avatarText;
     private Texture weapon;
     private Texture num1;
     private Texture num2;
@@ -39,6 +46,8 @@ public class PreGameMenu implements AppView {
     private final Button num2Down;
     private final Button num3Down;
     private final Button num4Down;
+    private final ArrayList<String> avatars = new ArrayList<>();
+    private int index;
 
     public PreGameMenu() {
         Viewport viewport = new FitViewport(1280, 720);
@@ -46,8 +55,10 @@ public class PreGameMenu implements AppView {
         Gdx.input.setInputProcessor(stage);
         Table table = new Table();
         table.setFillParent(true);
+        table.align(Align.top);
         background = new Texture(Gdx.files.internal("PreGameMenu/pregameMenu.png"));
         Skin skin = AssetManager.getInstance().getSkin();
+        initAvatars();
 
         backButton = new TextButton("Back", skin);
         startButton = new Button(skin, "start");
@@ -64,7 +75,28 @@ public class PreGameMenu implements AppView {
         num3Down = new Button(skin, "hidden");
         num4Down = new Button(skin, "hidden");
 
+        index = avatars.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "avatar") + ".png");
+        avatar = new Image(AssetManager.getInstance().getTexture(avatars.get(index)));
+        avatarText = new Image(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"));
+        weapon = AssetManager.getInstance().getTexture(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon") + ".png");
+        num1 = AssetManager.getInstance().getTexture("2.png");
+        num2 = AssetManager.getInstance().getTexture("0.png");
+        num3 = AssetManager.getInstance().getTexture("0.png");
+        num4 = AssetManager.getInstance().getTexture("0.png");
 
+//        avatar.setSize(192, 261);
+        avatar.setScaling(Scaling.fit);
+        avatarText.setScaling(Scaling.fit);
+
+        Table row1 = new Table();
+        row1.add(avatarLeft).padRight(700);
+        avatar.setPosition(400, 460);
+        avatarText.setPosition(700, 550);
+        table.addActor(avatar);
+        table.addActor(avatarText);
+        row1.add(avatarRight);
+
+        table.add(row1).padTop(110);
 
         stage.addActor(table);
         new PreGameMenuController(this);
@@ -96,11 +128,27 @@ public class PreGameMenu implements AppView {
         num2.dispose();
         num3.dispose();
         num4.dispose();
-        avatar.dispose();
         weapon.dispose();
     }
 
     //
+
+    public void update() {
+        avatar.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(avatars.get(index)))));
+        avatarText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"))));
+    }
+
+    public ArrayList<String> getAvatars() {
+        return avatars;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getIndex() {
+        return index;
+    }
 
     public Button getStartButton() {
         return startButton;
@@ -156,6 +204,21 @@ public class PreGameMenu implements AppView {
 
     public Button getNum4Down() {
         return num4Down;
+    }
+
+    public void initAvatars() {
+        FileHandle folder = Gdx.files.internal("assets/PreGameMenu/Portraits/");
+
+        if (folder.exists() && folder.isDirectory()) {
+            for (FileHandle file : folder.list()) {
+                if (!file.isDirectory()) {
+                    System.out.println(file.name());
+                    avatars.add(file.name());
+                }
+            }
+        } else {
+            System.out.println("Path not found");
+        }
     }
 
     //
