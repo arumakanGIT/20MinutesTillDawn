@@ -82,4 +82,7 @@ public class MainMenuController {
             }
         });
     }
+
+    public static class GameController {
+    }
 }
