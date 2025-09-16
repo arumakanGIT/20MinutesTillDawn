@@ -67,6 +67,27 @@ public class UserDAO {
         }
     }
 
+    public static Result changePassword(String username, String newPassword) {
+        String sql = "UPDATE users SET password = ? WHERE username = ?";
+
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            String newHash = SHA_256.hashPassword(newPassword, UserDAO.getStringField(username, "salt"));
+
+            pstmt.setString(1, newHash);
+            pstmt.setString(2, username);
+
+            int rows = pstmt.executeUpdate();
+            if (rows > 0) return new Result(true, "Password changed successfully");
+            else return new Result(false, "User not found");
+
+        } catch (Exception e) {
+            System.out.println("Error checking user existence: " + e.getMessage());
+            return new Result(false, "Database error: " + e.getMessage());
+        }
+    }
+
     public static int getSecurityQuestionID(String username) {
         String sql = "SELECT securityQuestionID FROM users WHERE username = ?";
         try (Connection conn = Database.connect();
@@ -82,73 +103,6 @@ public class UserDAO {
         return -1;
     }
 
-    public static String getAnswer(String username) {
-        String sql = "SELECT  answer FROM users WHERE username = ?";
-        try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getString("answer");
-            } else return null;
-        } catch (Exception e) {
-            System.out.println("Error checking user existence: " + e.getMessage());
-        }
-        return null;
-    }
-
-    public static String getSalt(String username) {
-        String sql = "SELECT salt FROM users WHERE username = ?";
-        try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getString("salt");
-            } else return null;
-        } catch (Exception e) {
-            System.out.println("Error checking user existence: " + e.getMessage());
-        }
-        return null;
-    }
-
-    public static String getPassword(String username) {
-        String sql = "SELECT password FROM users WHERE username = ?";
-        try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getString("password");
-            }
-            return null;
-        } catch (Exception e) {
-            System.out.println("Error checking user existence: " + e.getMessage());
-        }
-        return null;
-    }
-
-    public static Result changePassword(String username, String newPassword) {
-        String sql = "UPDATE users SET password = ? WHERE username = ?";
-
-        try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            String newHash = SHA_256.hashPassword(newPassword, UserDAO.getSalt(username));
-
-            pstmt.setString(1, newHash);
-            pstmt.setString(2, username);
-
-            int rows = pstmt.executeUpdate();
-            if (rows > 0) return new Result(true, "Password changed successfully");
-            else return new Result(false, "User not found");
-
-        } catch (Exception e) {
-            System.out.println("Error checking user existence: " + e.getMessage());
-            return new Result(false, "Database error: " + e.getMessage());
-        }
-    }
-
     public static void saveRememberToken(String username, String token) {
         String sql = "UPDATE users SET rememberToken = ? WHERE username = ?";
         try (Connection conn = Database.connect();
@@ -157,7 +111,7 @@ public class UserDAO {
             pstmt.setString(2, username);
             pstmt.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error checking user existence: " + e.getMessage());
         }
     }
 
@@ -191,11 +145,31 @@ public class UserDAO {
                     rs.getString("password"),
                     rs.getString("salt"),
                     rs.getInt("securityQuestionID"),
-                    rs.getString("answer")
+                    rs.getString("answer"),
+                    rs.getString("avatar"),
+                    rs.getString("weapon"),
+                    rs.getInt("kill"),
+                    rs.getInt("time"),
+                    rs.getInt("score")
                 );
             }
         } catch (Exception e) {
             System.out.println("Error fetching user: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public static String getStringField(String username, String field) {
+        String sql = "SELECT " + field + " FROM users WHERE username = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(field);
+            } else return null;
+        } catch (Exception e) {
+            System.out.println("Error checking user existence: " + e.getMessage());
         }
         return null;
     }

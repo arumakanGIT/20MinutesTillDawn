@@ -62,8 +62,8 @@ public class LoginMenuController {
                 if (!menu.getUsernameField().getText().isEmpty() && UserDAO.userExists(menu.getUsernameField().getText()).isSuccessful()) {
                     menu.getSecurityQuestionDialog().setForgetPasswordMode(UserDAO.getSecurityQuestionID(menu.getUsernameField().getText()));
                     menu.getSecurityQuestionDialog().setListener((selectedIndex, answer) -> {
-                        if (Objects.requireNonNull(UserDAO.getAnswer(menu.getUsernameField().getText()))
-                            .equals(SHA_256.hashPassword(answer, UserDAO.getSalt(menu.getUsernameField().getText())))) {
+                        if (Objects.requireNonNull(UserDAO.getStringField(menu.getUsernameField().getText(), "answer"))
+                            .equals(SHA_256.hashPassword(answer, UserDAO.getStringField(menu.getUsernameField().getText(), "salt")))) {
                             menu.getSecurityQuestionDialog().hide();
                             menu.getSetPasswordDialog().show(menu.getStage());
                         } else menu.showWarning("Wrong Answer!");

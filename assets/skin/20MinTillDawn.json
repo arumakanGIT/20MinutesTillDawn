@@ -100,6 +100,23 @@
 	"cancel": {
 		"up": "cancelButton",
 		"over": "cancelButton_OVER"
+	},
+	"right": {
+		"up": "rightButton",
+		"down": "rightButton_DOWN"
+	},
+	"left": {
+		"up": "leftButton",
+		"down": "leftButton_DOWN"
+	},
+	"hidden": {
+		"up": "empty",
+		"over": "Over"
+	},
+	"start": {
+		"up": "start",
+		"down": "start_DOWN",
+		"over": "start_OVER"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {

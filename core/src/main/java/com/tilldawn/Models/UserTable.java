@@ -15,7 +15,12 @@ public class UserTable {
                 "salt TEXT NOT NULL," +
                 "securityQuestionID INTEGER NOT NULL," +
                 "answer TEXT NOT NULL," +
-                "rememberToken TEXT)";
+                "rememberToken TEXT," +
+                "avatar TEXT NOT NULL DEFAULT 'Abby'," +
+                "weapon TEXT NOT NULL DEFAULT 'Revolver'," +
+                "score INTEGER NOT NULL DEFAULT 0," +
+                "kill INTEGER NOT NULL DEFAULT 0," +
+                "time INTEGER NOT NULL DEFAULT 0)";
 
             stmt.execute(sql);
         } catch (Exception e) {

@@ -101,7 +101,7 @@ public class LoginMenu implements AppView {
                     showWarning("Invalid Password!");
                     return;
                 }
-                if (Objects.equals(UserDAO.getPassword(usernameField.getText()), SHA_256.hashPassword(newPasswordField.getText(), UserDAO.getSalt(usernameField.getText())))) {
+                if (Objects.equals(UserDAO.getStringField(usernameField.getText(), "password"), SHA_256.hashPassword(newPasswordField.getText(), UserDAO.getStringField(usernameField.getText(), "salt")))) {
                     showWarning("Please Enter a new Password");
                     return;
                 }
