@@ -8,6 +8,7 @@ import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
+import com.tilldawn.View.PreGameMenu;
 
 public class MainMenuController {
     private final MainMenu menu;
@@ -23,6 +24,8 @@ public class MainMenuController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+                TillDawn.getGame().setScreen(new PreGameMenu());
+                menu.dispose();
             }
         });
 
