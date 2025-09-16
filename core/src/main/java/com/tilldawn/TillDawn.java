@@ -21,9 +21,11 @@ public class TillDawn extends Game {
 
         Preferences prefs = Gdx.app.getPreferences("StayLoggedIn");
         String token = prefs.getString("rememberToken", null);
+        System.out.println("Token: " + token);
         if (token != null) {
             String username = UserDAO.getUserByToken(token);
             if (username != null) {
+                System.out.println(username);
                 App.setCurrentUser(UserDAO.getUserByUsername(username));
                 setScreen(new MainMenu());
             } else
