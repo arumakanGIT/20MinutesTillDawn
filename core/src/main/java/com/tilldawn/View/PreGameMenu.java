@@ -27,9 +27,10 @@ import java.util.Random;
 
 public class PreGameMenu implements AppView {
 
-    public static final int weaponX = 830;
-    public static final int weaponY = 400;
+    public static final int weaponX = 660;
+    public static final int weaponY = 320;
     private final Texture background;
+    private final Texture background2;
     private final Stage stage;
     private final TextButton backButton;
     private final Button startButton;
@@ -57,6 +58,7 @@ public class PreGameMenu implements AppView {
     private int index;
     private int weaponIndex;
     private final ArrayList<String> weapons = new ArrayList<>(Arrays.asList("SMG", "Revolver", "ShotGun"));
+    private Character[] time;
 
     public PreGameMenu() {
         Viewport viewport = new FitViewport(1280, 720);
@@ -66,6 +68,7 @@ public class PreGameMenu implements AppView {
         table.setFillParent(true);
         table.align(Align.top);
         background = new Texture(Gdx.files.internal("PreGameMenu/pregameMenu.png"));
+        background2 = AssetManager.getInstance().getTexture("PreGameMenu_background.png");
         Skin skin = AssetManager.getInstance().getSkin();
         initAvatars();
 
@@ -90,6 +93,11 @@ public class PreGameMenu implements AppView {
         weaponIndex = weapons.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon"));
         weapon = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + ".png"));
         weaponText = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + "Text.png"));
+        time = new Character[4];
+        time[0] = '2';
+        time[1] = '0';
+        time[2] = '0';
+        time[3] = '0';
         num1 = new Image(AssetManager.getInstance().getTexture("2.png"));
         num2 = new Image(AssetManager.getInstance().getTexture("0.png"));
         num3 = new Image(AssetManager.getInstance().getTexture("0.png"));
@@ -108,10 +116,11 @@ public class PreGameMenu implements AppView {
 
         weapon.setScaling(Scaling.fit);
         weaponText.setScaling(Scaling.fit);
+        weapon.setAlign(Align.center);
 
         Table row2 = new Table();
         row2.add(weaponLeft).padRight(700);
-        weapon.setPosition(730, 350);
+        weapon.setPosition(weaponX, weaponY);
         weaponText.setPosition(400, 360);
         table.addActor(weapon);
         table.addActor(weaponText);
@@ -196,9 +205,11 @@ public class PreGameMenu implements AppView {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(new Color(36f / 255f, 32f / 255f, 47f / 255f, 1f));
+        ScreenUtils.clear(new Color(19 / 255f, 19f / 255f, 33 / 255f, 1f));
         TillDawn.getGame().getBatch().setProjectionMatrix(stage.getCamera().combined);
         TillDawn.getGame().getBatch().begin();
+        TillDawn.getGame().getBatch().draw(background2, 0, 0,
+            Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         TillDawn.getGame().getBatch().draw(background, 0, 0,
             stage.getViewport().getWorldWidth(),
             stage.getViewport().getWorldHeight());
@@ -225,6 +236,10 @@ public class PreGameMenu implements AppView {
         avatarText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"))));
         weapon.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + ".png"))));
         weaponText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + "Text.png"))));
+        num1.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(time[0] + ".png"))));
+        num2.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(time[1] + ".png"))));
+        num3.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(time[2] + ".png"))));
+        num4.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(time[3] + ".png"))));
     }
 
     public ArrayList<String> getAvatars() {
@@ -328,6 +343,10 @@ public class PreGameMenu implements AppView {
 
     public Image getWeaponText() {
         return weaponText;
+    }
+
+    public Character[] getTime() {
+        return time;
     }
 
     //

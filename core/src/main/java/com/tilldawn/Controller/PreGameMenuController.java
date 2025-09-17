@@ -8,6 +8,8 @@ import com.tilldawn.TillDawn;
 import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.PreGameMenu;
 
+import java.util.Arrays;
+
 public class PreGameMenuController {
     private final PreGameMenu menu;
 
@@ -23,11 +25,7 @@ public class PreGameMenuController {
         menu.getAvatarLeft().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.setIndex((menu.getIndex() + menu.getAvatars().size() - 1) % menu.getAvatars().size());
-//                float oldWidth = menu.getAvatar().getPrefWidth();
-//                float oldHeight = menu.getAvatar().getPrefHeight();
                 menu.update();
-//                menu.getAvatar().setSize(menu.getAvatar().getPrefWidth(), menu.getAvatar().getPrefHeight());
-//                menu.getAvatar().setPosition(menu.getAvatar().getX() - ((menu.getAvatar().getPrefWidth() - oldWidth) / 2), menu.getAvatar().getY() - ((menu.getAvatar().getPrefHeight() - oldHeight) / 2));
             }
         });
 
@@ -70,6 +68,78 @@ public class PreGameMenuController {
             public void clicked(InputEvent event, float x, float y) {
                 TillDawn.getGame().setScreen(new MainMenu());
                 menu.dispose();
+            }
+        });
+
+        // num1
+
+        menu.getNum1Up().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[0] = (char) ((Character.getNumericValue(menu.getTime()[0]) + 7) % 6 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
+            }
+        });
+
+        menu.getNum1Down().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[0] = (char) ((Character.getNumericValue(menu.getTime()[0]) + 5) % 6 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
+            }
+        });
+
+        // num2
+
+        menu.getNum2Up().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[1] = (char) ((Character.getNumericValue(menu.getTime()[1]) + 11) % 10 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
+            }
+        });
+
+        menu.getNum2Down().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[1] = (char) ((Character.getNumericValue(menu.getTime()[1]) + 9) % 10 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
+            }
+        });
+
+        // num3
+
+        menu.getNum3Up().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[2] = (char) ((Character.getNumericValue(menu.getTime()[2]) + 7) % 6 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
+            }
+        });
+
+        menu.getNum3Down().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[2] = (char) ((Character.getNumericValue(menu.getTime()[2]) + 5) % 6 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
+            }
+        });
+
+        // num4
+
+        menu.getNum4Up().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 11) % 10 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
+            }
+        });
+
+        menu.getNum4Down().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 9   ) % 10 + '0');
+                System.out.println(Arrays.toString(menu.getTime()));
+                menu.update();
             }
         });
     }
