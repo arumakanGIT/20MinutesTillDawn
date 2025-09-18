@@ -10,13 +10,25 @@ public class User {
     private String avatar;
     private String weapon;
     private int kill;
-    private int health;
+    private int health = 100;
     private int time;
     private int score;
+    private int playerX;
+    private int playerY;
+    private int speed = 5;
+    private boolean isPlayerIdle = true;
+    private boolean isPlayerRunning = false;
+
+    public boolean isPlayerIdle() {
+        return isPlayerIdle;
+    }
+
+    public void setPlayerIdle(boolean playerIdle) {
+        isPlayerIdle = playerIdle;
+    }
 
     public User(int id, String username, String password, String salt, int securityQuestionID, String answer,
-                String avatar, String weapon, int kill, int time, int score)
-    {
+                String avatar, String weapon, int kill, int time, int score) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -112,5 +124,37 @@ public class User {
 
     public String getAnswer() {
         return answer;
+    }
+
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public void setPlayerX(int playerX) {
+        this.playerX = playerX;
+    }
+
+    public int getPlayerY() {
+        return playerY;
+    }
+
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public boolean isPlayerRunning() {
+        return isPlayerRunning;
+    }
+
+    public void setPlayerRunning(boolean playerRunning) {
+        isPlayerRunning = playerRunning;
     }
 }

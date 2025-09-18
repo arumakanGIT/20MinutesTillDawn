@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tilldawn.Models.App;
+import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.PreGameMenu;
@@ -137,9 +139,20 @@ public class PreGameMenuController {
 
         menu.getNum4Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 9   ) % 10 + '0');
+                menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 9) % 10 + '0');
                 System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
+            }
+        });
+
+        // start
+
+        menu.getStartButton().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                Game game = new Game((menu.getTime()[0] - '0') * 10 + menu.getTime()[1] - '0',
+                    (menu.getTime()[2] - '0') * 10 + menu.getTime()[3] - '0'
+                    , App.getCurrentUser());
+
             }
         });
     }
