@@ -14,11 +14,6 @@ public class AnimationManager {
     private static AnimationManager instance;
     private final Map<String, Animation<TextureRegion>> animations = new HashMap<>();
 
-    /*
-    blinkLeft
-    blinkRight
-    */
-
     private AnimationManager() {
         loadAnimations();
     }
@@ -31,29 +26,38 @@ public class AnimationManager {
     }
 
     private void loadAnimations() {
-        // Blick Eye :
+        // blinkLeft :
         Texture blinkSheetLeft = new Texture(Gdx.files.internal("BlickEyeLeft.png"));
         TextureRegion[][] blinkFramesLeft = TextureRegion.split(blinkSheetLeft, blinkSheetLeft.getWidth() / 11, blinkSheetLeft.getHeight());
         animations.put("blinkLeft", new Animation<>(0.03f, blinkFramesLeft[0]));
 
+        // blinkRight
         Texture blinkSheetRight = new Texture(Gdx.files.internal("BlickEyeRight.png"));
         TextureRegion[][] blinkFramesRight = TextureRegion.split(blinkSheetRight, blinkSheetRight.getWidth() / 11, blinkSheetRight.getHeight());
         animations.put("blinkRight", new Animation<>(0.03f, blinkFramesRight[0]));
 
+        // swordShadow
         Array<TextureRegion> frames = new Array<>();
-
         for (int i = 7; i >= 1; i--) {
             Texture tex = new Texture(Gdx.files.internal("LoginMenuAssets/shadow" + i + ".png"));
             frames.add(new TextureRegion(tex));
         }
-
         for (int i = 1; i <= 7; i++) {
             Texture tex = new Texture(Gdx.files.internal("LoginMenuAssets/shadow" + i + ".png"));
             frames.add(new TextureRegion(tex));
         }
-
         Animation<TextureRegion> swordShadow = new Animation<>(0.1f, frames);
         animations.put("swordShadow", swordShadow);
+
+        // walk
+
+
+
+        // run
+
+        // Idle
+
+
     }
 
     public Animation<TextureRegion> get(String name) {

@@ -1,12 +1,11 @@
 package com.tilldawn.Controller;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tilldawn.Models.App;
 import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
+import com.tilldawn.View.GameView;
 import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.PreGameMenu;
 
@@ -149,10 +148,13 @@ public class PreGameMenuController {
 
         menu.getStartButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
+                App.getCurrentUser().setAvatar(menu.getAvatar());
                 Game game = new Game((menu.getTime()[0] - '0') * 10 + menu.getTime()[1] - '0',
                     (menu.getTime()[2] - '0') * 10 + menu.getTime()[3] - '0'
                     , App.getCurrentUser());
-
+                App.setGame(game);
+                TillDawn.getGame().setScreen(new GameView());
+                menu.dispose();
             }
         });
     }

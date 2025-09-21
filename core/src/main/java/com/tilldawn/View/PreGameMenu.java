@@ -87,7 +87,7 @@ public class PreGameMenu implements AppView {
         num3Down = new Button(skin, "hidden");
         num4Down = new Button(skin, "hidden");
 
-        index = avatars.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "avatar") + ".png");
+        index = avatars.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "avatar"));
         avatar = new Image(AssetManager.getInstance().getTexture(avatars.get(index)));
         avatarText = new Image(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"));
         weaponIndex = weapons.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon"));
@@ -252,6 +252,10 @@ public class PreGameMenu implements AppView {
 
     public int getIndex() {
         return index;
+    }
+
+    public String getAvatar() {
+        return avatars.get(index);
     }
 
     public Button getStartButton() {

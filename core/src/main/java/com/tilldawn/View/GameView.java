@@ -10,12 +10,11 @@ import com.tilldawn.Controller.GameController;
 import com.tilldawn.TillDawn;
 
 public class GameView implements InputProcessor, Screen {
-
     private Stage stage;
     private final GameController controller;
 
-    public GameView(GameController controller) {
-        this.controller = controller;
+    public GameView() {
+        this.controller = new GameController();
         controller.setView(this);
     }
 

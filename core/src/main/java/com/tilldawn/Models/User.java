@@ -1,5 +1,8 @@
 package com.tilldawn.Models;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+
 public class User {
     private int id;
     private String username;
@@ -28,7 +31,7 @@ public class User {
     }
 
     public User(int id, String username, String password, String salt, int securityQuestionID, String answer,
-                String avatar, String weapon, int kill, int time, int score) {
+                    String avatar, String weapon, int kill, int time, int score) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -156,5 +159,9 @@ public class User {
 
     public void setPlayerRunning(boolean playerRunning) {
         isPlayerRunning = playerRunning;
+    }
+
+    public Sprite getPlayerSprite() {
+        return null;
     }
 }

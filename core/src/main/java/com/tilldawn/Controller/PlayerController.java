@@ -20,6 +20,10 @@ public class PlayerController {
         handlePlayerInput();
     }
 
+    private void idAnimation() {
+
+    }
+
     private void handlePlayerInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             player.setPlayerY(player.getPlayerY() - player.getSpeed());
@@ -39,6 +43,4 @@ public class PlayerController {
     public User getPlayer() {
         return player;
     }
-
-
 }

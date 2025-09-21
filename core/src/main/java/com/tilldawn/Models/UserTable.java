@@ -16,7 +16,7 @@ public class UserTable {
                 "securityQuestionID INTEGER NOT NULL," +
                 "answer TEXT NOT NULL," +
                 "rememberToken TEXT," +
-                "avatar TEXT NOT NULL DEFAULT 'Abby'," +
+                "avatar TEXT NOT NULL DEFAULT 'Abby.png'," +
                 "weapon TEXT NOT NULL DEFAULT 'Revolver'," +
                 "score INTEGER NOT NULL DEFAULT 0," +
                 "kill INTEGER NOT NULL DEFAULT 0," +
