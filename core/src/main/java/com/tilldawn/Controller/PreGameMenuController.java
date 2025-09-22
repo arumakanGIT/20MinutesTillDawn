@@ -2,6 +2,7 @@ package com.tilldawn.Controller;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.tilldawn.Models.AnimationManager;
 import com.tilldawn.Models.App;
 import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
@@ -153,6 +154,7 @@ public class PreGameMenuController {
                     (menu.getTime()[2] - '0') * 10 + menu.getTime()[3] - '0'
                     , App.getCurrentUser());
                 App.setGame(game);
+                AnimationManager.getInstance().loadAvatarAnimations(menu.getAvatar());
                 TillDawn.getGame().setScreen(new GameView());
                 menu.dispose();
             }

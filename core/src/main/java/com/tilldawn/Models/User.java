@@ -1,6 +1,7 @@
 package com.tilldawn.Models;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.tilldawn.Models.Enums.Move;
 
 public class User {
     private int id;
@@ -18,19 +19,10 @@ public class User {
     private int playerX;
     private int playerY;
     private int speed = 5;
-    private boolean isPlayerIdle = true;
-    private boolean isPlayerRunning = false;
-
-    public boolean isPlayerIdle() {
-        return isPlayerIdle;
-    }
-
-    public void setPlayerIdle(boolean playerIdle) {
-        isPlayerIdle = playerIdle;
-    }
+    private Move moveState = Move.walk;
 
     public User(int id, String username, String password, String salt, int securityQuestionID, String answer,
-                    String avatar, String weapon, int kill, int time, int score) {
+                String avatar, String weapon, int kill, int time, int score) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -152,16 +144,17 @@ public class User {
         this.speed = speed;
     }
 
-    public boolean isPlayerRunning() {
-        return isPlayerRunning;
-    }
-
-    public void setPlayerRunning(boolean playerRunning) {
-        isPlayerRunning = playerRunning;
-    }
-
     public Sprite getPlayerSprite() {
 
         return null;
     }
+
+    public Move getMoveState() {
+        return moveState;
+    }
+
+    public void setMoveState(Move moveState) {
+        this.moveState = moveState;
+    }
+
 }

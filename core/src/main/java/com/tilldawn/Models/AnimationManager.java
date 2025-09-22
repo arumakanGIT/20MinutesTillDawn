@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,15 +49,26 @@ public class AnimationManager {
         }
         Animation<TextureRegion> swordShadow = new Animation<>(0.1f, frames);
         animations.put("swordShadow", swordShadow);
+    }
+
+    public void loadAvatarAnimations(String avatarName) {
+        avatarName = avatarName.substring(0, avatarName.lastIndexOf('.'));
 
         // walk
 
-
+        Array<TextureRegion> walkFrames = new Array<>();
+        for (int i = 0; i < 7; i++) {
+            Texture tex = AssetManager.getInstance().getTexture(avatarName + "_Walk_" + i + ".png");
+            walkFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> walkAnim = new Animation<>(0.1f, walkFrames, Animation.PlayMode.LOOP);
+        animations.put("walk", walkAnim);
 
         // run
 
-        // Idle
 
+
+        // Idle
 
     }
 
