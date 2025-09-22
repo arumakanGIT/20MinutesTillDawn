@@ -237,6 +237,13 @@
 		"backgroundDisabled": "selectBox_DISABLE"
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
+	"default-horizontal": {
+		"background": "SliderBackgroundBefore",
+		"knob": "SliderKnob",
+		"knobBefore": "SliderBackgroundAfter"
+	}
+},
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
 	"default": {
 		"font": "ChvyExprs_WHITE_24",

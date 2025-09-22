@@ -14,7 +14,7 @@ public class GameAudioManager {
     // for step :
     public static float footStepVolume = 1f;
     // for music :
-    public static float musicVolume = 1f;
+    public static float musicVolume = 0f;
     public static boolean playMusic = false;
     // for ambient :
     public static float ambientVolume = 1f;
