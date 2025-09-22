@@ -10,6 +10,7 @@ import com.tilldawn.TillDawn;
 import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.PreGameMenu;
+import com.tilldawn.View.SettingMenu;
 
 public class MainMenuController {
     private final MainMenu menu;
@@ -35,6 +36,8 @@ public class MainMenuController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 GameAudioManager.getInstance().playSound(SFX.click.getPath(), false, GameAudioManager.sfxVolume);
+                menu.dispose();
+                TillDawn.getGame().setScreen(new SettingMenu());
             }
         });
 
@@ -70,6 +73,7 @@ public class MainMenuController {
                 Preferences prefs = Gdx.app.getPreferences("StayLoggedIn");
                 prefs.remove("rememberToken");
                 prefs.flush();
+                menu.dispose();
                 TillDawn.getGame().setScreen(new LoginMenu());
             }
         });
@@ -78,6 +82,7 @@ public class MainMenuController {
         menu.getExitButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                menu.dispose();
                 Gdx.app.exit();
             }
         });

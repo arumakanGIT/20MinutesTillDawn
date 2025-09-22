@@ -23,6 +23,7 @@ public class GameView implements InputProcessor, Screen {
     private float timer = 0f;
 
     public GameView(Game game) {
+        TillDawn.setCursor("CursorSprite.png");
         this.game = game;
         this.controller = new GameController();
         controller.setView(this);

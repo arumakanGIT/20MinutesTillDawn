@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tilldawn.Controller.SettingController;
+import com.tilldawn.Controller.SettingMenuController;
 import com.tilldawn.TillDawn;
 
 public class SettingMenu implements AppView {
@@ -23,7 +23,7 @@ public class SettingMenu implements AppView {
 
 
         stage.addActor(table);
-        new SettingController(this);
+        new SettingMenuController(this);
     }
 
     @Override

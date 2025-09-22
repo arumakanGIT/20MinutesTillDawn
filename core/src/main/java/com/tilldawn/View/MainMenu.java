@@ -32,6 +32,7 @@ public class MainMenu implements AppView {
 
     // init :
     public MainMenu() {
+        TillDawn.setCursor("Mouse.png");
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         Table table = new Table();

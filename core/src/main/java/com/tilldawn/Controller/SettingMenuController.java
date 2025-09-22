@@ -2,10 +2,10 @@ package com.tilldawn.Controller;
 
 import com.tilldawn.View.SettingMenu;
 
-public class SettingController {
+public class SettingMenuController {
     private SettingMenu menu;
 
-    public SettingController(SettingMenu menu) {
+    public SettingMenuController(SettingMenu menu) {
         this.menu = menu;
         initialize();
     }
