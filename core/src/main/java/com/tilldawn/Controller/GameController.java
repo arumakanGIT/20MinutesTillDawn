@@ -10,7 +10,7 @@ public class GameController {
     public void updateGame() {
         if (view != null) {
             // update all things
-            playerController.update();
+//            playerController.update();
         }
     }
 

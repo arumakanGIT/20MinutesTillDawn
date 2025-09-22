@@ -1,0 +1,78 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "TiledMap/untitled.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "TiledMap/T_BoneTile.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TiledMap/T_ForestTiles_2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TiledMap/T_ForestTiles_7.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TiledMap/T_TempleTile_00.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TiledMap/T_TempleTile_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TiledMap/T_TempleTile_3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TiledMap/T_TempleTile_4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TiledMap/untitled.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1331.8181818181818,
+                "y": 939.3939393939394
+            }
+        },
+        "TiledMap/untitled.tmx#T_TempleTile_00": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/abomo/IdeaProjects/20MinutesTillDawn/assets/GameAsset",
+    "last.imagePath": "C:/Users/abomo/Downloads/Telegram Desktop/Images_grouped_1/Sprite/T",
+    "map.fixedSize": true,
+    "map.height": 64,
+    "map.lastUsedExportFilter": "Tiled map files (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 64,
+    "openFiles": [
+        "TiledMap/untitled.tmx",
+        "TiledMap/T_TempleTile_1.tsx",
+        "TiledMap/T_TempleTile_3.tsx",
+        "TiledMap/T_TempleTile_4.tsx"
+    ],
+    "project": "backgroundTiled.tiled-project",
+    "recentFiles": [
+        "TiledMap/T_TempleTile_4.tsx",
+        "TiledMap/T_TempleTile_3.tsx",
+        "TiledMap/T_TempleTile_1.tsx",
+        "TiledMap/untitled.tmx",
+        "TiledMap/T_ForestTiles_2.tsx",
+        "TiledMap/T_ForestTiles_7.tsx",
+        "TiledMap/T_TempleTile_00.tsx",
+        "TiledMap/T_BoneTile.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}

@@ -1,7 +1,6 @@
 package com.tilldawn.Models;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class User {
     private int id;
@@ -162,6 +161,7 @@ public class User {
     }
 
     public Sprite getPlayerSprite() {
+
         return null;
     }
 }
