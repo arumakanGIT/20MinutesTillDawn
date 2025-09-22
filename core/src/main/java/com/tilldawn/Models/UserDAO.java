@@ -1,5 +1,7 @@
 package com.tilldawn.Models;
 
+import com.tilldawn.Models.Enums.Gun;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -139,6 +141,11 @@ public class UserDAO {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
+                Gun gun = switch (rs.getString("weapon")) {
+                    case "Revolver" -> Gun.Revolver;
+                    case "Shotgun" -> Gun.Shotgun;
+                    default -> Gun.SMG;
+                };
                 return new User(
                     rs.getInt("id"),
                     rs.getString("username"),
@@ -147,7 +154,7 @@ public class UserDAO {
                     rs.getInt("securityQuestionID"),
                     rs.getString("answer"),
                     rs.getString("avatar"),
-                    rs.getString("weapon"),
+                    gun,
                     rs.getInt("kill"),
                     rs.getInt("time"),
                     rs.getInt("score")

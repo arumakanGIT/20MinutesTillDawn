@@ -20,21 +20,18 @@ public class SfxEnumGenerator {
             paths.filter(Files::isRegularFile).forEach(file -> {
                 Path relativePath = root.relativize(file);
 
-                // گرفتن نام فایل بدون پسوند
                 String fileName = file.getFileName().toString();
                 int dotIndex = fileName.lastIndexOf(".");
                 String nameWithoutExt = (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
 
-                // ساخت اسم ثابت Enum (پوشه‌ها + اسم بدون پسوند)
                 String enumName = root.relativize(file)
                     .toString()
                     .replace(File.separator, "_")
-                    .replace(fileName, nameWithoutExt) // حذف پسوند از اسم enum
+                    .replace(fileName, nameWithoutExt)
                     .replaceAll("\\W+", "_")
                     .replaceAll("_+", "_")
                     .toUpperCase();
 
-                // مسیر با پسوند برای پخش
                 String pathString = root.getFileName() + "/" + relativePath.toString().replace("\\", "/");
 
                 enumBuilder.append("    ")
@@ -45,7 +42,6 @@ public class SfxEnumGenerator {
             });
         }
 
-        // حذف ویرگول آخر
         int lastComma = enumBuilder.lastIndexOf(",");
         if (lastComma != -1) {
             enumBuilder.replace(lastComma, lastComma + 1, ";");
@@ -58,11 +54,8 @@ public class SfxEnumGenerator {
             .append("public String getPath() { return path; }")
             .append("}\n");
 
-        // نوشتن در فایل
         try (FileWriter writer = new FileWriter(outputFile.toFile())) {
             writer.write(enumBuilder.toString());
         }
-
-        System.out.println("Enum file created at: " + outputFile.toAbsolutePath());
     }
 }

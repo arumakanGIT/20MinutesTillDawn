@@ -150,11 +150,13 @@ public class PreGameMenuController {
         menu.getStartButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 App.getCurrentUser().setAvatar(menu.getAvatar());
+                App.getCurrentUser().setWeapon(menu.getGun());
                 Game game = new Game((menu.getTime()[0] - '0') * 10 + menu.getTime()[1] - '0',
                     (menu.getTime()[2] - '0') * 10 + menu.getTime()[3] - '0'
                     , App.getCurrentUser());
                 App.setGame(game);
                 AnimationManager.getInstance().loadAvatarAnimations(menu.getAvatar());
+                AnimationManager.getInstance().loadWeaponsAnimations(menu.getGun());
                 TillDawn.getGame().setScreen(new GameView());
                 menu.dispose();
             }

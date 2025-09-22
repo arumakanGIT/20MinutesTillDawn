@@ -18,11 +18,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Controller.PreGameMenuController;
 import com.tilldawn.Models.App;
 import com.tilldawn.Models.AssetManager;
+import com.tilldawn.Models.Enums.Gun;
 import com.tilldawn.Models.UserDAO;
 import com.tilldawn.TillDawn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 public class PreGameMenu implements AppView {
@@ -57,8 +59,8 @@ public class PreGameMenu implements AppView {
     private final ArrayList<String> avatars = new ArrayList<>();
     private int index;
     private int weaponIndex;
-    private final ArrayList<String> weapons = new ArrayList<>(Arrays.asList("SMG", "Revolver", "ShotGun"));
-    private Character[] time;
+    private final ArrayList<Gun> weapons = new ArrayList<>(Arrays.asList(Gun.values()));
+    private final Character[] time;
 
     public PreGameMenu() {
         Viewport viewport = new FitViewport(1280, 720);
@@ -90,9 +92,15 @@ public class PreGameMenu implements AppView {
         index = avatars.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "avatar"));
         avatar = new Image(AssetManager.getInstance().getTexture(avatars.get(index)));
         avatarText = new Image(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"));
-        weaponIndex = weapons.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon"));
-        weapon = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + ".png"));
-        weaponText = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + "Text.png"));
+        Gun defaultGun = switch (
+            Objects.requireNonNull(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon"))) {
+            case "SMG" -> Gun.SMG;
+            case "Revolver" -> Gun.Revolver;
+            default -> Gun.Shotgun;
+        };
+        weaponIndex = weapons.indexOf(defaultGun);
+        weapon = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex).name() + ".png"));
+        weaponText = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex).name() + "Text.png"));
         time = new Character[4];
         time[0] = '2';
         time[1] = '0';
@@ -234,8 +242,8 @@ public class PreGameMenu implements AppView {
     public void update() {
         avatar.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(avatars.get(index)))));
         avatarText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"))));
-        weapon.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + ".png"))));
-        weaponText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex) + "Text.png"))));
+        weapon.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex).name() + ".png"))));
+        weaponText.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(weapons.get(weaponIndex).name() + "Text.png"))));
         num1.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(time[0] + ".png"))));
         num2.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(time[1] + ".png"))));
         num3.setDrawable(new TextureRegionDrawable(new TextureRegion(AssetManager.getInstance().getTexture(time[2] + ".png"))));
@@ -318,15 +326,13 @@ public class PreGameMenu implements AppView {
         FileHandle folder = Gdx.files.internal("assets/PreGameMenu/Portraits/");
 
         if (folder.exists() && folder.isDirectory()) {
-            for (FileHandle file : folder.list()) {
-                if (!file.isDirectory()) {
-                    System.out.println(file.name());
+            for (FileHandle file : folder.list())
+                if (!file.isDirectory())
                     avatars.add(file.name());
-                }
-            }
-        } else {
-            System.out.println("Path not found");
         }
+         else
+            System.out.println("Path not found");
+
     }
 
     public int getWeaponIndex() {
@@ -337,8 +343,12 @@ public class PreGameMenu implements AppView {
         this.weaponIndex = weaponIndex;
     }
 
-    public ArrayList<String> getWeapons() {
+    public ArrayList<Gun> getWeapons() {
         return weapons;
+    }
+
+    public Gun getGun() {
+        return weapons.get(weaponIndex);
     }
 
     public Image getWeapon() {

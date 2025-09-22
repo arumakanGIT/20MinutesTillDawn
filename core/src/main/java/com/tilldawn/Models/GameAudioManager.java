@@ -43,7 +43,6 @@ public class GameAudioManager {
     public void playMusic(String path, boolean loop, float volume) {
         stopMusic();
         currentMusic = Gdx.audio.newMusic(Gdx.files.internal(path));
-        System.out.println("music volume " + currentMusic.getVolume());
         currentMusic.setLooping(loop);
         currentMusic.setVolume(volume);
         currentMusic.play();

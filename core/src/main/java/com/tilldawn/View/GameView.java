@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Controller.GameController;
-import com.tilldawn.Models.App;
 import com.tilldawn.Models.AssetManager;
 import com.tilldawn.TillDawn;
 
@@ -83,6 +82,10 @@ public class GameView implements InputProcessor, Screen {
     @Override
     public void resize(int width, int height) {
         camera.setToOrtho(false, width, height);
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 
     //

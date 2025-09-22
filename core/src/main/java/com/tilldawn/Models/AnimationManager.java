@@ -5,9 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.tilldawn.Models.Enums.Gun;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,7 +56,7 @@ public class AnimationManager {
         // walk
 
         Array<TextureRegion> walkFrames = new Array<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i <= 7; i++) {
             Texture tex = AssetManager.getInstance().getTexture(avatarName + "_Walk_" + i + ".png");
             walkFrames.add(new TextureRegion(tex));
         }
@@ -66,10 +65,39 @@ public class AnimationManager {
 
         // run
 
-
+        Array<TextureRegion> runFrames = new Array<>();
+        for (int i = 0; i <= 3; i++) {
+            Texture tex = AssetManager.getInstance().getTexture(avatarName + "_Run_" + i + ".png");
+            runFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> runAnim = new Animation<>(0.1f, runFrames, Animation.PlayMode.LOOP);
+        animations.put("run", runAnim);
 
         // Idle
 
+        Array<TextureRegion> idleFrames = new Array<>();
+        for (int i = 0; i <= 5; i++) {
+            Texture tex = AssetManager.getInstance().getTexture(avatarName + "_Idle_" + i + ".png");
+            idleFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> idleAnim = new Animation<>(0.1f, idleFrames, Animation.PlayMode.LOOP);
+        animations.put("idle", idleAnim);
+    }
+
+    public void loadWeaponsAnimations(Gun gun) {
+        int max = switch (gun) {
+            case SMG -> 4;
+            case Shotgun -> 2;
+            default -> 3;
+        };
+        System.out.println(gun.name());
+        Array<TextureRegion> reloadFrames = new Array<>();
+        for (int i = 0; i <= max; i++) {
+            Texture tex = AssetManager.getInstance().getTexture(gun.name() + "_Reload_" + i + ".png");
+            reloadFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> reloadAnim = new Animation<>(0.1f, reloadFrames, Animation.PlayMode.LOOP);
+        animations.put(gun.name() + "Reload", reloadAnim);
     }
 
     public Animation<TextureRegion> get(String name) {

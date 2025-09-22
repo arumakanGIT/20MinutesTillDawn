@@ -19,6 +19,6 @@ public class GameController {
 
     public void setView(GameView view) {
         this.view = view;
-        this.playerController = new PlayerController(App.getCurrentUser());
+        playerController = new PlayerController(App.getCurrentUser(), view);
     }
 }
