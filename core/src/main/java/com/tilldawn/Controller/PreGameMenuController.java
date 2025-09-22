@@ -157,7 +157,7 @@ public class PreGameMenuController {
                 App.setGame(game);
                 AnimationManager.getInstance().loadAvatarAnimations(menu.getAvatar());
                 AnimationManager.getInstance().loadWeaponsAnimations(menu.getGun());
-                TillDawn.getGame().setScreen(new GameView());
+                TillDawn.getGame().setScreen(new GameView(game));
                 menu.dispose();
             }
         });

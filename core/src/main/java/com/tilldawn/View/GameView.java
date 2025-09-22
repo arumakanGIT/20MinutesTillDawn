@@ -10,16 +10,20 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Controller.GameController;
 import com.tilldawn.Models.AssetManager;
+import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
 
 public class GameView implements InputProcessor, Screen {
+    private final Game game;
     private Stage stage;
     private final GameController controller;
     private final Texture background;
     private final OrthographicCamera camera;
     private final Texture darkMaskEffect;
+    private float timer = 0f;
 
-    public GameView() {
+    public GameView(Game game) {
+        this.game = game;
         this.controller = new GameController();
         controller.setView(this);
 
@@ -40,11 +44,19 @@ public class GameView implements InputProcessor, Screen {
 
     @Override
     public void render(float delta) {
+        if (!game.isGamePaused()) {
+            timer += delta;
+            if (timer >= 1f) {
+                game.decreaseSeconds();
+                timer -= 1f;
+            }
+        }
+
         ScreenUtils.clear(0, 0, 0, 1);
 
         camera.position.set(
-            controller.getPlayerController().getPlayer().getPlayerX(),
-            controller.getPlayerController().getPlayer().getPlayerY(),
+            game.getPlayer().getPlayerX(),
+            game.getPlayer().getPlayerY(),
             0
         );
         camera.update();

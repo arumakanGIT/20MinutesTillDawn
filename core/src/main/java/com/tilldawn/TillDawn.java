@@ -15,7 +15,7 @@ public class TillDawn extends Game {
     @Override
     public void create() {
         UserTable.createTable();
-        GameAudioManager.getInstance().playMusic("Pretty Dungeon LOOP.wav", true, GameAudioManager.musicVolume / 2f);
+        GameAudioManager.getInstance().playMusic("Songs\\Pretty Dungeon LOOP.wav", true, GameAudioManager.musicVolume);
         batch = new SpriteBatch();
         game = this;
 
