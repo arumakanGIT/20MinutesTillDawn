@@ -29,6 +29,8 @@ public class SettingMenu implements AppView {
     private final Button songLeftBut;
     private final CheckBox autoreloadCheckBox;
     private final CheckBox bwCheckBox;
+    private final Button saveButton;
+    private final Button cancelButton;
 
     public SettingMenu() {
         Viewport viewport = new FitViewport(1280, 720);
@@ -74,14 +76,27 @@ public class SettingMenu implements AppView {
         bwCheckBox = new CheckBox("", skin, "on-off2");
 
         AnimationActor tentacle = new AnimationActor(AnimationManager.getInstance().get("witcherMonsterAnim"), 3);
-        tentacle.setPosition(200, 750);
+        tentacle.setPosition(300, 750);
         page1.addActor(tentacle);
+
+        AnimationManager.getInstance().loadAvatarAnimations("Abby.png");
+        AnimationActor abby = new AnimationActor(AnimationManager.getInstance().get("walk"), 3);
+        abby.setPosition(900, 1200);
+        page1.addActor(abby);
+
+        saveButton = new Button(skin, "tick");
+        saveButton.setSize(40, 35);
+        saveButton.setPosition(stage.getViewport().getWorldWidth() - 80, stage.getViewport().getWorldHeight() - 60);
+
+        cancelButton = new Button(skin, "back");
+        cancelButton.setSize(35, 35);
+        cancelButton.setPosition(60, stage.getViewport().getWorldHeight() - 60);
 
         int padTop = 40;
         int sliderW = 300;
         int padRight = 50;
 
-        page1.add(new Label("Game Audio settings", skin, "title_chvy_WHITE_24")).padBottom(padTop * 2).row();
+        page1.add(new Label("Game Audio settings", skin, "title_chvy_WHITE_24")).padTop(padTop).padBottom(padTop * 2).row();
         Table row2 = new Table();
         row2.add(songLeftBut).padRight(padRight);
         row2.add(songs).width(600);
@@ -96,14 +111,14 @@ public class SettingMenu implements AppView {
         row1.add(ambientSlider).padTop(padTop).width(sliderW).row();
         row1.add(footLabel).padTop(padTop).padRight(padRight);
         row1.add(footSlider).padTop(padTop).width(sliderW).row();
-        page1.add(row1).padTop(padTop).row();
+        page1.add(row1).padTop(padTop).padLeft(-padRight * 3).row();
         page1.add(new Label("Game View Settings", skin, "title_chvy_WHITE_24")).padTop(padTop * 2).padBottom(padTop * 2).row();
         Table row3 = new Table();
         row3.add(new Label("Auto Reload", skin)).padRight(padRight);
         row3.add(autoreloadCheckBox).row();
         row3.add(new Label("Black and White", skin)).padTop(padTop).padRight(padRight);
         row3.add(bwCheckBox).padTop(padTop).row();
-        page1.add(row3).row();
+        page1.add(row3).padRight(-padRight * 3).row();
         page1.add(new Label("Game Controller Settings", skin, "title_chvy_WHITE_24")).padTop(padTop * 2).padBottom(padTop * 2).padBottom(600).row();
 
 
@@ -111,6 +126,8 @@ public class SettingMenu implements AppView {
 
         table.add(scrollPane).width(1280).height(720);
         stage.addActor(table);
+        stage.addActor(cancelButton);
+        stage.addActor(saveButton);
         new SettingMenuController(this);
     }
 
@@ -143,6 +160,30 @@ public class SettingMenu implements AppView {
 
     public Slider getMusicSlider() {
         return musicSlider;
+    }
+
+    public Button getSongRightBut() {
+        return songRightBut;
+    }
+
+    public Button getSongLeftBut() {
+        return songLeftBut;
+    }
+
+    public CheckBox getAutoreloadCheckBox() {
+        return autoreloadCheckBox;
+    }
+
+    public CheckBox getBwCheckBox() {
+        return bwCheckBox;
+    }
+
+    public Button getSaveButton() {
+        return saveButton;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
     }
 
     //

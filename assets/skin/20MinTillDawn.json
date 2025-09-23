@@ -123,6 +123,13 @@
 		"up": "start",
 		"down": "start_DOWN",
 		"over": "start_OVER"
+	},
+	"tick": {
+		"up": "tickButton_medium"
+	},
+	"back": {
+		"up": "BackButton_UP",
+		"down": "BackButton_DOWN"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
