@@ -56,6 +56,12 @@
 		"b": 0.30588236,
 		"a": 1
 	},
+	"KEREM": {
+		"r": 1,
+		"g": 0.8627451,
+		"b": 0.7764706,
+		"a": 1
+	},
 	"PINK": {
 		"r": 1,
 		"g": 0.49803922,
@@ -133,6 +139,16 @@
 		"font": "ChvyExprs_WHITE_16",
 		"fontColor": "PINK",
 		"overFontColor": "GREEN1"
+	},
+	"on-off": {
+		"checkboxOn": "checkBox2_ON",
+		"checkboxOff": "checkBox2_OFF",
+		"font": "ChvyExprs_WHITE_24"
+	},
+	"on-off2": {
+		"checkboxOn": "checkBox2_ON2",
+		"checkboxOff": "checkBox2_OFF",
+		"font": "ChvyExprs_WHITE_24"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
@@ -193,6 +209,11 @@
 	"OpSa_WHITE_16": {
 		"font": "OpSa_WHITE_16",
 		"fontColor": "WHITE"
+	},
+	"title_chvy_WHITE_24": {
+		"font": "ChvyExprs_WHITE_24",
+		"fontColor": "KEREM",
+		"background": "titleLabelBackground"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {

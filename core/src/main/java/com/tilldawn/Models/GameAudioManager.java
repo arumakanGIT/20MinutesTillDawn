@@ -15,20 +15,16 @@ public class GameAudioManager {
     public static float footStepVolume = 1f;
     // for music :
     public static float musicVolume = 0f;
-    public static boolean playMusic = false;
     // for ambient :
     public static float ambientVolume = 1f;
 
+    public static boolean playMusic = false;
     private static GameAudioManager instance;
     private List<String> playlist;
     private int playlistIndex;
     private Music currentMusic;
     private final HashMap<String, Sound> sounds = new HashMap<>();
-
-
-    public Music getCurrentMusic() {
-        return currentMusic;
-    }
+    private final HashMap<String, Long> loopingSoundIds = new HashMap<>();
 
     private GameAudioManager() {
     }
@@ -59,8 +55,6 @@ public class GameAudioManager {
     public void resumeMusic() {
         if (currentMusic != null) currentMusic.play();
     }
-
-    private final HashMap<String, Long> loopingSoundIds = new HashMap<>();
 
     public void playSound(String path, boolean loop, float volume) {
         Sound sfx = sounds.get(path);
@@ -106,6 +100,10 @@ public class GameAudioManager {
         String path = playlist.get(playlistIndex++);
         playMusic(path, false, volume);
         currentMusic.setOnCompletionListener(music -> playNextFromPlaylist(volume));
+    }
+
+    public Music getCurrentMusic() {
+        return currentMusic;
     }
 
 }

@@ -48,6 +48,47 @@ public class AnimationManager {
         }
         Animation<TextureRegion> swordShadow = new Animation<>(0.1f, frames);
         animations.put("swordShadow", swordShadow);
+
+        // winged monster
+
+        Array<TextureRegion> wingedMonsterFrames = new Array<>();
+        for (int i = 0; i <= 4; i++) {
+            Texture tex = AssetManager.getInstance().getTexture("WingedMonster_" + i + ".png");
+            wingedMonsterFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> wingedMonsterAnim = new Animation<>(0.1f, wingedMonsterFrames);
+        animations.put("wingedMonsterAnim", wingedMonsterAnim);
+
+        // Witcher Monster
+
+        Array<TextureRegion> witcherMonsterFrames = new Array<>();
+        for (int i = 0; i <= 5; i++) {
+            Texture tex = AssetManager.getInstance().getTexture("T_WitchMonster_" + i + ".png");
+            witcherMonsterFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> witcherMonsterAnim = new Animation<>(0.1f, witcherMonsterFrames);
+        animations.put("witcherMonsterAnim", witcherMonsterAnim);
+
+        // Tentacle
+
+        Array<TextureRegion> TentacleMonsterFrames = new Array<>();
+        for (int i = 0; i <= 3; i++) {
+            Texture tex = AssetManager.getInstance().getTexture("TentacleIdle" + i + ".png");
+            TentacleMonsterFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> tentacleMonsterAnim = new Animation<>(0.3f, TentacleMonsterFrames);
+        animations.put("tentacleMonsterAnim", tentacleMonsterAnim);
+
+        // Crow
+
+        Array<TextureRegion> crowFrames = new Array<>();
+        for (int i = 0; i <= 1; i++) {
+            Texture tex = AssetManager.getInstance().getTexture("T_Crow_" + i + ".png");
+            crowFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> crowAnim = new Animation<>(0.1f, crowFrames);
+        animations.put("crowAnim", crowAnim);
+
     }
 
     public void loadAvatarAnimations(String avatarName) {
