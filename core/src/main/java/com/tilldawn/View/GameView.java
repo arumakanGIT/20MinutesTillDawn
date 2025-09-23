@@ -15,7 +15,6 @@ import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
 
 public class GameView implements InputProcessor, Screen {
-
     private final Game game;
     private Stage stage;
     private final GameController controller;
@@ -106,6 +105,15 @@ public class GameView implements InputProcessor, Screen {
         camera.setToOrtho(false, width, height);
     }
 
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (!game.isGamePaused())
+            controller.getBulletController().shootBulletHandle(controller.getPlayerController().getGunX(),
+                controller.getPlayerController().getGunY(),
+                controller.getPlayerController().getRawAngle());
+        return false;
+    }
+
     //
 
     public OrthographicCamera getCamera() {
@@ -134,11 +142,6 @@ public class GameView implements InputProcessor, Screen {
 
     @Override
     public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         return false;
     }
 

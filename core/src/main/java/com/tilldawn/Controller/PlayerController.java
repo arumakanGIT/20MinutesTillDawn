@@ -20,6 +20,9 @@ public class PlayerController {
     private final static float scale = 2.5f;
     private boolean isReloading = false;
     private final GameView view;
+    private float gunX;
+    private float gunY;
+    private float rawAngle;
 
     public PlayerController(User player, GameView gameView) {
         this.player = player;
@@ -61,7 +64,7 @@ public class PlayerController {
         float dx = mousePos.x - player.getPlayerX();
         float dy = mousePos.y - player.getPlayerY();
 
-        float rawAngle = (float) Math.toDegrees(Math.atan2(dy, dx));
+        rawAngle = (float) Math.toDegrees(Math.atan2(dy, dx));
         float angleDraw = rawAngle;
 
         boolean flipGun = false;
@@ -74,11 +77,11 @@ public class PlayerController {
 
         float playerCenterX = player.getPlayerX();
         float playerCenterY = player.getPlayerY();
-        float offsetX = (float) Math.cos(Math.toRadians(rawAngle)) * distanceFromPlayer;
-        float offsetY = (float) Math.sin(Math.toRadians(rawAngle)) * distanceFromPlayer;
+        float offsetX = (float) Math.cos(Math.toRadians(rawAngle)) * distanceFromPlayer + 15;
+        float offsetY = (float) Math.sin(Math.toRadians(rawAngle)) * distanceFromPlayer + 30;
 
-        float gunX = playerCenterX + offsetX;
-        float gunY = playerCenterY + offsetY;
+        gunX = playerCenterX + offsetX;
+        gunY = playerCenterY + offsetY;
 
         TillDawn.getGame().getBatch().draw(
             playerFrame,
@@ -92,8 +95,8 @@ public class PlayerController {
 
         TillDawn.getGame().getBatch().draw(
             gunFrame,
-            gunX + 15,
-            gunY + 30,
+            gunX,
+            gunY,
             gunFrame.getRegionWidth() / 2f,
             gunFrame.getRegionHeight() / 2f,
             gunFrame.getRegionWidth() * scale,
@@ -141,7 +144,15 @@ public class PlayerController {
             player.setMoveState(Move.idle);
     }
 
-    public User getPlayer() {
-        return player;
+    public float getGunX() {
+        return gunX;
+    }
+
+    public float getGunY() {
+        return gunY;
+    }
+
+    public float getRawAngle() {
+        return rawAngle;
     }
 }

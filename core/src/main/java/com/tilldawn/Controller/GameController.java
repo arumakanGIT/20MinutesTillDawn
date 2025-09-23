@@ -14,11 +14,13 @@ import com.tilldawn.View.PauseMenu;
 public class GameController {
     private GameView view;
     private PlayerController playerController;
+    private BulletController bulletController;
 
     public void updateGame() {
         if (view != null) {
             inputHandler();
             playerController.update();
+            bulletController.update();
         }
     }
 
@@ -62,8 +64,13 @@ public class GameController {
         return playerController;
     }
 
+    public BulletController getBulletController() {
+        return bulletController;
+    }
+
     public void setView(GameView view) {
         this.view = view;
         playerController = new PlayerController(App.getCurrentUser(), view);
+        bulletController = new BulletController(view.getGame().getPlayer().getWeapon());
     }
 }
