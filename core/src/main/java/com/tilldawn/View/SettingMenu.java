@@ -2,6 +2,7 @@ package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
@@ -15,12 +16,13 @@ import com.tilldawn.Models.AssetManager;
 import com.tilldawn.Models.GameAudioManager;
 import com.tilldawn.TillDawn;
 
+import java.util.AbstractSet;
 import java.util.ArrayList;
 
 public class SettingMenu implements AppView {
 
     private final Stage stage;
-
+    private final Texture background;
     private final Slider musicSlider;
     private final Slider ambientSlider;
     private final Slider footSlider;
@@ -39,6 +41,7 @@ public class SettingMenu implements AppView {
         Table table = new Table();
         table.setFillParent(true);
         Skin skin = AssetManager.getInstance().getSkin();
+        background = AssetManager.getInstance().getTexture("starsBackground.png");
 
         Table page1 = new Table();
         page1.setSize(1280, 720 * 3);
@@ -135,6 +138,9 @@ public class SettingMenu implements AppView {
     public void render(float delta) {
         ScreenUtils.clear(new Color(39f / 255f, 33f / 255f, 42f / 255f, 1f));
         TillDawn.getGame().getBatch().setProjectionMatrix(stage.getCamera().combined);
+        TillDawn.getGame().getBatch().begin();
+        TillDawn.getGame().getBatch().draw(background, 0, 0, stage.getViewport().getWorldWidth(), stage.getViewport().getWorldHeight());
+        TillDawn.getGame().getBatch().end();
         stage.act(delta);
         stage.draw();
     }
