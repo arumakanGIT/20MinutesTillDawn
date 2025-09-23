@@ -73,8 +73,9 @@ public class SettingMenu implements AppView {
         autoreloadCheckBox = new CheckBox("", skin, "on-off");
         bwCheckBox = new CheckBox("", skin, "on-off2");
 
-        AnimationActor tentacle = new AnimationActor(AnimationManager.getInstance().get("witcherMonsterAnim"));
-        page1.add(tentacle).row();
+        AnimationActor tentacle = new AnimationActor(AnimationManager.getInstance().get("witcherMonsterAnim"), 3);
+        tentacle.setPosition(200, 750);
+        page1.addActor(tentacle);
 
         int padTop = 40;
         int sliderW = 300;

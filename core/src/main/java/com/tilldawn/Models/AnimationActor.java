@@ -20,6 +20,12 @@ public class AnimationActor extends Actor {
         setSize(firstFrame.getRegionWidth(), firstFrame.getRegionHeight());
     }
 
+    public AnimationActor(Animation<TextureRegion> animation, float scale) {
+        this.animation = animation;
+        TextureRegion firstFrame = animation.getKeyFrame(0);
+        setSize(firstFrame.getRegionWidth() * scale, firstFrame.getRegionHeight() * scale);
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
