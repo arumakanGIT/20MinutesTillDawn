@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class UserTable {
-    public static void createTable() {
+    public static void createUserTable() {
         try (Connection conn = Database.connect();
              Statement stmt = conn.createStatement()) {
 
@@ -26,5 +26,13 @@ public class UserTable {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
+    }
+
+    public static void createGameInputTable() {
+
+    }
+
+    public static void createSettingTable() {
+
     }
 }

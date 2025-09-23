@@ -146,7 +146,7 @@ public class UserDAO {
                     case "Shotgun" -> Gun.Shotgun;
                     default -> Gun.SMG;
                 };
-                return new User(
+                User target = new User(
                     rs.getInt("id"),
                     rs.getString("username"),
                     rs.getString("password"),
@@ -159,6 +159,8 @@ public class UserDAO {
                     rs.getInt("time"),
                     rs.getInt("score")
                 );
+                target.setGameInputSetting();
+                return target;
             }
         } catch (Exception e) {
             System.out.println("Error fetching user: " + e.getMessage());

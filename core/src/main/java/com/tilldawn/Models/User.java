@@ -20,6 +20,7 @@ public class User {
     private int playerX;
     private int playerY;
     private Move moveState = Move.walk;
+    private GameInputSetting gameInputSetting;
 
     public User(int id, String username, String password, String salt, int securityQuestionID, String answer,
                 String avatar, Gun weapon, int kill, int time, int score) {
@@ -142,6 +143,14 @@ public class User {
 
     public void setMoveState(Move moveState) {
         this.moveState = moveState;
+    }
+
+    public GameInputSetting getGameInputSetting() {
+        return gameInputSetting;
+    }
+
+    public void setGameInputSetting(GameInputSetting gameInputSetting) {
+        this.gameInputSetting = gameInputSetting;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.tilldawn.Models;
 
+import com.badlogic.gdx.Input;
+
 public class Game {
     private int minutes;
     private int seconds;
