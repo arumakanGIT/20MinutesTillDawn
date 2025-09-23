@@ -155,4 +155,9 @@ public class PlayerController {
     public float getRawAngle() {
         return rawAngle;
     }
+
+    public int getFacingRight() {
+        return facingRight;
+    }
+
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -107,10 +108,20 @@ public class GameView implements InputProcessor, Screen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (!game.isGamePaused())
-            controller.getBulletController().shootBulletHandle(controller.getPlayerController().getGunX(),
+        if (!game.isGamePaused()) {
+            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            getCamera().unproject(mousePos);
+
+            float dx = mousePos.x - controller.getPlayerController().getGunX();
+            float dy = mousePos.y - controller.getPlayerController().getGunY();
+
+            float angle = (float) Math.toDegrees(Math.atan2(dy, dx));
+
+            controller.getBulletController().shootBulletHandle(
+                controller.getPlayerController().getGunX(),
                 controller.getPlayerController().getGunY(),
-                controller.getPlayerController().getRawAngle());
+                angle);
+        }
         return false;
     }
 
