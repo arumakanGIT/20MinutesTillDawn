@@ -159,7 +159,7 @@ public class UserDAO {
                     rs.getInt("time"),
                     rs.getInt("score")
                 );
-                target.setGameInputSetting();
+                target.setGameInputSetting(new GameInputSetting());
                 return target;
             }
         } catch (Exception e) {

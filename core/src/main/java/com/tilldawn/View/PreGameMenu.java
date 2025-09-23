@@ -40,14 +40,14 @@ public class PreGameMenu implements AppView {
     private final Button avatarLeft;
     private final Button weaponRight;
     private final Button weaponLeft;
-    private Image avatar;
-    private Image avatarText;
-    private Image weapon;
-    private Image weaponText;
-    private Image num1;
-    private Image num2;
-    private Image num3;
-    private Image num4;
+    private final Image avatar;
+    private final Image avatarText;
+    private final Image weapon;
+    private final Image weaponText;
+    private final Image num1;
+    private final Image num2;
+    private final Image num3;
+    private final Image num4;
     private final Button num1Up;
     private final Button num2Up;
     private final Button num3Up;
@@ -329,8 +329,7 @@ public class PreGameMenu implements AppView {
             for (FileHandle file : folder.list())
                 if (!file.isDirectory())
                     avatars.add(file.name());
-        }
-         else
+        } else
             System.out.println("Path not found");
 
     }

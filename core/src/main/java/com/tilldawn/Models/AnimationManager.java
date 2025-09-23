@@ -87,7 +87,18 @@ public class AnimationManager {
             crowFrames.add(new TextureRegion(tex));
         }
         Animation<TextureRegion> crowAnim = new Animation<>(0.1f, crowFrames);
-        animations.put("crowAnim", crowAnim);
+        animations.put("BoomerAnim", crowAnim);
+
+        // Boomer
+
+        Array<TextureRegion> boomerFrames = new Array<>();
+        for (int i = 0; i <= 2; i++) {
+            Texture tex = AssetManager.getInstance().getTexture("Boomer_" + i + ".png");
+            boomerFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> BoomerAnim = new Animation<>(0.1f, boomerFrames);
+        animations.put("BoomerAnim", BoomerAnim);
+
 
     }
 

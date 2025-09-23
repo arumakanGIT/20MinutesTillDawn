@@ -1,6 +1,7 @@
 package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,6 +15,7 @@ import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
 
 public class GameView implements InputProcessor, Screen {
+
     private final Game game;
     private Stage stage;
     private final GameController controller;
@@ -40,19 +42,15 @@ public class GameView implements InputProcessor, Screen {
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(this);
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
+
     }
 
     @Override
     public void render(float delta) {
-        if (!game.isGamePaused()) {
-            timer += delta;
-            if (timer >= 1f) {
-                game.decreaseSeconds();
-                timer -= 1f;
-            }
-        }
-
         ScreenUtils.clear(0, 0, 0, 1);
 
         camera.position.set(
@@ -73,7 +71,17 @@ public class GameView implements InputProcessor, Screen {
             Gdx.graphics.getWidth(),
             Gdx.graphics.getHeight()
         );
+
+
+        if (!game.isGamePaused()) {
+            timer += delta;
+            if (timer >= 1f) {
+                game.decreaseSeconds();
+                timer -= 1f;
+            }
+        }
         controller.updateGame();
+
         TillDawn.getGame().getBatch().draw(
             darkMaskEffect,
             camera.position.x - Gdx.graphics.getWidth() / 2f,
@@ -81,6 +89,7 @@ public class GameView implements InputProcessor, Screen {
             Gdx.graphics.getWidth(),
             Gdx.graphics.getHeight()
         );
+
         TillDawn.getGame().getBatch().end();
         stage.act(delta);
         stage.draw();
@@ -97,8 +106,18 @@ public class GameView implements InputProcessor, Screen {
         camera.setToOrtho(false, width, height);
     }
 
+    //
+
     public OrthographicCamera getCamera() {
         return camera;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     //

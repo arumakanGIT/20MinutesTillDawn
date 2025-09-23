@@ -28,10 +28,10 @@ public class PlayerController {
     }
 
     public void update() {
-        handlePlayerInput();
-
-        stateTime += Gdx.graphics.getDeltaTime();
-
+        if (!view.getGame().isGamePaused()) {
+            handlePlayerInput();
+            stateTime += Gdx.graphics.getDeltaTime();
+        }
         TextureRegion playerFrame;
 
         if (player.getMoveState() == Move.idle) {
@@ -44,23 +44,16 @@ public class PlayerController {
 
         float drawW = playerFrame.getRegionWidth() * scale, drawH = playerFrame.getRegionHeight() * scale;
 
-        TillDawn.getGame().getBatch().draw(
-            playerFrame,
-            player.getPlayerX(),
-            player.getPlayerY(),
-            drawW / 2,
-            drawH / 2,
-            drawW,
-            drawH,
-            facingRight, 1f, 0f);
+        // draw player
 
         TextureRegion gunFrame;
         if (isReloading) {
             Animation<TextureRegion> reload = AnimationManager.getInstance().get(gun.name() + "Reload");
             gunFrame = reload.getKeyFrame(stateTime, false);
             System.out.println("in reloading animation" + stateTime);
-            if (reload.isAnimationFinished(stateTime))
+            if (reload.isAnimationFinished(stateTime)) {
                 isReloading = false;
+            }
         } else gunFrame = AnimationManager.getInstance().get(gun.name() + "Reload").getKeyFrame(0);
 
         Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -87,6 +80,15 @@ public class PlayerController {
         float gunX = playerCenterX + offsetX;
         float gunY = playerCenterY + offsetY;
 
+        TillDawn.getGame().getBatch().draw(
+            playerFrame,
+            player.getPlayerX(),
+            player.getPlayerY(),
+            drawW / 2,
+            drawH / 2,
+            drawW,
+            drawH,
+            facingRight, 1f, 0f);
 
         TillDawn.getGame().getBatch().draw(
             gunFrame,
