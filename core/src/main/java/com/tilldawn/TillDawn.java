@@ -9,12 +9,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tilldawn.Models.*;
+import com.tilldawn.View.GameView;
 import com.tilldawn.View.LoginMenu;
 import com.tilldawn.View.MainMenu;
 
 public class TillDawn extends Game {
     private static SpriteBatch batch;
     private static TillDawn game;
+
+    private static GameView gameView;
 
     @Override
     public void create() {
@@ -65,5 +68,13 @@ public class TillDawn extends Game {
         Cursor cursor = Gdx.graphics.newCursor(pixmap, 0, 0);
         Gdx.graphics.setCursor(cursor);
         pixmap.dispose();
+    }
+
+    public static GameView getGameView() {
+        return gameView;
+    }
+
+    public static void setGameView(GameView gameView) {
+        TillDawn.gameView = gameView;
     }
 }

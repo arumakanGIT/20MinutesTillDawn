@@ -455,6 +455,15 @@ warningLabel
   orig: 24, 25
   offset: 0, 0
   index: -1
+window on
+  rotate: false
+  xy: 401, 396
+  size: 17, 27
+  split: 8, 8, 9, 9
+  pad: 4, 4, 6, 6
+  orig: 17, 27
+  offset: 0, 0
+  index: -1
 window1
   rotate: false
   xy: 1, 673

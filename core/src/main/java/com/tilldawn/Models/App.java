@@ -7,17 +7,6 @@ import java.util.ArrayList;
 public class App {
     private static Menu currentMenu;
     private static User currentUser;
-    private static final ArrayList<User> users = new ArrayList<>();
-
-    public static Game getGame() {
-        return game;
-    }
-
-    public static void setGame(Game game) {
-        App.game = game;
-    }
-
-    private static Game game;
 
     public static Menu getCurrentMenu() {
         return currentMenu;

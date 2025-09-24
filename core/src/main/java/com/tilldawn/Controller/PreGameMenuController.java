@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.tilldawn.Models.AnimationManager;
 import com.tilldawn.Models.App;
 import com.tilldawn.Models.Game;
+import com.tilldawn.Models.Timer;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.GameView;
 import com.tilldawn.View.MainMenu;
@@ -143,13 +144,15 @@ public class PreGameMenuController {
             public void clicked(InputEvent event, float x, float y) {
                 App.getCurrentUser().setAvatar(menu.getAvatar());
                 App.getCurrentUser().setWeapon(menu.getGun());
-                Game game = new Game((menu.getTime()[0] - '0') * 10 + menu.getTime()[1] - '0',
-                    (menu.getTime()[2] - '0') * 10 + menu.getTime()[3] - '0'
-                    , App.getCurrentUser());
-                App.setGame(game);
+                Game game = new Game(App.getCurrentUser());
                 AnimationManager.getInstance().loadAvatarAnimations(menu.getAvatar());
                 AnimationManager.getInstance().loadWeaponsAnimations(menu.getGun());
-                TillDawn.getGame().setScreen(new GameView(game));
+                GameView view = new GameView(game);
+                TillDawn.setGameView(view);
+                game.setTimer(new Timer(
+                    (menu.getTime()[0] - '0') * 10 + menu.getTime()[1] - '0',
+                    (menu.getTime()[2] - '0') * 10 + menu.getTime()[3] - '0'));
+                TillDawn.getGame().setScreen(view);
                 menu.dispose();
             }
         });

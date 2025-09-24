@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Controller.GameController;
+import com.tilldawn.Models.App;
 import com.tilldawn.Models.AssetManager;
 import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
@@ -23,7 +24,6 @@ public class GameView implements InputProcessor, Screen {
     private final Texture background;
     private final OrthographicCamera camera;
     private final Texture darkMaskEffect;
-    private float timer = 0f;
 
     public GameView(Game game) {
         stage = new Stage();
@@ -31,9 +31,9 @@ public class GameView implements InputProcessor, Screen {
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
+        this.game = game;
 
         TillDawn.setCursor("CursorSprite.png");
-        this.game = game;
         this.controller = new GameController();
         controller.setView(this);
 
@@ -57,12 +57,20 @@ public class GameView implements InputProcessor, Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
 
-        camera.position.set(
-            game.getPlayer().getRect().getX(),
-            game.getPlayer().getRect().getY(),
-            0
-        );
-        camera.update();
+        if (!game.isGamePaused()) {
+            game.getTimer().update();
+            camera.position.set(
+                game.getPlayer().getRect().getX(),
+                game.getPlayer().getRect().getY(),
+                0
+            );
+            camera.update();
+        }
+
+        if (game.isGameFinished()) {
+            TillDawn.getGame().setScreen(new MainMenu());
+            dispose();
+        }
 
         TillDawn.getGame().getBatch().setProjectionMatrix(camera.combined);
 
@@ -76,14 +84,6 @@ public class GameView implements InputProcessor, Screen {
             Gdx.graphics.getHeight()
         );
 
-
-        if (!game.isGamePaused()) {
-            timer += delta;
-            if (timer >= 1f) {
-                game.decreaseSeconds();
-                timer -= 1f;
-            }
-        }
         controller.updateGame();
 
         TillDawn.getGame().getBatch().draw(

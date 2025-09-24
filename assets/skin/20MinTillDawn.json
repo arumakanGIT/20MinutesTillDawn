@@ -366,6 +366,13 @@
 		"background": "window4",
 		"titleFont": "ChvyExprs_WHITE_24",
 		"stageBackground": "stageBackground"
+	},
+	"win4": {
+		"background": "window on",
+		"titleFont": "ChvyExprs_WHITE_24_boarder"
+	},
+	"empty": {
+		"titleFont": "ChvyExprs_WHITE_16"
 	}
 }
 }
