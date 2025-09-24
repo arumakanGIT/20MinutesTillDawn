@@ -58,8 +58,8 @@ public class GameView implements InputProcessor, Screen {
         ScreenUtils.clear(0, 0, 0, 1);
 
         camera.position.set(
-            game.getPlayer().getPlayerX(),
-            game.getPlayer().getPlayerY(),
+            game.getPlayer().getRect().getX(),
+            game.getPlayer().getRect().getY(),
             0
         );
         camera.update();

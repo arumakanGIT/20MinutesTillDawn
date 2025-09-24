@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.tilldawn.Models.AnimationManager;
+import com.tilldawn.Models.CollisionRect;
 import com.tilldawn.Models.Enums.Gun;
 import com.tilldawn.Models.Enums.Move;
+import com.tilldawn.Models.GameInputSetting;
 import com.tilldawn.Models.User;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.GameView;
@@ -22,11 +24,15 @@ public class PlayerController {
     private final GameView view;
     private float gunX;
     private float gunY;
+    private final GameInputSetting gameInputSetting;
+    private final CollisionRect rect;
 
     public PlayerController(User player, GameView gameView) {
         this.player = player;
         gun = player.getWeapon();
         this.view = gameView;
+        gameInputSetting = player.getGameInputSetting();
+        rect = player.getRect();
     }
 
     public void update() {
@@ -60,8 +66,8 @@ public class PlayerController {
 
         Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         view.getCamera().unproject(mousePos);
-        float dx = mousePos.x - player.getPlayerX();
-        float dy = mousePos.y - player.getPlayerY();
+        float dx = mousePos.x - rect.getX();
+        float dy = mousePos.y - rect.getY();
 
         float rawAngle = (float) Math.toDegrees(Math.atan2(dy, dx));
         float angleDraw = rawAngle;
@@ -74,8 +80,8 @@ public class PlayerController {
 
         float distanceFromPlayer = 20f;
 
-        float playerCenterX = player.getPlayerX();
-        float playerCenterY = player.getPlayerY();
+        float playerCenterX = rect.getX();
+        float playerCenterY = rect.getY();
         float offsetX = (float) Math.cos(Math.toRadians(rawAngle)) * distanceFromPlayer + 15;
         float offsetY = (float) Math.sin(Math.toRadians(rawAngle)) * distanceFromPlayer + 30;
 
@@ -84,8 +90,8 @@ public class PlayerController {
 
         TillDawn.getGame().getBatch().draw(
             playerFrame,
-            player.getPlayerX(),
-            player.getPlayerY(),
+            rect.getX(),
+            rect.getY(),
             drawW / 2,
             drawH / 2,
             drawW,
@@ -113,21 +119,21 @@ public class PlayerController {
             ? Move.run.getSpeed()
             : Move.walk.getSpeed();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            player.setPlayerY(player.getPlayerY() - speed);
+        if (Gdx.input.isKeyPressed(gameInputSetting.getUp())) {
+            rect.move(rect.getX(), rect.getY() - speed);
             moving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            player.setPlayerY(player.getPlayerY() + speed);
+        if (Gdx.input.isKeyPressed(gameInputSetting.getDown())) {
+            rect.move(rect.getX(), rect.getY() + speed);
             moving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            player.setPlayerX(player.getPlayerX() - speed);
+        if (Gdx.input.isKeyPressed(gameInputSetting.getLeft())) {
+            rect.move(rect.getX() - speed, rect.getY());
             facingRight = -1;
             moving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            player.setPlayerX(player.getPlayerX() + speed);
+        if (Gdx.input.isKeyPressed(gameInputSetting.getRight())) {
+            rect.move(rect.getX() + speed, rect.getY());
             facingRight = 1;
             moving = true;
         }
@@ -136,7 +142,7 @@ public class PlayerController {
             isReloading = true;
             stateTime = 0f;
             view.getController().getBulletController().reload();
-            view.getController().getBulletController().updateLabel();
+            view.getController().getBulletController().updateAmmoLabel();
         }
 
         if (moving)

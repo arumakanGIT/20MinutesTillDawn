@@ -22,7 +22,8 @@ public class BulletController {
     private int amount;
     private float lastShotTime = 0f;
     private final GameView view;
-    private final Label remind;
+    private final Label ammo;
+    private final Label kill;
 
     public BulletController(Gun gun, GameView view) {
         this.view = view;
@@ -30,17 +31,42 @@ public class BulletController {
         MAX_amount = gun.getAmount();
         amount = MAX_amount;
         Skin skin = AssetManager.getInstance().getSkin();
-        Table table = new Table();
-        table.align(Align.top);
+
+        // Ammo
+
+        Table ammoTable = new Table();
+        ammoTable.align(Align.top);
         float scale = 1.5f;
-        Texture texture = AssetManager.getInstance().getTexture("T_AmmoIcon.png");
-        Image image = new Image(texture);
-        table.add(image).size(texture.getWidth() * scale, texture.getHeight() * scale).padRight(30);
-        remind = new Label(String.format("%02d", amount) + "/" + String.format("%02d", amount),
-            skin, "chvyExprs_GREEN_24");
-        table.add(remind);
-        table.setPosition(table.getPrefWidth() / 2 + 50, view.getStage().getHeight() - 100);
-        view.getStage().addActor(table);
+        Texture ammoTexture = AssetManager.getInstance().getTexture("T_AmmoIcon.png");
+        Image ammoImage = new Image(ammoTexture);
+        ammoTable.add(ammoImage).size(ammoTexture.getWidth() * scale,
+                ammoTexture.getHeight() * scale)
+            .padRight(30);
+        ammo = new Label(
+            String.format("%02d", amount) + "/" + String.format("%02d", amount),
+            skin,
+            "chvyExprs_GREEN_24");
+        ammoTable.add(ammo);
+        ammoTable.setPosition(ammoTable.getPrefWidth() / 2 + 50, view.getStage().getHeight() - 100);
+        view.getStage().addActor(ammoTable);
+
+        // kill
+
+        Table killTable = new Table();
+        killTable.align(Align.topRight);
+        kill = new Label(
+            String.format("%d", view.getGame().getPlayer().getKill()),
+            skin,
+            "chvyExprs_GREEN_24");
+        killTable.add(kill).padRight(30);
+        Texture killTexture = AssetManager.getInstance().getTexture("Icon_DarkArts.png");
+        Image killImage = new Image(killTexture);
+        killTable.add(killImage).size(killTexture.getWidth() * scale + 1,
+            killTexture.getHeight() * scale + 1);
+        killTable.setPosition(view.getStage().getWidth() - 50,
+            view.getStage().getHeight() - 100);
+        killImage.setWidth(ammoTable.getPrefWidth());
+        view.getStage().addActor(killTable);
     }
 
     public void shootBulletHandle(float gunX, float gunY, float angle) {
@@ -50,7 +76,7 @@ public class BulletController {
             bullets.add(new Bullet(gunX, gunY, angle, gun.getSpeed(), gun.getLifeTime(), gun.getAge()));
             amount -= 1;
             lastShotTime = currentTime;
-            updateLabel();
+            updateAmmoLabel();
         }
     }
 
@@ -63,7 +89,7 @@ public class BulletController {
             }
 
         for (Bullet b : bullets) {
-            TillDawn.getGame().getBatch().draw(b.getTexture(), b.getX(), b.getY());
+            TillDawn.getGame().getBatch().draw(b.getTexture(), b.getRect().getX(), b.getRect().getY());
         }
     }
 
@@ -71,8 +97,12 @@ public class BulletController {
         MAX_amount += increase;
     }
 
-    public void updateLabel() {
-        remind.setText(String.format("%02d", amount) + "/" + String.format("%02d", MAX_amount));
+    public void updateAmmoLabel() {
+        ammo.setText(String.format("%02d", amount) + "/" + String.format("%02d", MAX_amount));
+    }
+
+    public void updateKillLabel() {
+        kill.setText(view.getGame().getPlayer().getKill());
     }
 
     public void reload() {

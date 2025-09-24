@@ -1,6 +1,5 @@
 package com.tilldawn.Models;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tilldawn.Models.Enums.Gun;
 import com.tilldawn.Models.Enums.Move;
 
@@ -17,10 +16,9 @@ public class User {
     private int health = 100;
     private int time;
     private int score;
-    private int playerX;
-    private int playerY;
     private Move moveState = Move.walk;
     private GameInputSetting gameInputSetting;
+    private final CollisionRect rect;
 
     public User(int id, String username, String password, String salt, int securityQuestionID, String answer,
                 String avatar, Gun weapon, int kill, int time, int score) {
@@ -35,6 +33,7 @@ public class User {
         this.kill = kill;
         this.time = time;
         this.score = score;
+        rect = new CollisionRect(0, 0, 0, 0);
     }
 
     // setter
@@ -69,6 +68,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setMoveState(Move moveState) {
+        this.moveState = moveState;
+    }
+
+    public void setGameInputSetting(GameInputSetting gameInputSetting) {
+        this.gameInputSetting = gameInputSetting;
     }
 
     // getter
@@ -121,36 +128,15 @@ public class User {
         return answer;
     }
 
-    public int getPlayerX() {
-        return playerX;
-    }
-
-    public void setPlayerX(int playerX) {
-        this.playerX = playerX;
-    }
-
-    public int getPlayerY() {
-        return playerY;
-    }
-
-    public void setPlayerY(int playerY) {
-        this.playerY = playerY;
-    }
-
     public Move getMoveState() {
         return moveState;
-    }
-
-    public void setMoveState(Move moveState) {
-        this.moveState = moveState;
     }
 
     public GameInputSetting getGameInputSetting() {
         return gameInputSetting;
     }
 
-    public void setGameInputSetting(GameInputSetting gameInputSetting) {
-        this.gameInputSetting = gameInputSetting;
+    public CollisionRect getRect() {
+        return rect;
     }
-
 }
