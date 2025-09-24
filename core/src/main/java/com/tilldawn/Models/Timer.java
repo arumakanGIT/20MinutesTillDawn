@@ -120,4 +120,8 @@ public class Timer {
         this.accumulator = 0f;
         this.finished = false;
     }
+
+    public void setPauseMode(boolean state) {
+        timerWindow.setVisible(!state);
+    }
 }

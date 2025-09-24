@@ -18,12 +18,15 @@ import java.util.ArrayList;
 public class BulletController {
     private final ArrayList<Bullet> bullets = new ArrayList<>();
     private final Gun gun;
+    private final Table ammoTable;
+    private final Table killTable;
     private int MAX_amount;
     private int amount;
     private float lastShotTime = 0f;
     private final GameView view;
     private final Label ammo;
     private final Label kill;
+    private boolean pauseState = false;
 
     public BulletController(Gun gun, GameView view) {
         this.view = view;
@@ -34,7 +37,7 @@ public class BulletController {
 
         // Ammo
 
-        Table ammoTable = new Table();
+        ammoTable = new Table();
         ammoTable.align(Align.top);
         float scale = 1.5f;
         Texture ammoTexture = AssetManager.getInstance().getTexture("T_AmmoIcon.png");
@@ -52,7 +55,7 @@ public class BulletController {
 
         // kill
 
-        Table killTable = new Table();
+        killTable = new Table();
         killTable.align(Align.topRight);
         kill = new Label(
             String.format("%d", view.getGame().getPlayer().getKill()),
@@ -81,7 +84,7 @@ public class BulletController {
     }
 
     public void update() {
-        if (!view.getGame().isGamePaused())
+        if (view.getGame().isGamePaused())
             for (int i = bullets.size() - 1; i >= 0; i--) {
                 bullets.get(i).update();
                 if (!bullets.get(i).isActive())
@@ -107,5 +110,10 @@ public class BulletController {
 
     public void reload() {
         amount = MAX_amount;
+    }
+
+    public void setPauseMode(boolean state) {
+        ammoTable.setVisible(!state);
+        killTable.setVisible(!state);
     }
 }

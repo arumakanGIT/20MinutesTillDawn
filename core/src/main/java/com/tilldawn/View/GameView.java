@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Controller.GameController;
-import com.tilldawn.Models.App;
 import com.tilldawn.Models.AssetManager;
 import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
@@ -57,8 +56,7 @@ public class GameView implements InputProcessor, Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
 
-        if (!game.isGamePaused()) {
-            game.getTimer().update();
+        if (game.isGamePaused()) {
             camera.position.set(
                 game.getPlayer().getRect().getX(),
                 game.getPlayer().getRect().getY(),
@@ -101,7 +99,7 @@ public class GameView implements InputProcessor, Screen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (!game.isGamePaused() && !controller.getPlayerController().isReloading()) {
+        if (game.isGamePaused() && !controller.getPlayerController().isReloading()) {
             float gunX = controller.getPlayerController().getGunX();
             float gunY = controller.getPlayerController().getGunY() + 20;
 

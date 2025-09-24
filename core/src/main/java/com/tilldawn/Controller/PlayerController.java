@@ -36,7 +36,7 @@ public class PlayerController {
     }
 
     public void update() {
-        if (!view.getGame().isGamePaused()) {
+        if (view.getGame().isGamePaused()) {
             handlePlayerInput();
             stateTime += Gdx.graphics.getDeltaTime();
         }
@@ -162,5 +162,4 @@ public class PlayerController {
     public boolean isReloading() {
         return isReloading;
     }
-
 }

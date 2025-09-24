@@ -21,11 +21,16 @@ public class GameController {
             inputHandler();
             playerController.update();
             bulletController.update();
+            if (view.getGame().isGamePaused())
+                view.getGame().getTimer().update();
         }
     }
 
     private void inputHandler() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && !view.getGame().isGamePaused()) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && view.getGame().isGamePaused()) {
+            bulletController.setPauseMode(true);
+            view.getGame().getTimer().setPauseMode(true);
+
             view.getGame().setGamePaused(true);
             TillDawn.setCursor("Mouse.png");
             PauseMenu pauseMenu = new PauseMenu(AssetManager.getInstance().getSkin());
@@ -35,6 +40,8 @@ public class GameController {
                     pauseMenu.hide();
                     view.getGame().setGamePaused(false);
                     TillDawn.setCursor("CursorSprite.png");
+                    bulletController.setPauseMode(false);
+                    view.getGame().getTimer().setPauseMode(false);
                 }
             });
 
@@ -58,7 +65,6 @@ public class GameController {
             });
 
             pauseMenu.show(view.getStage());
-
         }
     }
 

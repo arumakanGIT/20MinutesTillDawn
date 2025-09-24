@@ -15,7 +15,7 @@ public class Game {
     }
 
     public boolean isGamePaused() {
-        return gamePaused;
+        return !gamePaused;
     }
 
     public void setGamePaused(boolean gamePaused) {
