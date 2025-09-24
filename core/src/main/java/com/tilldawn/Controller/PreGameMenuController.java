@@ -2,16 +2,11 @@ package com.tilldawn.Controller;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.tilldawn.Models.AnimationManager;
-import com.tilldawn.Models.App;
-import com.tilldawn.Models.Game;
-import com.tilldawn.Models.Timer;
+import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.GameView;
 import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.PreGameMenu;
-
-import java.util.Arrays;
 
 public class PreGameMenuController {
     private final PreGameMenu menu;
@@ -28,6 +23,7 @@ public class PreGameMenuController {
         menu.getAvatarLeft().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.setIndex((menu.getIndex() + menu.getAvatars().size() - 1) % menu.getAvatars().size());
+                App.getCurrentUser().setAvatar(menu.getAvatar());
                 menu.update();
             }
         });
@@ -37,6 +33,7 @@ public class PreGameMenuController {
         menu.getAvatarRight().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.setIndex((menu.getIndex() + menu.getAvatars().size() + 1) % menu.getAvatars().size());
+                App.getCurrentUser().setAvatar(menu.getAvatar());
                 menu.update();
             }
         });
@@ -50,6 +47,7 @@ public class PreGameMenuController {
                 menu.getWeapon().setSize(menu.getWeapon().getPrefWidth(), menu.getWeapon().getPrefHeight());
                 menu.getWeapon().setPosition(PreGameMenu.weaponX - menu.getWeapon().getPrefWidth() / 2, PreGameMenu.weaponY - menu.getWeapon().getPrefHeight() / 2);
                 menu.getWeaponText().setSize(menu.getWeaponText().getPrefWidth(), menu.getWeaponText().getPrefHeight());
+                App.getCurrentUser().setWeapon(menu.getWeapons().get(menu.getWeaponIndex()));
             }
         });
 
@@ -62,15 +60,7 @@ public class PreGameMenuController {
                 menu.getWeapon().setSize(menu.getWeapon().getPrefWidth(), menu.getWeapon().getPrefHeight());
                 menu.getWeapon().setPosition(PreGameMenu.weaponX - menu.getWeapon().getPrefWidth() / 2, PreGameMenu.weaponY - menu.getWeapon().getPrefHeight() / 2);
                 menu.getWeaponText().setSize(menu.getWeaponText().getPrefWidth(), menu.getWeaponText().getPrefHeight());
-            }
-        });
-
-        // back
-
-        menu.getBackButton().addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                TillDawn.getGame().setScreen(new MainMenu());
-                menu.dispose();
+                App.getCurrentUser().setWeapon(menu.getWeapons().get(menu.getWeaponIndex()));
             }
         });
 
@@ -78,14 +68,14 @@ public class PreGameMenuController {
 
         menu.getNum1Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[0] = (char) ((Character.getNumericValue(menu.getTime()[0]) + 7) % 6 + '0');
+                menu.getTime()[0] = (menu.getTime()[0] + 7) % 6;
                 menu.update();
             }
         });
 
         menu.getNum1Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[0] = (char) ((Character.getNumericValue(menu.getTime()[0]) + 5) % 6 + '0');
+                menu.getTime()[0] = (menu.getTime()[0] + 5) % 6;
                 menu.update();
             }
         });
@@ -94,14 +84,14 @@ public class PreGameMenuController {
 
         menu.getNum2Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[1] = (char) ((Character.getNumericValue(menu.getTime()[1]) + 11) % 10 + '0');
+                menu.getTime()[1] = (menu.getTime()[1] + 11) % 10;
                 menu.update();
             }
         });
 
         menu.getNum2Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[1] = (char) ((Character.getNumericValue(menu.getTime()[1]) + 9) % 10 + '0');
+                menu.getTime()[1] = (menu.getTime()[1] + 9) % 10;
                 menu.update();
             }
         });
@@ -110,14 +100,14 @@ public class PreGameMenuController {
 
         menu.getNum3Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[2] = (char) ((Character.getNumericValue(menu.getTime()[2]) + 7) % 6 + '0');
+                menu.getTime()[2] = ((menu.getTime()[2] + 7) % 6);
                 menu.update();
             }
         });
 
         menu.getNum3Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[2] = (char) ((Character.getNumericValue(menu.getTime()[2]) + 5) % 6 + '0');
+                menu.getTime()[2] = ((menu.getTime()[2] + 5) % 6);
                 menu.update();
             }
         });
@@ -126,15 +116,26 @@ public class PreGameMenuController {
 
         menu.getNum4Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 11) % 10 + '0');
+                menu.getTime()[3] = ((menu.getTime()[3] + 11) % 10);
                 menu.update();
             }
         });
 
         menu.getNum4Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 9) % 10 + '0');
+                menu.getTime()[3] = ((menu.getTime()[3] + 9) % 10);
                 menu.update();
+            }
+        });
+
+        // back
+
+        menu.getBackButton().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                TillDawn.getGame().setScreen(new MainMenu());
+                UserDAO.updateUser((menu.getTime()[0]) * 10 + menu.getTime()[1],
+                    (menu.getTime()[2]) * 10 + menu.getTime()[3]);
+                menu.dispose();
             }
         });
 
@@ -142,6 +143,8 @@ public class PreGameMenuController {
 
         menu.getStartButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
+                UserDAO.updateUser((menu.getTime()[0]) * 10 + menu.getTime()[1],
+                    (menu.getTime()[2]) * 10 + menu.getTime()[3]);
                 App.getCurrentUser().setAvatar(menu.getAvatar());
                 App.getCurrentUser().setWeapon(menu.getGun());
                 Game game = new Game(App.getCurrentUser());
@@ -150,8 +153,8 @@ public class PreGameMenuController {
                 GameView view = new GameView(game);
                 TillDawn.setGameView(view);
                 game.setTimer(new Timer(
-                    (menu.getTime()[0] - '0') * 10 + menu.getTime()[1] - '0',
-                    (menu.getTime()[2] - '0') * 10 + menu.getTime()[3] - '0'));
+                    (menu.getTime()[0]) * 10 + menu.getTime()[1],
+                    (menu.getTime()[2]) * 10 + menu.getTime()[3]));
                 TillDawn.getGame().setScreen(view);
                 menu.dispose();
             }

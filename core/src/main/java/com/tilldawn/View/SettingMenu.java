@@ -10,10 +10,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Controller.SettingMenuController;
-import com.tilldawn.Models.AnimationActor;
-import com.tilldawn.Models.AnimationManager;
-import com.tilldawn.Models.AssetManager;
-import com.tilldawn.Models.GameAudioManager;
+import com.tilldawn.Models.*;
 import com.tilldawn.TillDawn;
 
 import java.util.ArrayList;
@@ -76,6 +73,8 @@ public class SettingMenu implements AppView {
 
         autoreloadCheckBox = new CheckBox("", skin, "on-off");
         bwCheckBox = new CheckBox("", skin, "on-off2");
+        autoreloadCheckBox.setChecked(App.getCurrentUser().isAutoReload());
+        bwCheckBox.setChecked(App.getCurrentUser().isBw());
 
         AnimationActor tentacle = new AnimationActor(AnimationManager.getInstance().get("witcherMonsterAnim"), 3);
         tentacle.setPosition(300, 750);
@@ -118,7 +117,7 @@ public class SettingMenu implements AppView {
         Table row3 = new Table();
         row3.add(new Label("Auto Reload", skin)).padRight(padRight);
         row3.add(autoreloadCheckBox).row();
-        row3.add(new Label("Black and White", skin)).padTop(padTop).padRight(padRight);
+        row3.add(new Label("Black-and-white mode", skin)).padTop(padTop).padRight(padRight);
         row3.add(bwCheckBox).padTop(padTop).row();
         page1.add(row3).padRight(-padRight * 3).row();
         page1.add(new Label("Game Controller Settings", skin, "title_chvy_WHITE_24")).padTop(padTop * 2).padBottom(padTop * 2).padBottom(600).row();

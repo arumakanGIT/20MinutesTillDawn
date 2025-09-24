@@ -9,6 +9,7 @@ public class GameInputSetting {
     private int right;
     private int reload;
     private int speed;
+    private int autoAim;
 
     public GameInputSetting() {
         // default inputs
@@ -18,7 +19,10 @@ public class GameInputSetting {
         right = Input.Keys.D;
         reload = Input.Keys.R;
         speed = Input.Keys.SHIFT_LEFT;
+        autoAim = Input.Keys.SPACE;
     }
+
+    //
 
     public int getUp() {
         return up;
@@ -66,5 +70,13 @@ public class GameInputSetting {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getAutoAim() {
+        return autoAim;
+    }
+
+    public void setAutoAim(int autoAim) {
+        this.autoAim = autoAim;
     }
 }

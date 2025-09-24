@@ -23,21 +23,32 @@ public class TillDawn extends Game {
     public void create() {
         setCursor("Mouse.png");
         UserTable.createUserTable();
-        GameAudioManager.getInstance().playMusic("Songs\\Pretty Dungeon LOOP.wav", true, GameAudioManager.musicVolume);
+        UserTable.createSettingTable();
+        UserTable.createGameInputTable();
         batch = new SpriteBatch();
         game = this;
 
         Preferences prefs = Gdx.app.getPreferences("StayLoggedIn");
         String token = prefs.getString("rememberToken", null);
+        System.out.println("Remember token: " + token);
         if (token != null) {
             String username = UserDAO.getUserByToken(token);
+            GameAudioManager.getInstance();
+
             if (username != null) {
                 App.setCurrentUser(UserDAO.getUserByUsername(username));
                 setScreen(new MainMenu());
-            } else
+            } else {
                 setScreen(new LoginMenu());
+            }
+
+            System.out.println(username);
+            System.out.println(UserDAO.getFloatFieldFromSetting(username,"music"));
+
+            // TODO set song name
         } else
             setScreen(new LoginMenu());
+        GameAudioManager.getInstance().playMusic("Songs\\Pretty Dungeon LOOP.wav", true, GameAudioManager.musicVolume);
     }
 
     public static TillDawn getGame() {

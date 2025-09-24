@@ -60,7 +60,7 @@ public class PreGameMenu implements AppView {
     private int index;
     private int weaponIndex;
     private final ArrayList<Gun> weapons = new ArrayList<>(Arrays.asList(Gun.values()));
-    private final Character[] time;
+    private final int[] time;
 
     public PreGameMenu() {
         Viewport viewport = new FitViewport(1280, 720);
@@ -90,7 +90,8 @@ public class PreGameMenu implements AppView {
         num4Down = new Button(skin, "hidden");
 
         index = avatars.indexOf(UserDAO.getStringField(App.getCurrentUser().getUsername(), "avatar"));
-        avatar = new Image(AssetManager.getInstance().getTexture(avatars.get(index)));
+        Texture avatarTex = AssetManager.getInstance().getTexture(avatars.get(index));
+        avatar = new Image(avatarTex);
         avatarText = new Image(AssetManager.getInstance().getTexture(avatars.get(index).substring(0, avatars.get(index).length() - 4) + "_T.png"));
         Gun defaultGun = switch (
             Objects.requireNonNull(UserDAO.getStringField(App.getCurrentUser().getUsername(), "weapon"))) {
@@ -101,21 +102,25 @@ public class PreGameMenu implements AppView {
         weaponIndex = weapons.indexOf(defaultGun);
         weapon = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex).name() + ".png"));
         weaponText = new Image(AssetManager.getInstance().getTexture(weapons.get(weaponIndex).name() + "Text.png"));
-        time = new Character[4];
-        time[0] = '2';
-        time[1] = '0';
-        time[2] = '0';
-        time[3] = '0';
-        num1 = new Image(AssetManager.getInstance().getTexture("2.png"));
-        num2 = new Image(AssetManager.getInstance().getTexture("0.png"));
-        num3 = new Image(AssetManager.getInstance().getTexture("0.png"));
-        num4 = new Image(AssetManager.getInstance().getTexture("0.png"));
+        time = new int[4];
+        int minutes = UserDAO.getIntField(App.getCurrentUser().getUsername(), "minutes");
+        int seconds = UserDAO.getIntField(App.getCurrentUser().getUsername(), "seconds");
+        System.out.println(minutes + " " + seconds);
+        time[0] = minutes / 10;
+        time[1] = minutes % 10;
+        time[2] = seconds / 10;
+        time[3] = seconds % 10;
+        num1 = new Image(AssetManager.getInstance().getTexture(time[0] + ".png"));
+        num2 = new Image(AssetManager.getInstance().getTexture(time[1] + ".png"));
+        num3 = new Image(AssetManager.getInstance().getTexture(time[2] + ".png"));
+        num4 = new Image(AssetManager.getInstance().getTexture(time[3] + ".png"));
 
         avatar.setScaling(Scaling.fit);
         avatarText.setScaling(Scaling.fit);
 
         Table row1 = new Table();
         row1.add(avatarLeft).padRight(700);
+        avatar.setSize(250,250);
         avatar.setPosition(400, 450);
         avatarText.setPosition(700, 550);
         table.addActor(avatar);
@@ -358,7 +363,7 @@ public class PreGameMenu implements AppView {
         return weaponText;
     }
 
-    public Character[] getTime() {
+    public int[] getTime() {
         return time;
     }
 

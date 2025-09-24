@@ -10,15 +10,16 @@ import java.util.List;
 
 public class GameAudioManager {
     // for actions :
-    public static float sfxVolume = 0.5f;
+    public static float sfxVolume;
     // for step :
-    public static float footStepVolume = 1f;
+    public static float footStepVolume;
     // for music :
-    public static float musicVolume = 0.7f;
+    public static float musicVolume;
     // for ambient :
-    public static float ambientVolume = 1f;
+    public static float ambientVolume;
 
     public static boolean playMusic = false;
+
     private static GameAudioManager instance;
     private List<String> playlist;
     private int playlistIndex;
@@ -32,11 +33,18 @@ public class GameAudioManager {
     public static GameAudioManager getInstance() {
         if (instance == null) {
             instance = new GameAudioManager();
+            if (App.getCurrentUser() != null) {
+                musicVolume = UserDAO.getFloatFieldFromSetting(App.getCurrentUser().getUsername(), "music");
+                sfxVolume = UserDAO.getFloatFieldFromSetting(App.getCurrentUser().getUsername(), "SFX");
+                footStepVolume = UserDAO.getFloatFieldFromSetting(App.getCurrentUser().getUsername(), "foot");
+                ambientVolume = UserDAO.getFloatFieldFromSetting(App.getCurrentUser().getUsername(), "ambient");
+            }
         }
         return instance;
     }
 
     public void playMusic(String path, boolean loop, float volume) {
+        System.out.println(volume);
         stopMusic();
         currentMusic = Gdx.audio.newMusic(Gdx.files.internal(path));
         currentMusic.setLooping(loop);

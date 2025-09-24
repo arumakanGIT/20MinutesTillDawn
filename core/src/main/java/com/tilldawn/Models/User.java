@@ -19,9 +19,11 @@ public class User {
     private Move moveState = Move.walk;
     private GameInputSetting gameInputSetting;
     private final CollisionRect rect;
+    private boolean autoReload;
+    private boolean bw;
 
     public User(int id, String username, String password, String salt, int securityQuestionID, String answer,
-                String avatar, Gun weapon, int kill, int time, int score) {
+                String avatar, Gun weapon, int kill, int time, int score, boolean autoReload, boolean bw) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -33,6 +35,8 @@ public class User {
         this.kill = kill;
         this.time = time;
         this.score = score;
+        this.autoReload = autoReload;
+        this.bw = bw;
         rect = new CollisionRect(0, 0, 0, 0);
     }
 
@@ -139,4 +143,21 @@ public class User {
     public CollisionRect getRect() {
         return rect;
     }
+
+    public boolean isAutoReload() {
+        return autoReload;
+    }
+
+    public void setAutoReload(boolean autoReload) {
+        this.autoReload = autoReload;
+    }
+
+    public boolean isBw() {
+        return bw;
+    }
+
+    public void setBw(boolean bw) {
+        this.bw = bw;
+    }
+
 }
