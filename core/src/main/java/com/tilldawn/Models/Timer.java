@@ -55,7 +55,7 @@ public class Timer {
         table.add(image4).size(digits[0].getWidth() * scale, digits[0].getHeight() * scale).pad(padding);
         timerWindow.add(table).pad(1);
         timerWindow.pack();
-        timerWindow.setPosition((view.getStage().getWidth() - timerWindow.getWidth()) / 2, timerWindow.getPrefHeight() / 2 + 5);
+        timerWindow.setPosition((view.getStage().getWidth() - timerWindow.getWidth()) / 2, 25);
         timerWindow.getColor().a = 0.5f;
         view.getStage().addActor(timerWindow);
     }

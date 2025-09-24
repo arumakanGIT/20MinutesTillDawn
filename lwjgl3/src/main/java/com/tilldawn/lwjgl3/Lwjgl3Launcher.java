@@ -11,8 +11,8 @@ public class Lwjgl3Launcher {
         createApplication();
     }
 
-    private static Lwjgl3Application createApplication() {
-        return new Lwjgl3Application(new TillDawn(), getDefaultConfiguration());
+    private static void createApplication() {
+        new Lwjgl3Application(new TillDawn(), getDefaultConfiguration());
     }
 
     private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {
@@ -27,9 +27,9 @@ public class Lwjgl3Launcher {
         Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
         // not fullscreen :
 //        configuration.setWindowedMode((int)(displayMode.width * 0.8), (int)(displayMode.height * 0.8));
-        configuration.setWindowedMode(displayMode.width, displayMode.height);
+//        configuration.setWindowedMode(displayMode.width, displayMode.height);
         // full screen :
-//        configuration.setFullscreenMode(displayMode);
+        configuration.setFullscreenMode(displayMode);
 
         configuration.setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
         return configuration;

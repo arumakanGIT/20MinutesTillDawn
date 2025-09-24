@@ -26,7 +26,6 @@ public class BulletController {
     private final GameView view;
     private final Label ammo;
     private final Label kill;
-    private boolean pauseState = false;
 
     public BulletController(Gun gun, GameView view) {
         this.view = view;
@@ -50,7 +49,7 @@ public class BulletController {
             skin,
             "chvyExprs_GREEN_24");
         ammoTable.add(ammo);
-        ammoTable.setPosition(ammoTable.getPrefWidth() / 2 + 50, view.getStage().getHeight() - 100);
+        ammoTable.setPosition(ammoTable.getPrefWidth() / 2 + 50, view.getStage().getHeight() - 75);
         view.getStage().addActor(ammoTable);
 
         // kill
@@ -66,8 +65,7 @@ public class BulletController {
         Image killImage = new Image(killTexture);
         killTable.add(killImage).size(killTexture.getWidth() * scale + 1,
             killTexture.getHeight() * scale + 1);
-        killTable.setPosition(view.getStage().getWidth() - 50,
-            view.getStage().getHeight() - 100);
+        killTable.setPosition(view.getStage().getWidth() - 50, view.getStage().getHeight() - 75);
         killImage.setWidth(ammoTable.getPrefWidth());
         view.getStage().addActor(killTable);
     }

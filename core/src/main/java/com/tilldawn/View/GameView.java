@@ -33,7 +33,7 @@ public class GameView implements InputProcessor, Screen {
         this.game = game;
 
         TillDawn.setCursor("CursorSprite.png");
-        this.controller = new GameController();
+        this.controller = new GameController(stage);
         controller.setView(this);
 
         Random random = new Random();

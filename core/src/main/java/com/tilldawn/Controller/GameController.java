@@ -3,6 +3,8 @@ package com.tilldawn.Controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.tilldawn.Models.App;
 import com.tilldawn.Models.AssetManager;
@@ -12,9 +14,17 @@ import com.tilldawn.View.MainMenu;
 import com.tilldawn.View.PauseMenu;
 
 public class GameController {
+    private final ProgressBar xpBar;
     private GameView view;
     private PlayerController playerController;
     private BulletController bulletController;
+
+    public GameController(Stage stage) {
+        xpBar = new ProgressBar(0, 100, 1, false, AssetManager.getInstance().getSkin());
+        xpBar.setSize(stage.getWidth() - 70, 100);
+        xpBar.setPosition((stage.getWidth() - xpBar.getWidth()) / 2, stage.getHeight() - xpBar.getHeight());
+        stage.addActor(xpBar);
+    }
 
     public void updateGame() {
         if (view != null) {
@@ -30,6 +40,8 @@ public class GameController {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) && view.getGame().isGamePaused()) {
             bulletController.setPauseMode(true);
             view.getGame().getTimer().setPauseMode(true);
+            setPauseMode(true);
+
 
             view.getGame().setGamePaused(true);
             TillDawn.setCursor("Mouse.png");
@@ -42,6 +54,7 @@ public class GameController {
                     TillDawn.setCursor("CursorSprite.png");
                     bulletController.setPauseMode(false);
                     view.getGame().getTimer().setPauseMode(false);
+                    setPauseMode(false);
                 }
             });
 
@@ -66,6 +79,10 @@ public class GameController {
 
             pauseMenu.show(view.getStage());
         }
+    }
+
+    private void setPauseMode(boolean state) {
+        xpBar.setVisible(!state);
     }
 
     public PlayerController getPlayerController() {

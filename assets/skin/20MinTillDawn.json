@@ -243,6 +243,12 @@
 		"background": "textFieldBack1"
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
+	"default-horizontal": {
+		"background": "progresBar",
+		"knobBefore": "progressBarBefore"
+	}
+},
 "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
 	"default": {
 		"hScroll": "hScroll",
