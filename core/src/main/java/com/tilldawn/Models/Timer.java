@@ -13,6 +13,7 @@ import com.tilldawn.View.GameView;
 
 
 public class Timer {
+    private final Window timerWindow;
     private int minutes;
     private int seconds;
     private float accumulator = 0f;
@@ -41,7 +42,7 @@ public class Timer {
         int padding = 10;
         float scale = 0.2f;
 
-        Window timerWindow = new Window("", AssetManager.getInstance().getSkin(), "win4");
+        timerWindow = new Window("", AssetManager.getInstance().getSkin(), "win4");
         image1 = new Image(digits[minTens]);
         image2 = new Image(digits[minOnes]);
         image3 = new Image(digits[secTens]);
@@ -55,6 +56,7 @@ public class Timer {
         timerWindow.add(table).pad(1);
         timerWindow.pack();
         timerWindow.setPosition((view.getStage().getWidth() - timerWindow.getWidth()) / 2, timerWindow.getPrefHeight() / 2 + 5);
+        timerWindow.getColor().a = 0.5f;
         view.getStage().addActor(timerWindow);
     }
 
@@ -66,6 +68,12 @@ public class Timer {
             accumulator -= 1f;
             tickDown();
         }
+
+        if (seconds <= 10 || seconds >= 50)
+            timerWindow.getColor().a = 1f;
+        else
+            timerWindow.getColor().a = 0.2f;
+
 
         int minTens = minutes / 10;
         int minOnes = minutes % 10;
