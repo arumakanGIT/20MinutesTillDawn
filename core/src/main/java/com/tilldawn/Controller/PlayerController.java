@@ -22,7 +22,6 @@ public class PlayerController {
     private final GameView view;
     private float gunX;
     private float gunY;
-    private float rawAngle;
 
     public PlayerController(User player, GameView gameView) {
         this.player = player;
@@ -64,7 +63,7 @@ public class PlayerController {
         float dx = mousePos.x - player.getPlayerX();
         float dy = mousePos.y - player.getPlayerY();
 
-        rawAngle = (float) Math.toDegrees(Math.atan2(dy, dx));
+        float rawAngle = (float) Math.toDegrees(Math.atan2(dy, dx));
         float angleDraw = rawAngle;
 
         boolean flipGun = false;
@@ -136,6 +135,8 @@ public class PlayerController {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             isReloading = true;
             stateTime = 0f;
+            view.getController().getBulletController().reload();
+            view.getController().getBulletController().updateLabel();
         }
 
         if (moving)
@@ -152,12 +153,8 @@ public class PlayerController {
         return gunY;
     }
 
-    public float getRawAngle() {
-        return rawAngle;
-    }
-
-    public int getFacingRight() {
-        return facingRight;
+    public boolean isReloading() {
+        return isReloading;
     }
 
 }

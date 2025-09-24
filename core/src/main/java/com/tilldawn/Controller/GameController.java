@@ -52,6 +52,8 @@ public class GameController {
 
             pauseMenu.getSave().addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
+                    view.dispose();
+                    Gdx.app.exit();
                 }
             });
 
@@ -71,6 +73,6 @@ public class GameController {
     public void setView(GameView view) {
         this.view = view;
         playerController = new PlayerController(App.getCurrentUser(), view);
-        bulletController = new BulletController(view.getGame().getPlayer().getWeapon());
+        bulletController = new BulletController(view.getGame().getPlayer().getWeapon(), view);
     }
 }

@@ -50,7 +50,7 @@
 		"b": 0,
 		"a": 1
 	},
-	"GREEN1": {
+	"GREEN": {
 		"r": 0.23529412,
 		"g": 0.30588236,
 		"b": 0.30588236,
@@ -138,14 +138,14 @@
 		"checkboxOff": "checkBox_OFF",
 		"font": "ChvyExprs_WHITE_24",
 		"fontColor": "PINK",
-		"overFontColor": "GREEN1"
+		"overFontColor": "GREEN"
 	},
 	"chvy_PINK_16": {
 		"checkboxOn": "checkBox_ON1",
 		"checkboxOff": "checkBox_OFF",
 		"font": "ChvyExprs_WHITE_16",
 		"fontColor": "PINK",
-		"overFontColor": "GREEN1"
+		"overFontColor": "GREEN"
 	},
 	"on-off": {
 		"checkboxOn": "checkBox2_ON",
@@ -166,9 +166,9 @@
 		"font": "ChvyExprs_WHITE_24",
 		"fontColor": "PINK"
 	},
-	"chvyExprs_GREEN1_24": {
+	"chvyExprs_GREEN_24": {
 		"font": "ChvyExprs_WHITE_24",
-		"fontColor": "GREEN1"
+		"fontColor": "GREEN"
 	},
 	"chvyExprs_RED_36": {
 		"font": "ChvyExprs_WHITE_36",
@@ -221,20 +221,24 @@
 		"font": "ChvyExprs_WHITE_24",
 		"fontColor": "KEREM",
 		"background": "titleLabelBackground"
+	},
+	"chvyExprs_GREEN_36": {
+		"font": "ChvyExprs_WHITE_36",
+		"fontColor": "GREEN"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
 	"default": {
 		"font": "ChvyExprs_WHITE_24",
 		"fontColorSelected": "PINK",
-		"fontColorUnselected": "GREEN1",
+		"fontColorUnselected": "GREEN",
 		"selection": "T_UIPanel",
 		"background": "textFieldBack1"
 	},
 	"default2": {
 		"font": "ChvyExprs_WHITE_16",
 		"fontColorSelected": "PINK",
-		"fontColorUnselected": "GREEN1",
+		"fontColorUnselected": "GREEN",
 		"selection": "T_UIPanel",
 		"background": "textFieldBack1"
 	}
@@ -276,22 +280,22 @@
 	"default": {
 		"font": "ChvyExprs_WHITE_24",
 		"fontColor": "PINK",
-		"overFontColor": "GREEN1"
+		"overFontColor": "GREEN"
 	},
 	"chvy_PINK_36": {
 		"font": "ChvyExprs_WHITE_36",
 		"fontColor": "PINK",
-		"overFontColor": "GREEN1"
+		"overFontColor": "GREEN"
 	},
 	"chvy_PINK_54": {
 		"font": "ChvyExprs_WHITE_54",
 		"fontColor": "PINK",
-		"overFontColor": "GREEN1"
+		"overFontColor": "GREEN"
 	},
 	"chvy_PINK_16": {
 		"font": "ChvyExprs_WHITE_16",
 		"fontColor": "PINK",
-		"overFontColor": "GREEN1"
+		"overFontColor": "GREEN"
 	},
 	"chvy_PINK_24_ui": {
 		"font": "ChvyExprs_WHITE_24",

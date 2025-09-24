@@ -78,7 +78,6 @@ public class PreGameMenuController {
         menu.getNum1Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[0] = (char) ((Character.getNumericValue(menu.getTime()[0]) + 7) % 6 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });
@@ -86,7 +85,6 @@ public class PreGameMenuController {
         menu.getNum1Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[0] = (char) ((Character.getNumericValue(menu.getTime()[0]) + 5) % 6 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });
@@ -96,7 +94,6 @@ public class PreGameMenuController {
         menu.getNum2Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[1] = (char) ((Character.getNumericValue(menu.getTime()[1]) + 11) % 10 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });
@@ -104,7 +101,6 @@ public class PreGameMenuController {
         menu.getNum2Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[1] = (char) ((Character.getNumericValue(menu.getTime()[1]) + 9) % 10 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });
@@ -114,7 +110,6 @@ public class PreGameMenuController {
         menu.getNum3Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[2] = (char) ((Character.getNumericValue(menu.getTime()[2]) + 7) % 6 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });
@@ -122,7 +117,6 @@ public class PreGameMenuController {
         menu.getNum3Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[2] = (char) ((Character.getNumericValue(menu.getTime()[2]) + 5) % 6 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });
@@ -132,7 +126,6 @@ public class PreGameMenuController {
         menu.getNum4Up().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 11) % 10 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });
@@ -140,7 +133,6 @@ public class PreGameMenuController {
         menu.getNum4Down().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 menu.getTime()[3] = (char) ((Character.getNumericValue(menu.getTime()[3]) + 9) % 10 + '0');
-                System.out.println(Arrays.toString(menu.getTime()));
                 menu.update();
             }
         });

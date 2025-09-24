@@ -9,15 +9,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Controller.GameController;
 import com.tilldawn.Models.AssetManager;
 import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
 
+import java.util.Random;
+
 public class GameView implements InputProcessor, Screen {
     private final Game game;
-    private Stage stage;
+    private final Stage stage;
     private final GameController controller;
     private final Texture background;
     private final OrthographicCamera camera;
@@ -25,12 +26,20 @@ public class GameView implements InputProcessor, Screen {
     private float timer = 0f;
 
     public GameView(Game game) {
+        stage = new Stage();
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
+
         TillDawn.setCursor("CursorSprite.png");
         this.game = game;
         this.controller = new GameController();
         controller.setView(this);
 
-        background = AssetManager.getInstance().getTexture("map.png");
+        Random random = new Random();
+        int mapIndex = random.nextInt(4);
+        background = AssetManager.getInstance().getTexture("map" + mapIndex + ".png");
         background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         darkMaskEffect = AssetManager.getInstance().getTexture("darkMaskEffect.png");
@@ -41,11 +50,6 @@ public class GameView implements InputProcessor, Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(stage);
-        multiplexer.addProcessor(this);
-        Gdx.input.setInputProcessor(multiplexer);
 
     }
 
@@ -96,6 +100,25 @@ public class GameView implements InputProcessor, Screen {
     }
 
     @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (!game.isGamePaused() && !controller.getPlayerController().isReloading()) {
+            float gunX = controller.getPlayerController().getGunX();
+            float gunY = controller.getPlayerController().getGunY() + 20;
+
+            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            getCamera().unproject(mousePos);
+
+            float dx = mousePos.x + 16 - gunX;
+            float dy = mousePos.y - 20 - gunY;
+
+            float angle = (float) Math.toDegrees(Math.atan2(dy, dx));
+
+            controller.getBulletController().shootBulletHandle(gunX, gunY, angle);
+        }
+        return false;
+    }
+
+    @Override
     public void dispose() {
         background.dispose();
         stage.dispose();
@@ -104,25 +127,6 @@ public class GameView implements InputProcessor, Screen {
     @Override
     public void resize(int width, int height) {
         camera.setToOrtho(false, width, height);
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (!game.isGamePaused()) {
-            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            getCamera().unproject(mousePos);
-
-            float dx = mousePos.x - controller.getPlayerController().getGunX();
-            float dy = mousePos.y - controller.getPlayerController().getGunY();
-
-            float angle = (float) Math.toDegrees(Math.atan2(dy, dx));
-
-            controller.getBulletController().shootBulletHandle(
-                controller.getPlayerController().getGunX(),
-                controller.getPlayerController().getGunY(),
-                angle);
-        }
-        return false;
     }
 
     //
@@ -137,6 +141,10 @@ public class GameView implements InputProcessor, Screen {
 
     public Game getGame() {
         return game;
+    }
+
+    public GameController getController() {
+        return controller;
     }
 
     //

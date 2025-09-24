@@ -1326,7 +1326,7 @@ jsonData: {
 				b: 0.30588236
 				a: 1
 			}
-			name: GREEN1
+			name: GREEN
 		}
 		{
 			class: com.ray3k.skincomposer.data.ColorData
@@ -1486,7 +1486,7 @@ jsonData: {
 			}
 			{
 				class: com.ray3k.skincomposer.data.StyleData
-				name: chvyExprs_GREEN1_24
+				name: chvyExprs_GREEN_24
 				clazz: com.badlogic.gdx.scenes.scene2d.ui.Label
 				properties: {
 					font: {
@@ -1499,7 +1499,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: fontColor
 						optional: true
-						value: GREEN1
+						value: GREEN
 					}
 					background: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
@@ -1830,6 +1830,33 @@ jsonData: {
 						name: background
 						optional: true
 						value: titleLabelBackground
+					}
+				}
+				deletable: true
+				parent: null
+			}
+			{
+				class: com.ray3k.skincomposer.data.StyleData
+				name: chvyExprs_GREEN_36
+				clazz: com.badlogic.gdx.scenes.scene2d.ui.Label
+				properties: {
+					font: {
+						type: com.badlogic.gdx.graphics.g2d.BitmapFont
+						name: font
+						optional: false
+						value: ChvyExprs_WHITE_36
+					}
+					fontColor: {
+						type: com.badlogic.gdx.graphics.Color
+						name: fontColor
+						optional: true
+						value: GREEN
+					}
+					background: {
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: background
+						optional: true
+						value: null
 					}
 				}
 				deletable: true
@@ -2432,7 +2459,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: fontColorUnselected
 						optional: false
-						value: GREEN1
+						value: GREEN
 					}
 					selection: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
@@ -2483,7 +2510,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: fontColorUnselected
 						optional: false
-						value: GREEN1
+						value: GREEN
 					}
 					selection: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
@@ -2947,7 +2974,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: overFontColor
 						optional: true
-						value: GREEN1
+						value: GREEN
 					}
 					focusedFontColor: {
 						type: com.badlogic.gdx.graphics.Color
@@ -3106,7 +3133,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: overFontColor
 						optional: true
-						value: GREEN1
+						value: GREEN
 					}
 					focusedFontColor: {
 						type: com.badlogic.gdx.graphics.Color
@@ -3265,7 +3292,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: overFontColor
 						optional: true
-						value: GREEN1
+						value: GREEN
 					}
 					focusedFontColor: {
 						type: com.badlogic.gdx.graphics.Color
@@ -3424,7 +3451,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: overFontColor
 						optional: true
-						value: GREEN1
+						value: GREEN
 					}
 					focusedFontColor: {
 						type: com.badlogic.gdx.graphics.Color
@@ -3939,7 +3966,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: overFontColor
 						optional: true
-						value: GREEN1
+						value: GREEN
 					}
 					focusedFontColor: {
 						type: com.badlogic.gdx.graphics.Color
@@ -4134,7 +4161,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.Color
 						name: overFontColor
 						optional: true
-						value: GREEN1
+						value: GREEN
 					}
 					focusedFontColor: {
 						type: com.badlogic.gdx.graphics.Color

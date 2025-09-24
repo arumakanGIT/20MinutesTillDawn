@@ -142,7 +142,6 @@ public class AnimationManager {
             case Shotgun -> 2;
             default -> 3;
         };
-        System.out.println(gun.name());
         Array<TextureRegion> reloadFrames = new Array<>();
         for (int i = 0; i <= max; i++) {
             Texture tex = AssetManager.getInstance().getTexture(gun.name() + "_Reload_" + i + ".png");

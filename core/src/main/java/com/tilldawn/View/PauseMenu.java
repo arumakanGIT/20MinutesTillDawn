@@ -4,8 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.tilldawn.Models.AnimationActor;
-import com.tilldawn.Models.AnimationManager;
 
 public class PauseMenu extends Window {
     private final TextButton resume;

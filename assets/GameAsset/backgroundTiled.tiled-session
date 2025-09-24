@@ -61,14 +61,15 @@
         "TiledMap/untitled.tmx",
         "TiledMap/T_TempleTile_1.tsx",
         "TiledMap/T_TempleTile_3.tsx",
-        "TiledMap/T_TempleTile_4.tsx"
+        "TiledMap/T_TempleTile_4.tsx",
+        "TiledMap/untitled.tmx"
     ],
     "project": "backgroundTiled.tiled-project",
     "recentFiles": [
-        "TiledMap/T_TempleTile_4.tsx",
-        "TiledMap/T_TempleTile_3.tsx",
-        "TiledMap/T_TempleTile_1.tsx",
         "TiledMap/untitled.tmx",
+        "TiledMap/T_TempleTile_1.tsx",
+        "TiledMap/T_TempleTile_3.tsx",
+        "TiledMap/T_TempleTile_4.tsx",
         "TiledMap/T_ForestTiles_2.tsx",
         "TiledMap/T_ForestTiles_7.tsx",
         "TiledMap/T_TempleTile_00.tsx",
