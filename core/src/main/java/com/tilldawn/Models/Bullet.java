@@ -23,8 +23,9 @@ public class Bullet {
     public void update() {
         if (!active) return;
 
-        rect.move(rect.getX() + (float) (Math.cos(Math.toRadians(angle)) * speed),
-            rect.getY()+(float) (Math.sin(Math.toRadians(angle)) * speed));
+        if (age >= 0)
+            rect.move(rect.getX() + (float) (Math.cos(Math.toRadians(angle)) * speed),
+                rect.getY() + (float) (Math.sin(Math.toRadians(angle)) * speed));
 
         age += 1f / 60f;
 

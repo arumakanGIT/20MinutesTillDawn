@@ -1,16 +1,13 @@
-package com.tilldawn.Controller;
+package com.tilldawn.Controller.GameControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.tilldawn.Models.AnimationManager;
-import com.tilldawn.Models.CollisionRect;
+import com.tilldawn.Models.*;
 import com.tilldawn.Models.Enums.Gun;
 import com.tilldawn.Models.Enums.Move;
-import com.tilldawn.Models.GameInputSetting;
-import com.tilldawn.Models.User;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.GameView;
 
@@ -33,6 +30,16 @@ public class PlayerController {
         this.view = gameView;
         gameInputSetting = player.getGameInputSetting();
         rect = player.getRect();
+
+        int padding = 10;
+        float base = (view.getStage().getWidth() / 2)
+            - ((new AnimationActor(AnimationManager.getInstance().get("HeartAnim")).getWidth() + padding) * 2);
+        AnimationActor[] hearts = new AnimationActor[5];
+        for (int i = 0; i < hearts.length; i++) {
+            hearts[i] = new AnimationActor(AnimationManager.getInstance().get("HeartAnim"));
+            hearts[i].setPosition(base + ((hearts[0].getWidth() + padding) * i), view.getStage().getHeight() - hearts[0].getHeight() - 75);
+            view.getStage().addActor(hearts[i]);
+        }
     }
 
     public void update() {
@@ -143,6 +150,11 @@ public class PlayerController {
             stateTime = 0f;
             view.getController().getBulletController().reload();
             view.getController().getBulletController().updateAmmoLabel();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            view.getController().getEnemyController().clear();
+            view.getController().getEnemyController().spawnEnemies();
         }
 
         if (moving)

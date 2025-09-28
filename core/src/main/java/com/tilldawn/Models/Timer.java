@@ -110,6 +110,10 @@ public class Timer {
         return seconds;
     }
 
+    public int timeAsSeconds() {
+        return seconds + minutes * 60;
+    }
+
     public String getFormattedTime() {
         return String.format("%02d:%02d", minutes, seconds);
     }

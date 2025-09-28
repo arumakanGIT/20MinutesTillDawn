@@ -1,4 +1,4 @@
-package com.tilldawn.Controller;
+package com.tilldawn.Controller.GameControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -18,6 +18,7 @@ public class GameController {
     private GameView view;
     private PlayerController playerController;
     private BulletController bulletController;
+    private EnemyController enemyController;
 
     public GameController(Stage stage) {
         xpBar = new ProgressBar(0, 100, 1, false, AssetManager.getInstance().getSkin());
@@ -33,6 +34,7 @@ public class GameController {
             bulletController.update();
             if (view.getGame().isGamePaused())
                 view.getGame().getTimer().update();
+            enemyController.update();
         }
     }
 
@@ -85,6 +87,10 @@ public class GameController {
         xpBar.setVisible(!state);
     }
 
+    public EnemyController getEnemyController() {
+        return enemyController;
+    }
+
     public PlayerController getPlayerController() {
         return playerController;
     }
@@ -97,5 +103,6 @@ public class GameController {
         this.view = view;
         playerController = new PlayerController(App.getCurrentUser(), view);
         bulletController = new BulletController(view.getGame().getPlayer().getWeapon(), view);
+        enemyController = new EnemyController(view);
     }
 }

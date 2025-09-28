@@ -6,10 +6,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.tilldawn.Controller.GameController;
+import com.tilldawn.Controller.GameControllers.GameController;
 import com.tilldawn.Models.AssetManager;
 import com.tilldawn.Models.Game;
 import com.tilldawn.TillDawn;
@@ -25,17 +24,29 @@ public class GameView implements InputProcessor, Screen {
     private final Texture darkMaskEffect;
 
     public GameView(Game game) {
+
+        // initialize stage
         stage = new Stage();
+
+        // multiplexer
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
+
+        //inputs
         Gdx.input.setInputProcessor(multiplexer);
+
+        // set game
         this.game = game;
 
+        // set cursor
         TillDawn.setCursor("CursorSprite.png");
+
+        // game controller
         this.controller = new GameController(stage);
         controller.setView(this);
 
+        // game background and effects
         Random random = new Random();
         int mapIndex = random.nextInt(4);
         background = AssetManager.getInstance().getTexture("map" + mapIndex + ".png");
@@ -43,13 +54,14 @@ public class GameView implements InputProcessor, Screen {
 
         darkMaskEffect = AssetManager.getInstance().getTexture("darkMaskEffect.png");
 
+        // camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
     public void show() {
-
+        controller.getEnemyController().setTimer();
     }
 
     @Override
@@ -99,20 +111,8 @@ public class GameView implements InputProcessor, Screen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (game.isGamePaused() && !controller.getPlayerController().isReloading()) {
-            float gunX = controller.getPlayerController().getGunX();
-            float gunY = controller.getPlayerController().getGunY() + 20;
-
-            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            getCamera().unproject(mousePos);
-
-            float dx = mousePos.x + 16 - gunX;
-            float dy = mousePos.y - 20 - gunY;
-
-            float angle = (float) Math.toDegrees(Math.atan2(dy, dx));
-
-            controller.getBulletController().shootBulletHandle(gunX, gunY, angle);
-        }
+        if (game.isGamePaused() && !controller.getPlayerController().isReloading())
+            controller.getBulletController().shootBulletHandle();
         return false;
     }
 

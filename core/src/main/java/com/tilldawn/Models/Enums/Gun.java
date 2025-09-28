@@ -1,9 +1,13 @@
 package com.tilldawn.Models.Enums;
 
+import com.tilldawn.Models.Shooting.NormalStrategy;
+import com.tilldawn.Models.Shooting.ShootingStrategy;
+import com.tilldawn.Models.Shooting.ShotgunStrategy;
+
 public enum Gun {
-    SMG(22f, 2.5f, 0f, 12f, 30, 0.1f),
-    Shotgun(16f, 1.8f, 0f, 30f, 2, 0.6f),
-    Revolver(20f, 2.2f, 0f, 22f, 7, 0.4f),
+    SMG(22f, 1f, 0f, 8f, 30, 0.1f, new NormalStrategy()),
+    Shotgun(15f, 0.3f, 0f, 10f, 2, 0.6f, new ShotgunStrategy()),
+    Revolver(20f, 1f, 0f, 20f, 7, 0.4f, new NormalStrategy()),
     ;
 
     private final float speed;
@@ -12,14 +16,16 @@ public enum Gun {
     private final float damage;
     private final int amount;
     private final float fireRate;
+    private final ShootingStrategy strategy;
 
-    Gun(float speed, float lifeTime, float age, float damage, int amount, float fireRate) {
+    Gun(float speed, float lifeTime, float age, float damage, int amount, float fireRate, ShootingStrategy strategy) {
         this.speed = speed;
         this.lifeTime = lifeTime;
         this.age = age;
         this.damage = damage;
         this.amount = amount;
         this.fireRate = fireRate;
+        this.strategy = strategy;
     }
 
     public float getFireRate() {
@@ -44,5 +50,9 @@ public enum Gun {
 
     public int getAmount() {
         return amount;
+    }
+
+    public ShootingStrategy getStrategy() {
+        return strategy;
     }
 }

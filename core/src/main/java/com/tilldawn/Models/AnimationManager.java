@@ -73,7 +73,11 @@ public class AnimationManager {
 
         Array<TextureRegion> TentacleMonsterFrames = new Array<>();
         for (int i = 0; i <= 3; i++) {
-            Texture tex = AssetManager.getInstance().getTexture("TentacleIdle" + i + ".png");
+            Texture tex = AssetManager.getInstance().getTexture("BrainMonster_" + i + ".png");
+            TentacleMonsterFrames.add(new TextureRegion(tex));
+        }
+        for (int i = 3; i >= 0; i--) {
+            Texture tex = AssetManager.getInstance().getTexture("BrainMonster_" + i + ".png");
             TentacleMonsterFrames.add(new TextureRegion(tex));
         }
         Animation<TextureRegion> tentacleMonsterAnim = new Animation<>(0.3f, TentacleMonsterFrames);
@@ -87,7 +91,7 @@ public class AnimationManager {
             crowFrames.add(new TextureRegion(tex));
         }
         Animation<TextureRegion> crowAnim = new Animation<>(0.1f, crowFrames);
-        animations.put("BoomerAnim", crowAnim);
+        animations.put("CrowAnim", crowAnim);
 
         // Boomer
 
@@ -99,7 +103,33 @@ public class AnimationManager {
         Animation<TextureRegion> BoomerAnim = new Animation<>(0.1f, boomerFrames);
         animations.put("BoomerAnim", BoomerAnim);
 
+        // Heart
 
+        Array<TextureRegion> heartsFrames = new Array<>();
+        for (int i = 0; i <= 2; i++) {
+            Texture tex = AssetManager.getInstance().getTexture("HeartAnimation_" + i + ".png");
+            heartsFrames.add(new TextureRegion(tex));
+        }
+        for (int i = 2; i >= 0; i--) {
+            Texture tex = AssetManager.getInstance().getTexture("HeartAnimation_" + i + ".png");
+            heartsFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> HeartAnim = new Animation<>(0.1f, heartsFrames);
+        animations.put("HeartAnim", HeartAnim);
+
+        // Soul Heart
+
+        Array<TextureRegion> soulHeartsFrames = new Array<>();
+        for (int i = 0; i <= 2; i++) {
+            Texture tex = AssetManager.getInstance().getTexture("T_SoulHeartAnimation_" + i + ".png");
+            soulHeartsFrames.add(new TextureRegion(tex));
+        }
+        for (int i = 2; i >= 0; i--) {
+            Texture tex = AssetManager.getInstance().getTexture("T_SoulHeartAnimation_" + i + ".png");
+            soulHeartsFrames.add(new TextureRegion(tex));
+        }
+        Animation<TextureRegion> SoulHeartAnim = new Animation<>(0.1f, soulHeartsFrames);
+        animations.put("SoulHeartAnim", SoulHeartAnim);
     }
 
     public void loadAvatarAnimations(String avatarName) {

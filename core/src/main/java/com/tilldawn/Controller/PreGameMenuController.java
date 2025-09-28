@@ -155,6 +155,7 @@ public class PreGameMenuController {
                 game.setTimer(new Timer(
                     (menu.getTime()[0]) * 10 + menu.getTime()[1],
                     (menu.getTime()[2]) * 10 + menu.getTime()[3]));
+
                 TillDawn.getGame().setScreen(view);
                 menu.dispose();
             }

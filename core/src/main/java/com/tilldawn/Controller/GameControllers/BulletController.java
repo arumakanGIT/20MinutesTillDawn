@@ -1,6 +1,8 @@
-package com.tilldawn.Controller;
+package com.tilldawn.Controller.GameControllers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -9,14 +11,18 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.tilldawn.Models.AssetManager;
 import com.tilldawn.Models.Bullet;
+import com.tilldawn.Models.Enemy;
 import com.tilldawn.Models.Enums.Gun;
+import com.tilldawn.Models.ScheduledBullet;
 import com.tilldawn.TillDawn;
 import com.tilldawn.View.GameView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class BulletController {
     private final ArrayList<Bullet> bullets = new ArrayList<>();
+    private final ArrayList<ScheduledBullet> jobs = new ArrayList<>();
     private final Gun gun;
     private final Table ammoTable;
     private final Table killTable;
@@ -26,6 +32,7 @@ public class BulletController {
     private final GameView view;
     private final Label ammo;
     private final Label kill;
+    private float currentTime;
 
     public BulletController(Gun gun, GameView view) {
         this.view = view;
@@ -70,11 +77,25 @@ public class BulletController {
         view.getStage().addActor(killTable);
     }
 
-    public void shootBulletHandle(float gunX, float gunY, float angle) {
-        float currentTime = TimeUtils.nanoTime() / 1_000_000_000f;
+    public void shootBulletHandle() {
+
+
+        float gunX = view.getController().getPlayerController().getGunX();
+        float gunY = view.getController().getPlayerController().getGunY() + 20;
+
+        Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+        view.getCamera().unproject(mousePos);
+
+        float dx = mousePos.x + 16 - gunX;
+        float dy = mousePos.y - 20 - gunY;
+
+        float angle = (float) Math.toDegrees(Math.atan2(dy, dx));
+
+
         float fireRate = gun.getFireRate();
+
         if (amount != 0 && currentTime - lastShotTime >= fireRate) {
-            bullets.add(new Bullet(gunX, gunY, angle, gun.getSpeed(), gun.getLifeTime(), gun.getAge()));
+            jobs.addAll(gun.getStrategy().shoot(gunX, gunY, angle, gun.getSpeed(), gun.getLifeTime(), currentTime));
             amount -= 1;
             lastShotTime = currentTime;
             updateAmmoLabel();
@@ -82,6 +103,19 @@ public class BulletController {
     }
 
     public void update() {
+        currentTime = TimeUtils.nanoTime() / 1_000_000_000f;
+
+        for (int i = jobs.size() - 1; i >= 0; i--) {
+            ScheduledBullet s = jobs.get(i);
+            if (currentTime - s.createdAt >= s.delay) {
+                bullets.add(new Bullet(
+                    view.getController().getPlayerController().getGunX(),
+                    view.getController().getPlayerController().getGunY() + 20,
+                    s.angle, s.speed, s.lifeTime, 0));
+                jobs.remove(i);
+            }
+        }
+
         if (view.getGame().isGamePaused())
             for (int i = bullets.size() - 1; i >= 0; i--) {
                 bullets.get(i).update();
@@ -89,7 +123,18 @@ public class BulletController {
                     bullets.remove(i);
             }
 
-        for (Bullet b : bullets) {
+        Iterator<Bullet> it = bullets.iterator();
+        while (it.hasNext()) {
+            Bullet b = it.next();
+
+            for (Enemy e : view.getController().getEnemyController().getEnemies()) {
+                if (b.getRect().collidesWith(e.getRect())) {
+                    it.remove();
+                    e.setHealth(e.getHealth() - gun.getDamage());
+                    break;
+                }
+            }
+
             TillDawn.getGame().getBatch().draw(b.getTexture(), b.getRect().getX(), b.getRect().getY());
         }
     }
